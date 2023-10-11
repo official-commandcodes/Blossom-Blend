@@ -1,5 +1,5 @@
 import { cloneElement, createContext, useContext, useState } from 'react';
-import { useDropDown } from '../hooks/useDropDown';
+import { useClickOutside } from '../hooks/useClickOutside';
 
 const DropDownContext = createContext();
 
@@ -21,7 +21,7 @@ const Button = ({ children }) => {
 
 const DropDown = ({ children }) => {
      const { dropDown, setDropDown } = useContext(DropDownContext);
-     const { ref } = useDropDown(dropDown, setDropDown);
+     const { ref } = useClickOutside(dropDown, setDropDown);
 
      if (!dropDown) return null;
 

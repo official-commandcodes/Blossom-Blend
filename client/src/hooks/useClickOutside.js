@@ -1,18 +1,18 @@
 import { useEffect, useRef } from 'react';
 
-export const useDropDown = (dropDown, setDropDown) => {
+export const useClickOutside = (state, setState) => {
      const ref = useRef();
 
      useEffect(() => {
           const el = ref.current;
 
-          if (dropDown) {
+          if (state) {
                document.addEventListener(
                     'click',
                     (e) => {
                          const fact = e.target.closest('.drop');
 
-                         if (!fact && el) setDropDown(false);
+                         if (!fact && el) setState(false);
 
                          return;
                     },
@@ -25,7 +25,7 @@ export const useDropDown = (dropDown, setDropDown) => {
                          (e) => {
                               const fact = e.target.closest('.drop');
 
-                              if (!fact && el) setDropDown(false);
+                              if (!fact && el) setState(false);
 
                               return;
                          },
@@ -33,7 +33,7 @@ export const useDropDown = (dropDown, setDropDown) => {
                     );
                };
           }
-     }, [dropDown, setDropDown]);
+     }, [state, setState]);
 
      return { ref };
 };
