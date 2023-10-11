@@ -1,31 +1,35 @@
 import { cloneElement, createContext, useContext, useState } from 'react';
+import { useDropDown } from '../hooks/useDropDown';
 
 const DropDownContext = createContext();
 
 const DropDownCompound = ({ children }) => {
- const [dropDown, setDropDown] = useState(false);
+     const [dropDown, setDropDown] = useState(false);
 
- const open = () => setDropDown((dropDown) => !dropDown);
-
- return (
-  <DropDownContext.Provider value={{ dropDown, open }}>
-   {children}
-  </DropDownContext.Provider>
- );
+     return (
+          <DropDownContext.Provider value={{ dropDown, setDropDown }}>
+               {children}
+          </DropDownContext.Provider>
+     );
 };
 
 const Button = ({ children }) => {
- const { open } = useContext(DropDownContext);
+     const { setDropDown } = useContext(DropDownContext);
 
- return cloneElement(children, { onClick: open });
+     return cloneElement(children, { onClick: () => setDropDown(true) });
 };
 
 const DropDown = ({ children }) => {
- const { dropDown } = useContext(DropDownContext);
+     const { dropDown, setDropDown } = useContext(DropDownContext);
+     const { ref } = useDropDown(dropDown, setDropDown);
 
- if (!dropDown) return null;
+     if (!dropDown) return null;
 
- return <div>{children}</div>;
+     return (
+          <div ref={ref} className='drop'>
+               {children}
+          </div>
+     );
 };
 
 DropDownCompound.Button = Button;

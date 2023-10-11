@@ -6,44 +6,38 @@ const FAQContext = createContext();
 export const FAQ = ({ children }) => {
      const [open, setOpen] = useState(null);
 
-     const close = () => setOpen('');
-
-     console.log(open);
+     const close = () => setOpen(null);
 
      return (
           <FAQContext.Provider value={{ open, close, setOpen }}>
-               <li className='w-5/12 bg-gray-100'>{children}</li>
+               <li className='border-[1px] border-gray-300 w-8/12 bg-gray-100 h-full rounded-sm'>
+                    {children}
+               </li>
           </FAQContext.Provider>
      );
 };
 
 const Button = ({ children, id }) => {
-     const { setOpen } = useContext(FAQContext);
-     const [plus, setPlus] = useState(false);
-
-     const openValue = id && !plus ? id : null;
+     const { setOpen, open } = useContext(FAQContext);
 
      return cloneElement(
           children,
           {
-               onClick: () => {
-                    setOpen(openValue);
-                    setPlus((plus) => !plus);
-               },
+               onClick: () => setOpen((open) => (open === id ? null : id)),
           },
 
-          id && plus ? <AiOutlineMinus /> : <AiOutlinePlus />
+          open === id ? <AiOutlineMinus /> : <AiOutlinePlus />
      );
 };
 
 const Body = ({ children, window }) => {
      const { open } = useContext(FAQContext);
 
+     if (open !== window) return null;
+
      return (
           <div
-               className={`font-thin px-4 py-3 text-sm leading-8 ${
-                    window !== open ? 'hidden' : 'flex'
-               } transition-all duration-300`}
+               className={`font-thin px-4 py-3 text-sm leading-8 transition-all duration-700 ease-out`}
           >
                {children}
           </div>
