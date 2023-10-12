@@ -5,8 +5,8 @@ const Product = ({ w }) => {
      const outline = true;
 
      return (
-          <Link className={`w-[${w}rem] flex flex-col gap-2`}>
-               <div className='relative h-[250px] w-full '>
+          <Link className={`${w ? 'w-[250px]' : ''} flex flex-col gap-2`}>
+               <div className='relative h-[250px]'>
                     <img
                          src='https://images.unsplash.com/photo-1590393802688-ab3fd7c186f2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29zbWV0aWNzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'
                          alt='Cosmetics'

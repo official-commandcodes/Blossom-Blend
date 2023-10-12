@@ -7,7 +7,7 @@ const Products = () => {
 
                <div className='grid grid-cols-4 gap-x-5 gap-y-10 py-2'>
                     {Array.from({ length: 12 }, (_, i) => (
-                         <Product key={i + 1} w='0' />
+                         <Product key={i + 1} w='' />
                     ))}
                </div>
           </section>

@@ -20,6 +20,11 @@ export default {
                fontFamily: {
                     fontFamily: ['Noto Sans Georgian'],
                },
+
+               gridTemplateColumns: {
+                    //  12 COLUMN GRID
+                    12: 'repeat(12, minmax(0, 1fr))',
+               },
           },
      },
      plugins: [],
