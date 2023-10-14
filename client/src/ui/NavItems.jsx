@@ -10,7 +10,7 @@ const hoverStyle =
 const NavItems = () => {
      const handleMouseEnter = (e) => {
           e.target.classList =
-               'category text-gray-600 text-[16px] flex items-center transition-all duration-300';
+               'category text-gray-400 text-[16px] flex items-center transition-all duration-300';
      };
 
      const handleMouseLeave = (e) => {
@@ -42,7 +42,7 @@ const NavItems = () => {
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                >
-                    <Link>Promotions & Deals </Link>
+                    <Link to='/products'>Products</Link>
                </li>
 
                <li

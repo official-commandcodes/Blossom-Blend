@@ -15,7 +15,7 @@ const Home = () => {
                <FilterSection />
 
                {/* PRODUCTS */}
-               <Products />
+               <Products title='Elegant Beauty Picks' />
 
                {/* PAGINATION */}
                <Pagination />

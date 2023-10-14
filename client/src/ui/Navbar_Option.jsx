@@ -37,7 +37,7 @@ const Navbar_Option = () => {
                </li>
 
                <li className='hover:bg-orange-50 w-8 h-8 flex justify-center items-center rounded-full transition-all duration-300 relative'>
-                    <Link to='/cart'>
+                    <Link to='/carts'>
                          <ImCart />
                     </Link>
 

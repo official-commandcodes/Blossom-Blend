@@ -3,7 +3,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const Home = lazy(() => import('./pages/Home'));
+const ProductsPage = lazy(() => import('./pages/Products'));
+const ProductsDetails = lazy(() => import('./pages/ProductsDetails'));
 const Cart = lazy(() => import('./pages/Cart'));
+const Checkout = lazy(() => import('./pages/Checkout'));
 
 const App = () => {
      const router = createBrowserRouter([
@@ -17,8 +20,23 @@ const App = () => {
                     },
 
                     {
-                         path: '/cart',
+                         path: '/products',
+                         element: <ProductsPage />,
+                    },
+
+                    {
+                         path: '/products/:product',
+                         element: <ProductsDetails />,
+                    },
+
+                    {
+                         path: '/carts',
                          element: <Cart />,
+                    },
+
+                    {
+                         path: '/checkout/:product',
+                         element: <Checkout />,
                     },
                ],
           },
