@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Input from './Input';
 
 const Shipping = () => {
@@ -22,9 +23,12 @@ const Shipping = () => {
                          <Input label='City' />
                     </div>
 
-                    <button className='bg-gray-600 py-2 w-48 text-gray-100 rounded-md'>
+                    <Link
+                         to='/payment'
+                         className='bg-gray-600 h-12 w-48 text-gray-100 rounded-md flex justify-center items-center'
+                    >
                          Continue
-                    </button>
+                    </Link>
                </form>
           </section>
      );

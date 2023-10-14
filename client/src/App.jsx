@@ -7,6 +7,7 @@ const ProductsPage = lazy(() => import('./pages/Products'));
 const ProductsDetails = lazy(() => import('./pages/ProductsDetails'));
 const Cart = lazy(() => import('./pages/Cart'));
 const Checkout = lazy(() => import('./pages/Checkout'));
+const Payment = lazy(() => import('./pages/Payment'));
 
 const App = () => {
      const router = createBrowserRouter([
@@ -37,6 +38,11 @@ const App = () => {
                     {
                          path: '/checkout/:product',
                          element: <Checkout />,
+                    },
+
+                    {
+                         path: '/payment',
+                         element: <Payment />,
                     },
                ],
           },
