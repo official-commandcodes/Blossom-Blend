@@ -41,6 +41,7 @@ function Payment() {
                               <Input label='EXPIRE YEAR' />
                               <Input label='CVV' />
                          </div>
+
                          {/* <label>
                               <input
                                    type='text'
@@ -80,7 +81,7 @@ function Payment() {
 
                          <button
                               type='submit'
-                              className='bg-orange-300 w-28 text-[14px] h-9 rounded-md font-light'
+                              className='bg-orange-900 text-gray-50 w-28 text-[14px] h-9 rounded-md font-light'
                          >
                               Pay Now
                          </button>

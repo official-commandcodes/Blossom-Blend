@@ -1,5 +1,9 @@
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+     createBrowserRouter,
+     Navigate,
+     RouterProvider,
+} from 'react-router-dom';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const Home = lazy(() => import('./pages/Home'));
@@ -8,6 +12,11 @@ const ProductsDetails = lazy(() => import('./pages/ProductsDetails'));
 const Cart = lazy(() => import('./pages/Cart'));
 const Checkout = lazy(() => import('./pages/Checkout'));
 const Payment = lazy(() => import('./pages/Payment'));
+const Account = lazy(() => import('./pages/Account'));
+const AccountInformation = lazy(() => import('./pages/AccountInformation'));
+const AccountOrders = lazy(() => import('./pages/AccountOrders'));
+const AccountWishLists = lazy(() => import('./pages/AccountWishLists'));
+const Contact = lazy(() => import('./pages/Contact'));
 
 const App = () => {
      const router = createBrowserRouter([
@@ -44,12 +53,46 @@ const App = () => {
                          path: '/payment',
                          element: <Payment />,
                     },
+
+                    {
+                         path: '/account/:user',
+                         element: <Account />,
+                         children: [
+                              {
+                                   index: true,
+                                   element: (
+                                        <Navigate
+                                             to='/account/user/info'
+                                             replace
+                                        />
+                                   ),
+                              },
+                              {
+                                   path: '/account/:user/info',
+                                   element: <AccountInformation />,
+                              },
+                              {
+                                   path: '/account/:user/orders',
+                                   element: <AccountOrders />,
+                              },
+
+                              {
+                                   path: '/account/:user/wishlists',
+                                   element: <AccountWishLists />,
+                              },
+                         ],
+                    },
+
+                    {
+                         path: '/contact-us',
+                         element: <Contact />,
+                    },
                ],
           },
      ]);
 
      return (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={'Loading ....'}>
                <RouterProvider router={router} />
           </Suspense>
      );
