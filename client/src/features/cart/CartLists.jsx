@@ -35,7 +35,7 @@ const CartLists = () => {
                          <div className='justify-self-center text-[17px] font-light'>
                               $499.79
                          </div>
-                         <div className='justify-self-center text-[25px] cursor-pointer text-orange-400'>
+                         <div className='justify-self-center text-[25px] cursor-pointer text-orange-800'>
                               <MdCancel />
                          </div>
                     </li>
@@ -65,7 +65,7 @@ const CartLists = () => {
                               $499.79
                          </div>
 
-                         <div className='justify-self-center text-[25px] cursor-pointer text-orange-400'>
+                         <div className='justify-self-center text-[25px] cursor-pointer text-orange-800'>
                               <MdCancel />
                          </div>
                     </li>

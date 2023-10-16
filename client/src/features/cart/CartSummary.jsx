@@ -34,7 +34,7 @@ const CartSummary = ({ button }) => {
                     {button && (
                          <Link
                               to='/checkout/1'
-                              className='w-40 h-10 text-[14px] font-medium rounded-md bg-orange-200 hover:bg-orange-300 transition-all duration-300 flex justify-center items-center'
+                              className='w-40 h-10 text-[14px] font-medium rounded-md bg-orange-700 text-orange-100 hover:bg-orange-800 transition-all duration-300 flex justify-center items-center'
                          >
                               Check out
                          </Link>

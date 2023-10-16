@@ -27,7 +27,7 @@ function Payment() {
                          onSubmit={handleSubmit}
                          className='flex flex-col gap-8'
                     >
-                         <h1 className='text-[20px] font-medium'>
+                         <h1 className='text-[20px] font-medium text-orange-950'>
                               PAYMENT (<span className='font-light'>$5000</span>
                               )
                          </h1>

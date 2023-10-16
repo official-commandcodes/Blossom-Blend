@@ -4,7 +4,7 @@ import Pagination from '../ui/Pagination';
 
 const ProductsPage = () => {
      return (
-          <div>
+          <div className='border-t-[1px]'>
                <FilterSection />
 
                <Products title='' />

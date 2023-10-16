@@ -10,9 +10,7 @@ export const useClickOutside = (state, setState) => {
                document.addEventListener(
                     'click',
                     (e) => {
-                         const fact = e.target.closest('.drop');
-
-                         if (!fact && el) setState(false);
+                         if (e.target !== ref.current) setState(false);
 
                          return;
                     },
@@ -35,5 +33,5 @@ export const useClickOutside = (state, setState) => {
           }
      }, [state, setState]);
 
-     return { ref };
+     return ref;
 };

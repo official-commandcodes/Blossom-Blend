@@ -18,7 +18,7 @@ const NavItems = () => {
      console.log();
 
      return (
-          <ul className='flex items-center gap-4'>
+          <ul className='flex items-center gap-4 text-orange-100'>
                <NavItem text='Skincare' s='skincare' param={active} />
 
                <NavItem text='Haircare' s='haircare' param={active} />

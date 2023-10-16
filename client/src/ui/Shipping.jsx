@@ -25,7 +25,7 @@ const Shipping = () => {
 
                     <Link
                          to='/payment'
-                         className='bg-gray-600 h-12 w-48 text-gray-100 rounded-md flex justify-center items-center'
+                         className='bg-orange-800 h-12 w-48 text-orange-100 rounded-md flex justify-center items-center'
                     >
                          Continue
                     </Link>

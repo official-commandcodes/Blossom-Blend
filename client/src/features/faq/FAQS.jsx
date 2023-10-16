@@ -88,7 +88,7 @@ const FAQS = () => {
      return (
           <section className='border-t-[1px] px-16 py-10'>
                <div className='font-thin'>
-                    <h2 className='font-light text-2xl '>
+                    <h2 className='font-medium text-2xl '>
                          Frequently Asked Questions
                     </h2>
                     <p className='text-sm mt-2'>

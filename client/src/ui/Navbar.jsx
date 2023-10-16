@@ -4,7 +4,7 @@ import Navbar_Option from './Navbar_Option';
 
 const Navbar = () => {
      return (
-          <nav className='bg-gray-100 flex justify-between items-center px-6 h-[100px]'>
+          <nav className='bg-orange-900 flex justify-between items-center px-6 h-[100px]'>
                <Logo />
 
                <NavItems />

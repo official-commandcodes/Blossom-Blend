@@ -84,7 +84,7 @@ const Contact = () => {
                               ></textarea>
                               <button
                                    type='submit'
-                                   className='w-40 h-10 rounded-md bg-orange-600 text-gray-100'
+                                   className='w-40 h-10 rounded-md bg-orange-900 text-gray-100'
                               >
                                    Submit
                               </button>

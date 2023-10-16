@@ -56,11 +56,11 @@ const ProductDetail_Side_Right = () => {
                <div className='flex gap-7'>
                     <Link
                          to='/checkout/1'
-                         className='w-32 h-9 text-gray-800 text-[13px] bg-orange-300 rounded-full hover:bg-transparent hover:border-[1px] hover:border-orange-300 transition-all duration-300 flex justify-center items-center'
+                         className='w-32 h-9 text-orange-950 text-[15px] bg-orange-800 rounded-full hover:bg-transparent hover:border-[1px] hover:border-orange-900 transition-all duration-300 flex justify-center items-center'
                     >
                          Buy Now
                     </Link>
-                    <button className='w-32 h-9 text-gray-800 text-[13px] border-[1px] rounded-full border-orange-300 hover:bg-orange-300 hover:border-none transition-all duration-300'>
+                    <button className='w-32 h-9 text-orange-950 text-[15px] border-[1px] rounded-full border-orange-900 hover:bg-orange-900 hover:border-none transition-all duration-300'>
                          Add to Cart
                     </button>
                </div>

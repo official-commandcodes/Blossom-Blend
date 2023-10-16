@@ -67,6 +67,7 @@ const FilterSection = () => {
           { label: 'Customer Ratings', value: 'ratings' },
           { label: 'Brand', value: 'brand' },
      ];
+
      return (
           <section className='px-16 py-7 bg-gray-300 flex justify-between border-b-[1px]'>
                <div className='flex gap-4'>
