@@ -4,8 +4,24 @@ import Popular from '../features/products/Popular';
 import FAQS from '../features/faq/FAQS';
 import FilterSection from '../ui/FilterSection';
 import HeroSection from '../ui/HeroSection';
+import { useEffect } from 'react';
 
 const Home = () => {
+     useEffect(() => {
+          const fetchAPI = async () => {
+               try {
+                    const res = await fetch(`${import.meta.env.VITE_API_URL}`);
+
+                    const data = await res.json();
+
+                    console.log(data);
+               } catch (error) {
+                    console.log(error);
+               }
+          };
+
+          fetchAPI();
+     }, []);
      return (
           <div>
                {/* HERO SECTION */}

@@ -1,6 +1,19 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
+// cross-origin
+const corsOptions = {
+     origin: '*',
+     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+     optionSuccessStatus: 200,
+     headers: ['Content-Type', 'Authorization', 'x-access-token'],
+     credentials: true,
+     maxAge: 3600,
+     // preflightContinue: true,
+};
+
+app.cors(corsOptions);
 const data = [
      {
           id: 53,
