@@ -5,12 +5,12 @@ const app = express();
 // cross-origin
 const corsOptions = {
      origin: '*',
-     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+     methods: ['GET', 'POST', 'DELETE', 'PATCH'],
      optionSuccessStatus: 200,
      headers: ['Content-Type', 'Authorization', 'x-access-token'],
      credentials: true,
      maxAge: 3600,
-     // preflightContinue: true,
+     preflightContinue: false,
 };
 
 app.use(cors(corsOptions));
