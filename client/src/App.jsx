@@ -4,6 +4,7 @@ import {
      Navigate,
      RouterProvider,
 } from 'react-router-dom';
+import DropDownProvider from './ui/DropDownContext';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const Home = lazy(() => import('./pages/Home'));
@@ -92,9 +93,11 @@ const App = () => {
      ]);
 
      return (
-          <Suspense fallback={'Loading ....'}>
-               <RouterProvider router={router} />
-          </Suspense>
+          <DropDownProvider>
+               <Suspense fallback={'Loading ....'}>
+                    <RouterProvider router={router} />
+               </Suspense>
+          </DropDownProvider>
      );
 };
 

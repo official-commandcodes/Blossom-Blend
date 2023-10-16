@@ -1,53 +1,39 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ImSearch, ImCart } from 'react-icons/im';
+import { ImCart } from 'react-icons/im';
 import { BiUser } from 'react-icons/bi';
-import { useClickOutside } from '../hooks/useClickOutside';
+import DropDownProvider from './DropDownContext';
 
 const Navbar_Option = () => {
-     const [active, setActive] = useState(false);
-     const ref = useClickOutside(active, setActive);
-
-     const handleSearch = () => {
-          setActive(true);
-     };
-
      return (
-          <ul className='flex gap-3 items-center text-[18px] text-orange-100'>
-               <input
-                    ref={ref}
-                    type='text'
-                    placeholder='Search for any product here ...'
-                    className={`bg-orange-200 border-none transition duration-1000 ease-in-out text-xs px-4 py-2 w-56 outline-none rounded-sm italic focus:ring-2 focus:ring-orange-950 focus:bg-orange-300 focus:border-[1px] focus:border-orange-100 text-orange-950 placeholder:text-orange-950 ${
-                         active
-                              ? 'animate-[slide_1s_ease-in-out]'
-                              : 'translate-x-14 hidden'
-                    }`}
-               />
-
-               <li
-                    className='hover:bg-orange-800 w-8 h-8 flex justify-center items-center rounded-full transition-all duration-300 cursor-pointer'
-                    onClick={handleSearch}
-               >
-                    <ImSearch />
-               </li>
-
-               <li className='hover:bg-orange-800 w-8 h-8 flex justify-center items-center rounded-full transition-all duration-300 relative'>
-                    <Link to='/carts'>
-                         <ImCart />
-                    </Link>
-
-                    <span className='absolute top-[1px] right-[1px] w-4 h-4 bg-orange-700 text-[10px] text-gray-200 flex justify-center items-center rounded-full'>
-                         1
-                    </span>
-               </li>
-               <Link
-                    to='/account/user'
-                    className='hover:bg-orange-800 w-8 h-8 flex justify-center items-center rounded-full transition-all duration-300 cursor-pointer'
-               >
-                    <BiUser />
+          <div className='flex gap-4 font-light text-[14px] text-gray-600'>
+               <Link className='relative flex gap-2 items-center font-medium hover:text-orange-300 transition-all duration-300'>
+                    <ImCart /> <span>Cart</span>
                </Link>
-          </ul>
+
+               <div className='relative flex flex-col items-center font-medium'>
+                    <DropDownProvider.Button account='account'>
+                         <BiUser /> <span>User</span>
+                    </DropDownProvider.Button>
+
+                    <DropDownProvider.DropDown window='account'>
+                         <button className='text-[14px] py-2 px-4 bg-orange-400 w-full text-center rounded-md font-medium text-gray-100 hover:bg-orange-600 active:bg-orange-600 transition-all duration-300'>
+                              Sign in
+                         </button>
+
+                         <div className='flex flex-col gap-2 pt-2'>
+                              <Link className='hover:font-medium text-[14px] transition-all duration-300'>
+                                   My Account
+                              </Link>
+                              <Link className='hover:font-medium text-[14px] transition-all duration-300'>
+                                   Orders
+                              </Link>
+                              <Link className='hover:font-medium text-[14px] transition-all duration-300'>
+                                   Saved Items
+                              </Link>
+                         </div>
+                    </DropDownProvider.DropDown>
+               </div>
+          </div>
      );
 };
 

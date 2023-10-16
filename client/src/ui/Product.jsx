@@ -10,14 +10,14 @@ const Product = ({ w }) => {
                className={`${w ? 'w-[250px]' : ''} flex flex-col gap-2`}
                to='/products/1'
           >
-               <div className='relative h-[250px]'>
+               <div className='relative'>
                     <img
-                         src='https://images.unsplash.com/photo-1590393802688-ab3fd7c186f2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29zbWV0aWNzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'
+                         src='/markup-1.png'
                          alt='Cosmetics'
-                         className='object-cover w-full h-full rounded-md'
+                         className='object-cover w-full h-36 rounded-md hover:scale-110 transition-all duration-300 border border-gray-200 hover:shadow-lg hover:shadow-gray-400/50'
                     />
 
-                    <span className='absolute top-3 right-3 text-gray-500 text-[18px] bg-orange-50 cursor-pointer rounded-full w-7 h-7 flex justify-center items-center'>
+                    <span className='absolute top-2 right-3 text-gray-500 text-[18px] bg-orange-50 cursor-pointer rounded-full w-7 h-7 flex justify-center items-center'>
                          {outline ? (
                               <AiOutlineHeart className='text-orange-400' />
                          ) : (

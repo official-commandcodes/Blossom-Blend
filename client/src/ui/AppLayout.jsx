@@ -4,7 +4,7 @@ import Footer from './Footer';
 
 const AppLayout = () => {
      return (
-          <div>
+          <div className='relative'>
                <Navbar />
 
                <main>

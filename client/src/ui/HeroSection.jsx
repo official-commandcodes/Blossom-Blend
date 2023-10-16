@@ -16,7 +16,7 @@ const HeroSection = () => {
                          the latest innovations, you&apos;ll find it all here.
                     </p>
 
-                    <Link className='px-4 py-2 text-orange-100 rounded-md shadow-lg shadow-orange-800/50 uppercase text-[13px] bg-orange-800'>
+                    <Link className='px-4 py-2 text-gray-100 rounded-md shadow-lg shadow-orange-800/50 uppercase text-[13px] bg-orange-400'>
                          shop now
                     </Link>
                </div>

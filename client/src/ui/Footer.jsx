@@ -9,7 +9,7 @@ import FooterLists from './FooterLists';
 
 const Footer = () => {
      return (
-          <footer className='px-16 bg-orange-950 text-orange-100'>
+          <footer className='px-16 text-gray-800 divide-y-[1px] border-t-[1px] border-gray-200'>
                <div className='py-8 flex justify-between text-[13px]'>
                     <FooterLists
                          header={'Navigation'}
@@ -73,7 +73,7 @@ const Footer = () => {
                     />
                </div>
 
-               <div className='border-t-[1px] border-orange-100 py-6 flex justify-between font-light text-xs'>
+               <div className='py-6 flex justify-between font-light text-xs'>
                     <div className='flex gap-3'>
                          <span>&copy; 2023 Blossom Blend, Inc.</span>
                          &bull;
