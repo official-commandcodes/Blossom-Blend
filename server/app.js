@@ -13,7 +13,7 @@ const corsOptions = {
      // preflightContinue: true,
 };
 
-app.cors(corsOptions);
+app.use(cors(corsOptions));
 const data = [
      {
           id: 53,
