@@ -87,6 +87,16 @@ productSchema.virtual('discountPercentage').get(function () {
      return (this.discountPrice / this.price) * 100;
 });
 
+productSchema.virtual('priceAfterDiscount').get(function () {
+     return this.price - this.discountPrice;
+});
+
+// productSchema.pre(/^find/, function (next) {
+//      this.find({}).select('-discountPrice');
+
+//      next();
+// });
+
 const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;
