@@ -10,7 +10,9 @@ const Home = () => {
      useEffect(() => {
           const fetchAPI = async () => {
                try {
-                    const res = await fetch(`${import.meta.env.VITE_API_URL}`);
+                    const res = await fetch(
+                         `${import.meta.env.VITE_API_URL}/api/v1/products`
+                    );
 
                     const data = await res.json();
 
@@ -22,6 +24,7 @@ const Home = () => {
 
           fetchAPI();
      }, []);
+
      return (
           <div>
                {/* HERO SECTION */}
