@@ -5,6 +5,8 @@ const app = require('./app');
 // CONNECT TO MONGODB DATABASE
 mongoose.connect(process.env.MONGODB_URL);
 
+console.log(process.env.NODE_ENV);
+
 const PORT = process.env.PORT || 9999;
 
 const server = app.listen(PORT, () => {

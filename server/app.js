@@ -1,8 +1,14 @@
 const express = require('express');
 const cors = require('cors');
+
+// ROUTES
+const productRoutes = require('./routes/product');
+const globalErrorHandler = require('./utils/globalErrorHandler');
 const app = express();
 
-// cross-origin
+// MIDDLEWARES
+
+// CROSS-ORIGIN
 const corsOptions = {
      origin: '*',
      methods: ['GET', 'POST', 'DELETE', 'PATCH'],
@@ -12,58 +18,25 @@ const corsOptions = {
      maxAge: 3600,
      preflightContinue: false,
 };
-
 app.use(cors(corsOptions));
-const data = [
-     {
-          id: 53,
-          title: 'printed high quality T shirts',
-          price: 35,
-          quantity: 3,
-          total: 105,
-          discountPercentage: 7.54,
-          discountedPrice: 97,
-     },
-     {
-          id: 61,
-          title: 'Leather Straps Wristwatch',
-          price: 120,
-          quantity: 2,
-          total: 240,
-          discountPercentage: 7.14,
-          discountedPrice: 223,
-     },
-     {
-          id: 92,
-          title: 'HOT SALE IN EUROPE electric racing motorcycle',
-          price: 920,
-          quantity: 1,
-          total: 920,
-          discountPercentage: 14.4,
-          discountedPrice: 788,
-     },
-     {
-          id: 11,
-          title: 'perfume Oil',
-          price: 13,
-          quantity: 3,
-          total: 39,
-          discountPercentage: 8.4,
-          discountedPrice: 36,
-     },
-     {
-          id: 37,
-          title: 'ank Tops for Womens/Girls',
-          price: 50,
-          quantity: 3,
-          total: 150,
-          discountPercentage: 12.05,
-          discountedPrice: 132,
-     },
-];
+
+// BODY-PARSER & STATIC FILES
+app.use(express.json());
+app.use(express.static(`${__dirname}/public`));
 
 app.get('/', (req, res) => {
-     res.json(data);
+     res.send('Welcome to Bloom Blend API');
 });
+
+// app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/products', productRoutes);
+// app.use('/api/v1/products', productRoutes);
+// app.use('/api/v1/products', productRoutes);
+
+app.all('*', (req, res) => {
+     return res.send(`There is no ${req.originalUrl} route on this server`);
+});
+
+app.use(globalErrorHandler);
 
 module.exports = app;
