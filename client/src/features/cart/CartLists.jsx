@@ -1,6 +1,7 @@
-import { MdCancel } from 'react-icons/md';
-import QuantityButton from '../../ui/QuantityButton';
 import { Link } from 'react-router-dom';
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
+import { MdCancel } from 'react-icons/md';
+import Button from '../../ui/Button';
 
 const CartLists = () => {
      return (
@@ -29,8 +30,16 @@ const CartLists = () => {
                               </h3>
                          </Link>
                          <div className='text-[17px] font-light'>$499.79</div>
-                         <div className='justify-self-center'>
-                              <QuantityButton />
+                         <div className='flex items-center gap-5'>
+                              <Button>
+                                   <AiOutlineMinus />
+                              </Button>
+
+                              <span>1</span>
+
+                              <Button>
+                                   <AiOutlinePlus />
+                              </Button>
                          </div>
                          <div className='justify-self-center text-[17px] font-light'>
                               $499.79
@@ -57,8 +66,16 @@ const CartLists = () => {
 
                          <div className='text-[17px] font-light'>$499.79</div>
 
-                         <div className='justify-self-center'>
-                              <QuantityButton />
+                         <div className='flex items-center gap-5'>
+                              <Button>
+                                   <AiOutlineMinus />
+                              </Button>
+
+                              <span>1</span>
+
+                              <Button>
+                                   <AiOutlinePlus />
+                              </Button>
                          </div>
 
                          <div className='justify-self-center text-[17px] font-light'>
