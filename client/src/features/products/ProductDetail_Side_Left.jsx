@@ -1,50 +1,47 @@
 import { useState } from 'react';
+import { API_URL } from '../../utils/helper';
 
-const ProductDetail_Side_Left = () => {
-     const [active, setActive] = useState(1);
+const ProductDetail_Side_Left = ({ image }) => {
+     const [active, setActive] = useState(0);
+
+     const handleChange = (value) => {
+          setActive(value);
+     };
+
+     const lastDashIndex = image[active].lastIndexOf('-');
+     const imagePath = image[active].slice(0, lastDashIndex);
+     const ext = image[active].split('.').at(-1);
+
+     const imageUrl = `${imagePath}-${active + 1}.${ext}`;
 
      return (
           <div className='flex flex-col gap-3'>
                <div className='flex items-center justify-center'>
                     <img
-                         src={`/markup-${active}.png`}
-                         alt='Markup'
-                         className='bg-gray-300 object-cover w-full'
+                         src={`${API_URL}/products/${imageUrl}`}
+                         alt={imageUrl}
+                         className='bg-gray-300 w-[500px] h-96 object-cover'
                     />
                </div>
 
-               <div className='grid grid-flow-col gap-x-2'>
-                    <div
-                         className={`bg-gray-300 cursor-pointer ${
-                              Object.is(active, 1)
-                                   ? 'border-[1px] border-gray-400'
-                                   : ''
-                         }`}
-                         onClick={() => setActive(1)}
-                    >
-                         <img src='/markup-1.png' alt='' />
-                    </div>
-
-                    <div
-                         className={`bg-gray-300 cursor-pointer ${
-                              Object.is(active, 2)
-                                   ? 'border-[1px] border-gray-400'
-                                   : ''
-                         }`}
-                         onClick={() => setActive(2)}
-                    >
-                         <img src='/markup-2.png' alt='' />
-                    </div>
-                    <div
-                         className={`bg-gray-300 cursor-pointer ${
-                              Object.is(active, 3)
-                                   ? 'border-[1px] border-gray-400'
-                                   : ''
-                         }`}
-                         onClick={() => setActive(3)}
-                    >
-                         <img src='/markup-3.png' alt='' />
-                    </div>
+               <div className='flex gap-1 justify-center items-center gap-x-2'>
+                    {image.map((img, i) => (
+                         <div
+                              key={i + 1}
+                              className={`bg-gray-300 cursor-pointer flex justify-center items-center w-1/3 ${
+                                   active === i
+                                        ? 'border-[1px] border-gray-400'
+                                        : ''
+                              }`}
+                              onClick={() => handleChange(i)}
+                         >
+                              <img
+                                   src={`${API_URL}/products/${img}`}
+                                   alt={img}
+                                   className='w-32 h-32'
+                              />
+                         </div>
+                    ))}
                </div>
           </div>
      );

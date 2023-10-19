@@ -3,11 +3,12 @@ const {
      getAllProducts,
      createProduct,
      getProduct,
-     getPopular,
+     getSearch,
 } = require('../controller/productController');
 
+router.get('/search', getSearch);
 router.get('/', getAllProducts).post('/', createProduct);
 
-router.get('/:id', getProduct);
+router.get('/:slug', getProduct);
 
 module.exports = router;

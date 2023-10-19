@@ -13,3 +13,4 @@
 -    Focused on compound reusabilities.
 -    Custom Hooks
 -    [React Loading Skeleton](https://github.com/dvtng/react-loading-skeleton): For nice products loading 😃.
+-    Working pretty with strings using string methods like lastIndexOf,slice,split e.t.c

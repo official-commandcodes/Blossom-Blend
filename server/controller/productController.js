@@ -59,7 +59,7 @@ const getAllProducts = async (req, res, next) => {
 
 const getProduct = async (req, res, next) => {
      try {
-          const product = await Product.findById(req.params.id);
+          const product = await Product.findOne({ slug: req.params.slug });
 
           res.status(200).json({
                status: 'success',
@@ -83,4 +83,29 @@ const createProduct = async (req, res, next) => {
      }
 };
 
-module.exports = { getAllProducts, createProduct, getProduct };
+const getSearch = async (req, res, next) => {
+     try {
+          if (!req.query.q) return;
+
+          let products = await Product.find({
+               title: { $regex: new RegExp(req.query.q, 'i') },
+          });
+
+          products = products.map((product) => ({
+               title: product.title,
+               imageUrl: product.imageUrl,
+               slug: product.slug,
+               price: product.price,
+          }));
+
+          res.status(200).json({
+               status: 'success',
+               results: products.length,
+               data: products,
+          });
+     } catch (err) {
+          next(err);
+     }
+};
+
+module.exports = { getAllProducts, createProduct, getProduct, getSearch };

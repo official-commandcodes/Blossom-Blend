@@ -9,10 +9,7 @@ const Product = ({ w, product }) => {
      const title = `${product?.title.slice(0, 23)}...`;
 
      return (
-          <div
-               className={`${w ? 'w-[250px]' : ''} flex flex-col gap-2`}
-               to='/products/1'
-          >
+          <div className={`${w ? 'w-[250px]' : ''} flex flex-col gap-2`}>
                <div className='relative'>
                     <img
                          src={`${API_URL}/products/${product?.imageUrl}`}
@@ -32,7 +29,7 @@ const Product = ({ w, product }) => {
                <div className='flex justify-between'>
                     <div className='flex flex-col gap-[6px]'>
                          <Link
-                              to='/products/1'
+                              to={`/products/${product?.slug}`}
                               className='font-light text-[12px] underline'
                          >
                               {title}

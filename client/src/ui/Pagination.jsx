@@ -43,8 +43,8 @@ const Pagination = () => {
                     <div className='text-orange-900'>{page}</div>
                     <div
                          onClick={handleNext}
-                         className={`w-10 h-10 rounded-full border-[1px] border-orange-800 flex justify-center items-center cursor-pointer font-semibold ${
-                              page === 4
+                         className={`w-10 h-10 rounded-full border-[1px] border-orange-800 flex justify-center items-center font-semibold ${
+                              page === totalProducts
                                    ? 'cursor-not-allowed'
                                    : 'cursor-pointer'
                          }`}

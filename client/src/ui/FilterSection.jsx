@@ -21,11 +21,11 @@ const FilterSection = () => {
                               { label: 'Best Selling', value: 'best-selling' },
                               { label: 'New Arrivals', value: 'new' },
                               {
-                                   label: 'Price: Low to High',
+                                   label: 'Low Price',
                                    value: 'low-price',
                               },
                               {
-                                   label: 'Price: High to Low',
+                                   label: 'Hight Price',
                                    value: 'high-price',
                               },
                          ]}

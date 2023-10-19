@@ -10,7 +10,6 @@ import DropDownProvider from './ui/DropDownContext';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const Home = lazy(() => import('./pages/Home'));
-const ProductsPage = lazy(() => import('./pages/Products'));
 const ProductsDetails = lazy(() => import('./pages/ProductsDetails'));
 const Cart = lazy(() => import('./pages/Cart'));
 const Checkout = lazy(() => import('./pages/Checkout'));
@@ -36,17 +35,17 @@ const App = () => {
                element: <AppLayout />,
                children: [
                     {
-                         path: '/',
-                         element: <Home />,
+                         index: true,
+                         element: <Navigate to='/products' replace />,
                     },
 
                     {
                          path: '/products',
-                         element: <ProductsPage />,
+                         element: <Home />,
                     },
 
                     {
-                         path: '/products/:product',
+                         path: '/products/:slug',
                          element: <ProductsDetails />,
                     },
 
