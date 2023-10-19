@@ -12,3 +12,4 @@
 -    [CloneElement](https://react.dev/reference/react/cloneElement): One of React Top-Level API used to manipulate elements or components.
 -    Focused on compound reusabilities.
 -    Custom Hooks
+-    [React Loading Skeleton](https://github.com/dvtng/react-loading-skeleton): For nice products loading 😃.

@@ -1,9 +1,22 @@
-const Filter = ({ filter }) => {
+/* eslint-disable */
+import { useSearchParams } from 'react-router-dom';
+
+const Filter = ({ options, filterField }) => {
+     const [searchParams, setSearchParams] = useSearchParams();
+
+     function handleChange(e) {
+          searchParams.set([filterField], e.target.value);
+          setSearchParams(searchParams);
+     }
+
      return (
-          <select className='text-[12px] outline-none px-2 py-1 rounded-sm bg-gray-100'>
-               {filter.map((filter, i) => (
-                    <option key={i + 1} value={filter.value}>
-                         {filter.label}
+          <select
+               onChange={handleChange}
+               className='text-[12px] outline-none px-2 py-1 rounded-sm bg-gray-100'
+          >
+               {options.map(({ value, label }) => (
+                    <option key={value} value={value}>
+                         {label}
                     </option>
                ))}
           </select>

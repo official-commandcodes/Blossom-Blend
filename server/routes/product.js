@@ -3,6 +3,7 @@ const {
      getAllProducts,
      createProduct,
      getProduct,
+     getPopular,
 } = require('../controller/productController');
 
 router.get('/', getAllProducts).post('/', createProduct);

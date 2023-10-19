@@ -31,6 +31,8 @@ const productSchema = mongoose.Schema(
 
           images: [String],
 
+          wishLists: [String],
+
           stockQuantity: {
                type: Number,
                default: 0,
@@ -80,11 +82,11 @@ productSchema.pre('save', function (next) {
 productSchema.virtual('avgRatings').get(function () {
      return (
           this.ratings.reduce((acc, cur) => acc + cur, 0) / this.ratings.length
-     );
+     ).toFixed(1);
 });
 
 productSchema.virtual('discountPercentage').get(function () {
-     return (this.discountPrice / this.price) * 100;
+     return ((this.discountPrice / this.price) * 100).toFixed(0);
 });
 
 productSchema.virtual('priceAfterDiscount').get(function () {

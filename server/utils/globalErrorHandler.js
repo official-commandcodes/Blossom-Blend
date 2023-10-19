@@ -21,7 +21,7 @@ const globalErrorHandler = (err, req, res, next) => {
 
      if (process.env.NODE_ENV === 'development') {
           res.status(400).json({
-               err,
+               err: err.message,
           });
      }
 
@@ -33,7 +33,7 @@ const globalErrorHandler = (err, req, res, next) => {
           if (err.name === 'ValidationError')
                return handleValidationErr(err, res);
 
-          res.status(500).json('Something went wrong!');
+          res.status(500).json({ err: err.message });
      }
 };
 

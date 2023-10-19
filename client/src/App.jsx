@@ -4,6 +4,8 @@ import {
      Navigate,
      RouterProvider,
 } from 'react-router-dom';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import DropDownProvider from './ui/DropDownContext';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
@@ -18,6 +20,14 @@ const AccountInformation = lazy(() => import('./pages/AccountInformation'));
 const AccountOrders = lazy(() => import('./pages/AccountOrders'));
 const AccountWishLists = lazy(() => import('./pages/AccountWishLists'));
 const Contact = lazy(() => import('./pages/Contact'));
+
+const queryClient = new QueryClient({
+     defaultOptions: {
+          queries: {
+               staleTime: 0,
+          },
+     },
+});
 
 const App = () => {
      const router = createBrowserRouter([
@@ -93,11 +103,14 @@ const App = () => {
      ]);
 
      return (
-          <DropDownProvider>
-               <Suspense fallback={'Loading ....'}>
-                    <RouterProvider router={router} />
-               </Suspense>
-          </DropDownProvider>
+          <QueryClientProvider client={queryClient}>
+               <DropDownProvider>
+                    <Suspense fallback={'Loading ....'}>
+                         <RouterProvider router={router} />
+                    </Suspense>
+               </DropDownProvider>
+               <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
      );
 };
 

@@ -4,27 +4,8 @@ import Popular from '../features/products/Popular';
 import FAQS from '../features/faq/FAQS';
 import FilterSection from '../ui/FilterSection';
 import HeroSection from '../ui/HeroSection';
-import { useEffect } from 'react';
 
 const Home = () => {
-     useEffect(() => {
-          const fetchAPI = async () => {
-               try {
-                    const res = await fetch(
-                         `${import.meta.env.VITE_API_URL}/api/v1/products`
-                    );
-
-                    const data = await res.json();
-
-                    console.log(data);
-               } catch (error) {
-                    console.log(error);
-               }
-          };
-
-          fetchAPI();
-     }, []);
-
      return (
           <div>
                {/* HERO SECTION */}
@@ -34,7 +15,13 @@ const Home = () => {
                <FilterSection />
 
                {/* PRODUCTS */}
-               <Products title='Elegant Beauty Picks' />
+               <section className='px-16 py-8 flex flex-col gap-2'>
+                    <h1 className='font-medium text-2xl text-orange-950'>
+                         Elegant Beauty Picks
+                    </h1>
+
+                    <Products />
+               </section>
 
                {/* PAGINATION */}
                <Pagination />

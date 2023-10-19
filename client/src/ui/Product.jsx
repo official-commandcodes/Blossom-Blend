@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import Star from './Star';
+import { API_URL } from '../utils/helper';
 
-const Product = ({ w }) => {
+const Product = ({ w, product }) => {
      const outline = true;
+
+     const title = `${product?.title.slice(0, 23)}...`;
 
      return (
           <div
@@ -12,8 +15,8 @@ const Product = ({ w }) => {
           >
                <div className='relative'>
                     <img
-                         src='/markup-1.png'
-                         alt='Cosmetics'
+                         src={`${API_URL}/products/${product?.imageUrl}`}
+                         alt={product?.title}
                          className='object-cover w-full h-36 rounded-md hover:scale-110 transition-all duration-300 border border-gray-200 hover:shadow-lg hover:shadow-gray-400/50'
                     />
 
@@ -30,18 +33,18 @@ const Product = ({ w }) => {
                     <div className='flex flex-col gap-[6px]'>
                          <Link
                               to='/products/1'
-                              className='font-medium uppercase text-[14px] underline'
+                              className='font-light text-[12px] underline'
                          >
-                              Cosmetics
+                              {title}
                          </Link>
                          <span className='text-xs text-gray-500'>
-                              Organic fluid, lotion
+                              {product?.category}
                          </span>
 
                          <div className='text-orange-300 flex gap-[1px] items-center'>
                               <Star />
                               <span className='text-xs font-medium text-gray-900'>
-                                   4
+                                   {product?.avgRatings || 0}
                               </span>
                          </div>
 
@@ -50,7 +53,9 @@ const Product = ({ w }) => {
                          </button>
                     </div>
 
-                    <div className='font-medium text-[18px]'>$99</div>
+                    <div className='font-medium text-[14px]'>
+                         ${product?.price}
+                    </div>
                </div>
           </div>
      );
