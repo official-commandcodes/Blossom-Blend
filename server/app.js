@@ -3,10 +3,13 @@ const cors = require('cors');
 
 // ROUTES
 const productRoutes = require('./routes/product');
+const userRoutes = require('./routes/user');
 const globalErrorHandler = require('./utils/globalErrorHandler');
 const app = express();
 
 // MIDDLEWARES
+app.set('view engine', 'ejs');
+app.set('views', `${__dirname}/views`);
 
 // CROSS-ORIGIN
 const corsOptions = {
@@ -28,7 +31,7 @@ app.get('/', (req, res) => {
      res.send('Welcome to Bloom Blend API');
 });
 
-// app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/products', productRoutes);
 // app.use('/api/v1/products', productRoutes);
 // app.use('/api/v1/products', productRoutes);

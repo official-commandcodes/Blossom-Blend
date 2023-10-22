@@ -5,6 +5,7 @@ import Star from '../../ui/Star';
 import Button from '../../ui/Button';
 
 const ProductDetail_Side_Right = ({
+     id,
      title,
      description,
      ratings,
@@ -18,8 +19,12 @@ const ProductDetail_Side_Right = ({
 
      const addCart = true;
 
+     const handleAddToCart = () => {
+          console.log(id);
+     };
+
      return (
-          <div className='bg-gray-200 flex flex-col px-6 py-8 gap-2 divide-y-[1px] divide-gray-300'>
+          <div className='bg-gray-200 flex flex-col px-6 py-8 gap-6 divide-y-[1px] divide-gray-300'>
                {/* DESCRIPTION */}
                <div className='flex flex-col gap-2'>
                     <h1 className='font-bold text-xl '>{title}</h1>
@@ -96,23 +101,11 @@ const ProductDetail_Side_Right = ({
                          </div>
                     </div>
                ) : (
-                    <Button>
+                    <Button onClick={handleAddToCart}>
                          <BiCartAdd className='text-[18px]' />
                          Add to Cart
                     </Button>
                )}
-               {/* CAT BUTTONS */}
-               {/* <div className='flex gap-7'>
-                    <Link
-                         to='/checkout/1'
-                         className='w-32 h-9 text-orange-950 text-[15px] bg-orange-800 rounded-full hover:bg-transparent hover:border-[1px] hover:border-orange-900 transition-all duration-300 flex justify-center items-center'
-                    >
-                         Buy Now
-                    </Link>
-                    <button className='w-32 h-9 text-orange-950 text-[15px] border-[1px] rounded-full border-orange-900 hover:bg-orange-900 hover:border-none transition-all duration-300'>
-                         Add to Cart
-                    </button>
-               </div> */}
           </div>
      );
 };

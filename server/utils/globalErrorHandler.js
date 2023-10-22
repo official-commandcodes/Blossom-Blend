@@ -17,11 +17,10 @@ const handleValidationErr = (err, res) => {
 };
 
 const globalErrorHandler = (err, req, res, next) => {
-     // const error = { message: err.message, ...err };
-
      if (process.env.NODE_ENV === 'development') {
-          res.status(400).json({
-               err: err.message,
+          res.json({
+               message: err.message,
+               err,
           });
      }
 

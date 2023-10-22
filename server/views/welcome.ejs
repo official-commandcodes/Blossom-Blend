@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0"
+          />
+          <link rel="stylesheet" href="./css/style.css" />
+          <title><%= subject %></title>
+          <style>
+               * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+               }
+
+               body {
+                    background-color: #efefef;
+                    font-size: 80%;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 80%;
+                    margin: auto;
+               }
+
+               h1 {
+                    font-size: 23px;
+                    font-family: sans-serif;
+               }
+
+               p {
+                    font-size: 14px;
+               }
+
+               a {
+                    text-decoration: none;
+                    padding: 1rem 1.3rem;
+                    border-radius: 4px;
+               }
+
+               a:hover {
+                    background-color: #f9c462;
+               }
+          </style>
+     </head>
+     <body>
+          <h1 class="">Welcome to Blossom Blend, <%= name %>!</h1>
+          <p>
+               We're thrilled to welcome you to Blossom Blend! Thank you for
+               choosing us for all your shopping needs. We're committed to
+               providing you with a seamless and enjoyable shopping experience.
+          </p>
+          <a href="<%= url %>">Start Shopping</a>
+     </body>
+</html>

@@ -20,7 +20,7 @@ const ProductDetail_Side_Left = ({ image }) => {
                     <img
                          src={`${API_URL}/products/${imageUrl}`}
                          alt={imageUrl}
-                         className='bg-gray-300 w-[500px] h-96 object-cover'
+                         className='bg-gray-300 w-[500px] h-96 object-cover transition-all duration-500'
                     />
                </div>
 

@@ -44,19 +44,16 @@ const ProductSearch = () => {
                </div>
 
                {query && (
-                    <div className='absolute bg-gray-100 opacity-95 w-full mt-5 rounded-md'>
-                         <ul className='py-1 divide-y-[1px] h-96 overflow-y-scroll flex flex-col'>
+                    <div className='absolute bg-orange-300 opacity-95 w-full mt-5 rounded-md'>
+                         <ul className='py-1 divide-y-[1px] h-96 overflow-y-scroll grid grid-flow-row'>
                               {isLoading &&
                                    Array.from({ length: 8 }, (_, i) => {
-                                        <SkeletonTheme
-                                             highlightColor='#eaca54'
-                                             baseColor='#7add7a'
+                                        <li
+                                             key={i + 1}
+                                             className='grid grid-flow-row'
                                         >
-                                             <li key={i + 1}>
-                                                  <Skeleton count={1} />;
-                                             </li>
-                                             ;
-                                        </SkeletonTheme>;
+                                             <Skeleton count={1} />;
+                                        </li>;
                                    })}
 
                               {!isLoading &&

@@ -45,3 +45,24 @@ export const getSearchProducts = async (query) => {
           throw new Error(err);
      }
 };
+
+export const addProductToCart = async (id) => {
+     try {
+          // const signal = controller.signal;
+          const res = await axios.get(`${API_URL}/api/v1/products/addToCart`, {
+               method: 'POST',
+               headers: {
+                    'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({ id }),
+          });
+
+          const data = res.data.data;
+
+          // controller.abort();
+
+          return data;
+     } catch (err) {
+          throw new Error(err);
+     }
+};

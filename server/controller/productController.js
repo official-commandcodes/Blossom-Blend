@@ -108,4 +108,9 @@ const getSearch = async (req, res, next) => {
      }
 };
 
-module.exports = { getAllProducts, createProduct, getProduct, getSearch };
+module.exports = {
+     getAllProducts,
+     createProduct,
+     getProduct,
+     getSearch,
+};
