@@ -26,6 +26,7 @@ module.exports = class Email {
                     name: this.name.split(' ')[0],
                     url: this.url,
                     subject,
+                    date: `${new Date().toDateString()}, ${new Date().toLocaleTimeString('en-US')}`, // prettier-ignore
                }
           );
 
@@ -47,5 +48,9 @@ module.exports = class Email {
 
      async sendEmailValidation() {
           await this.send('emailValidation', 'Email Verification');
+     }
+
+     async sendLogInAccess() {
+          await this.send('login', 'Blossom Login Notification');
      }
 };

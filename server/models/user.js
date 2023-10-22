@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { isEmail } = require('validator');
 
-const UserSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
      {
           name: {
                type: String,
@@ -52,7 +52,7 @@ const UserSchema = new mongoose.Schema(
 
           password: {
                type: String,
-               minLength: [
+               minlength: [
                     8,
                     'Password length must be greater than or equal 8',
                ],
@@ -62,9 +62,9 @@ const UserSchema = new mongoose.Schema(
 
           passwordConfirm: {
                type: String,
-               minLength: [
+               minlength: [
                     8,
-                    'Password length must be greater than or equal 8',
+                    'PasswordConfirm length must be greater than or equal 8',
                ],
 
                validate: {
@@ -78,27 +78,34 @@ const UserSchema = new mongoose.Schema(
      { timestamps: true }
 );
 
-UserSchema.pre('save', async function (next) {
-     if (!this.password) return next();
+userSchema.pre('save', async function (next) {
+     if (!this.isModified('password')) return next();
 
-     this.password = await bcrypt.hash(this.password, +process.env.HASH_ROUNDS);
+     this.password = await bcrypt.hash(this.password, 12);
 
      this.passwordConfirm = undefined;
 
      next();
 });
 
-UserSchema.methods.createEmailToken = async function () {
+userSchema.methods.createEmailToken = async function () {
      const emailToken = crypto.randomBytes(32).toString('hex');
 
      const hash = crypto.createHash('sha256').update(emailToken).digest('hex');
 
      this.emailValidation = await bcrypt.hash(hash, 12);
 
-     console.log(this.emailValidation);
      return hash;
 };
 
-const User = mongoose.model('User', UserSchema);
+userSchema.methods.compareToken = async (plainToken, hashToken) => {
+     return await bcrypt.compare(plainToken, hashToken);
+};
+
+userSchema.methods.correctPassword = async (plainPassword, hashedPassword) => {
+     return await bcrypt.compare(plainPassword, hashedPassword);
+};
+
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

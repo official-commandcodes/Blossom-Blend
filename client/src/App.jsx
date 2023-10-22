@@ -9,6 +9,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import DropDownProvider from './ui/DropDownContext';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
+const Login = lazy(() => import('./pages/Login'));
+const Signup = lazy(() => import('./pages/Signup'));
 const Home = lazy(() => import('./pages/Home'));
 const ProductsDetails = lazy(() => import('./pages/ProductsDetails'));
 const Cart = lazy(() => import('./pages/Cart'));
@@ -98,6 +100,16 @@ const App = () => {
                          element: <Contact />,
                     },
                ],
+          },
+
+          {
+               path: '/login',
+               element: <Login />,
+          },
+
+          {
+               path: '/sign-up',
+               element: <Signup />,
           },
      ]);
 
