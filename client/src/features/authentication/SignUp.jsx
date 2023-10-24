@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { useSignUp } from './useSignUp';
 
 import Spinner from '../../ui/Spinner';
-import AuthHeader from '../../ui/authHeader';
+import AuthHeader from '../../ui/AuthHeader';
 
 const SignUp = () => {
      const {
