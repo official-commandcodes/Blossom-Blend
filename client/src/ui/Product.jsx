@@ -8,7 +8,7 @@ import { useRemoveFromCart } from '../features/products/useRemoveFromCart';
 import Star from './Star';
 import Spinner from './Spinner';
 import { useAddToWishlist } from '../features/products/useAddToWishlist';
-import { useRemoveFromWishlist } from '../features/products/useRemoveFromWishList';
+import { useRemoveFromWishlist } from '../features/products/useRemoveFromWishlist';
 
 const Product = ({ w, product }) => {
      const { status: addStatus, addToCart } = useAddToCart();
