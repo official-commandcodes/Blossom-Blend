@@ -57,7 +57,7 @@ const signup = async (req, res, next) => {
           await new Email(newUser, validateEmailUrl).sendEmailValidation();
 
           // send welcome email
-          await new Email(newUser,`${req.protocol}://${req.get('host')}/products`).sendWelcome(); // prettier-ignore
+          await new Email(newUser, `${mainUrl}/products`).sendWelcome();
 
           createToken(res, newUser, 201);
      } catch (err) {

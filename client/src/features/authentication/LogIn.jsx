@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 import { useLogin } from './useLogin';
 
-import AuthHeader from '../../ui/authHeader';
+import AuthHeader from '../../ui/AuthHeader';
 import Spinner from '../../ui/Spinner';
 import { useEffect } from 'react';
 
