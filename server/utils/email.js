@@ -51,6 +51,6 @@ module.exports = class Email {
      }
 
      async sendLogInAccess() {
-          await this.send('login', 'Blossom Login Notification');
+          await this.send('login', 'Blossom Blend Login Notification');
      }
 };

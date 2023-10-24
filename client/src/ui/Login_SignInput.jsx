@@ -1,4 +1,8 @@
-const Login_SignInput = ({ icon, label, type }) => {
+import { useForm } from 'react-hook-form';
+
+const Login_SignInput = ({ icon, label, holder, errors, type }) => {
+     const { register } = useForm();
+
      return (
           <div className='flex items-center bg-orange-50 h-10'>
                <label
@@ -10,9 +14,15 @@ const Login_SignInput = ({ icon, label, type }) => {
                <input
                     id={label}
                     type={type}
-                    placeholder={label}
-                    className='w-full outline-none h-full px-2 placeholder:text-[14px] placeholder:italic italic text-[14px]'
-                    autoComplete='off'
+                    placeholder={holder}
+                    className={`w-full outline-none h-full px-2 placeholder:text-[14px] placeholder:italic italic text-[14px] ${
+                         errors?.[label]?.message
+                              ? 'border-2 border-red-300'
+                              : ''
+                    }`}
+                    {...register(label, {
+                         required: 'FullName is required',
+                    })}
                />
           </div>
      );

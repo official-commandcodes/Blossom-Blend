@@ -3,66 +3,102 @@ import { API_URL } from '../utils/helper';
 
 // const controller = new AbortController();
 
-export const getAllProduct = async (category, sortBy) => {
-     try {
-          const res = await axios.get(
-               `${API_URL}/api/v1/products?category=${category}&sort=${sortBy}`
-          );
+export const getAllProduct = async (category = 'all', sortBy = 'all') => {
+     const res = await fetch(
+          `${API_URL}/api/v1/products?category=${category}&sort=${sortBy}`
+     );
 
-          const data = res.data.data;
+     const data = await res.json();
 
-          return data;
-     } catch (err) {
-          throw new Error(err);
-     }
+     return data.data;
 };
 
 export const getProduct = async (slug) => {
-     try {
-          const res = await axios.get(`${API_URL}/api/v1/products/${slug}`);
+     const res = await fetch(`${API_URL}/api/v1/products/${slug}`);
 
-          const data = res.data.data;
+     const data = await res.json();
 
-          return data;
-     } catch (err) {
-          throw new Error(err);
-     }
+     return data.data;
 };
 
 export const getSearchProducts = async (query) => {
-     try {
-          // const signal = controller.signal;
-          const res = await axios.get(
-               `${API_URL}/api/v1/products/search?q=${query}`
-          );
+     const res = await fetch(`${API_URL}/api/v1/products/search?q=${query}`);
 
-          const data = res.data.data;
+     const data = await res.json();
 
-          // controller.abort();
-
-          return data;
-     } catch (err) {
-          throw new Error(err);
-     }
+     return data.data;
 };
 
-export const addProductToCart = async (id) => {
-     try {
-          // const signal = controller.signal;
-          const res = await axios.get(`${API_URL}/api/v1/products/addToCart`, {
-               method: 'POST',
+export const addToCart = async (addCart) => {
+     const res = await fetch(`${API_URL}/api/v1/users/carts/addToCarts`, {
+          method: 'PATCH',
+          credentials: 'include',
+          headers: {
+               'Content-type': 'application/json; charset=UTF-8',
+          },
+          body: JSON.stringify(addCart),
+     });
+
+     const data = await res.json();
+
+     if (data.message) throw new Error(data.message);
+
+     return data;
+};
+
+export const removeFromCart = async (productId) => {
+     const res = await fetch(`${API_URL}/api/v1/users/carts/removeFromCarts`, {
+          method: 'DELETE',
+          credentials: 'include',
+          headers: {
+               'Content-type': 'application/json; charset=UTF-8',
+          },
+          body: JSON.stringify({ id: productId }),
+     });
+
+     const data = await res.json();
+
+     if (data.message) throw new Error(data.message);
+
+     return data;
+};
+
+export const addToWishlist = async (productId) => {
+     const res = await fetch(
+          `${API_URL}/api/v1/users/wishlists/addToWishlists`,
+          {
+               method: 'PATCH',
+               credentials: 'include',
                headers: {
-                    'Content-Type': 'application/json',
+                    'Content-type': 'application/json; charset=UTF-8',
                },
-               body: JSON.stringify({ id }),
-          });
+               body: JSON.stringify({ id: productId }),
+          }
+     );
 
-          const data = res.data.data;
+     const data = await res.json();
 
-          // controller.abort();
+     if (data.message) throw new Error(data.message);
 
-          return data;
-     } catch (err) {
-          throw new Error(err);
-     }
+     return data;
+};
+
+export const removeFromWishlist = async (productId) => {
+     const res = await fetch(
+          `${API_URL}/api/v1/users/wishlists/removeFromWishlists`,
+          {
+               method: 'DELETE',
+               credentials: 'include',
+               headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+               },
+               body: JSON.stringify({ id: productId }),
+          }
+     );
+
+     const data = await res.json();
+
+     if (data.message) throw new Error(data.message);
+
+     return data;
 };

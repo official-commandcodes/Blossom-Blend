@@ -10,12 +10,16 @@ const ProductDetail_Side_Left = ({ image }) => {
 
      const lastDashIndex = image[active].lastIndexOf('-');
      const imagePath = image[active].slice(0, lastDashIndex);
-     const ext = image[active].split('.').at(-1);
+
+     const length = image[active].split('.').length;
+
+     // .at Array method is not compatible with safari
+     const ext = image[active].split('.')[length - 1];
 
      const imageUrl = `${imagePath}-${active + 1}.${ext}`;
 
      return (
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col space-y-3'>
                <div className='flex items-center justify-center'>
                     <img
                          src={`${API_URL}/products/${imageUrl}`}
@@ -24,7 +28,7 @@ const ProductDetail_Side_Left = ({ image }) => {
                     />
                </div>
 
-               <div className='flex gap-1 justify-center items-center gap-x-2'>
+               <div className='flex justify-center items-center space-x-2'>
                     {image.map((img, i) => (
                          <div
                               key={i + 1}

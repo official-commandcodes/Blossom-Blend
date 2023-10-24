@@ -7,8 +7,9 @@ const {
 } = require('../controller/productController');
 
 router.get('/search', getSearch);
-router.get('/', getAllProducts).post('/', createProduct);
-
-router.get('/:slug', getProduct);
+router
+     .get('/', getAllProducts)
+     .get('/:slug', getProduct)
+     .post('/', createProduct);
 
 module.exports = router;

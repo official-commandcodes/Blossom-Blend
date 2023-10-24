@@ -1,10 +1,29 @@
 const router = require('express').Router();
-const { signup, login, validateEmail } = require('../controller/authController'); // prettier-ignore
+const {
+     signup,
+     login,
+     validateEmail,
+     getLoggedInUser,
+     protect,
+} = require('../controller/authController');
+const {
+     addToCart,
+     removeFromCart,
+     addToWishlist,
+     removeFromWishlist,
+} = require('../controller/userController');
+
+// AUTH
+router.post('/signup', signup).post('/login', login);
 
 // PROTECT UER ID TO BE USED
 router.patch('/validate/:userId/:emailValidateToken', validateEmail);
 
-// AUTH
-router.post('/signup', signup).post('/login', login);
+router
+     .get('/getUser', getLoggedInUser)
+     .patch('/carts/addToCarts', protect, addToCart)
+     .patch('/wishlists/addToWishlists', protect, addToWishlist)
+     .delete('/carts/removeFromCarts', protect, removeFromCart)
+     .delete('/wishlists/removeFromWishlists', protect, removeFromWishlist);
 
 module.exports = router;

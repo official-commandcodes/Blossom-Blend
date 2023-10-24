@@ -3,6 +3,14 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { isEmail } = require('validator');
 
+const cartSchema = new mongoose.Schema({
+     id: {
+          type: String,
+     },
+
+     quantity: { type: Number },
+});
+
 const userSchema = new mongoose.Schema(
      {
           name: {
@@ -13,7 +21,7 @@ const userSchema = new mongoose.Schema(
 
           email: {
                type: String,
-               unique: true,
+               // unique: true,
                trim: true,
                required: [true, 'Please provide your email'],
                validate: {
@@ -36,19 +44,9 @@ const userSchema = new mongoose.Schema(
 
           phoneNumber: Number,
 
-          wishlist: [
-               {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: 'Product',
-               },
-          ],
+          wishlists: [String],
 
-          cart: [
-               {
-                    type: mongoose.Schema.ObjectId,
-                    ref: 'Product',
-               },
-          ],
+          carts: [cartSchema],
 
           password: {
                type: String,

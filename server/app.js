@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 // ROUTES
 const productRoutes = require('./routes/product');
@@ -13,7 +14,10 @@ app.set('views', `${__dirname}/views`);
 
 // CROSS-ORIGIN
 const corsOptions = {
-     origin: '*',
+     origin:
+          process.env.NODE_ENV === 'production'
+               ? 'https://blossomblend.vercel.app'
+               : 'http://localhost:5173',
      methods: ['GET', 'POST', 'DELETE', 'PATCH'],
      optionSuccessStatus: 200,
      headers: ['Content-Type', 'Authorization', 'x-access-token'],
@@ -22,6 +26,7 @@ const corsOptions = {
      preflightContinue: false,
 };
 app.use(cors(corsOptions));
+app.use(cookieParser());
 
 // BODY-PARSER & STATIC FILES
 app.use(express.json());

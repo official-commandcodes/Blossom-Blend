@@ -16,11 +16,18 @@ const handleValidationErr = (err, res) => {
      res.status(409).json({ status: 'fail', message });
 };
 
+const handleJWTExpiredError = (err, res) => {
+     res.status(400).json({
+          status: 'fail',
+          message: 'Your token has expired',
+     });
+};
+
 const globalErrorHandler = (err, req, res, next) => {
      if (process.env.NODE_ENV === 'development') {
           res.json({
                message: err.message,
-               err,
+               err: { ...err },
           });
      }
 
@@ -32,7 +39,11 @@ const globalErrorHandler = (err, req, res, next) => {
           if (err.name === 'ValidationError')
                return handleValidationErr(err, res);
 
-          res.status(500).json({ err: err.message });
+          // Invalid Token
+          if (err.name == 'TokenExpiredError')
+               return handleJWTExpiredError(err, res);
+
+          res.status(err.statusCode || 500).json({ err });
      }
 };
 

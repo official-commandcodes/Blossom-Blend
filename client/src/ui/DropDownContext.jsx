@@ -18,7 +18,7 @@ const Button = ({ children, account }) => {
 
      return (
           <button
-               className='flex gap-1 items-center hover:text-orange-300 transition-all duration-300'
+               className='flex space-x-1 items-center  hover:text-orange-950 transition-all duration-300'
                onClick={() => setDropDown(account)}
           >
                {children}
@@ -35,7 +35,7 @@ const DropDown = ({ children, window }) => {
      return (
           <ul
                ref={ref}
-               className='absolute top-8 bg-gray-100 w-[200px] flex flex-col gap-4 px-2 w-full right-0 divide-y-[1px] py-3 rounded-md'
+               className='absolute top-8 bg-gray-100 w-[200px] flex flex-col gap-4 right-0 divide-y-[1px] py-1 rounded-md'
           >
                {children}
           </ul>

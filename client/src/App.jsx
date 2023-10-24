@@ -6,10 +6,12 @@ import {
 } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Toaster } from 'react-hot-toast';
 import DropDownProvider from './ui/DropDownContext';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const Login = lazy(() => import('./pages/Login'));
+const EmailVerify = lazy(() => import('./pages/EmailVerify'));
 const Signup = lazy(() => import('./pages/Signup'));
 const Home = lazy(() => import('./pages/Home'));
 const ProductsDetails = lazy(() => import('./pages/ProductsDetails'));
@@ -108,20 +110,50 @@ const App = () => {
           },
 
           {
+               path: '/auth/email-verification/:userId/:token',
+               element: <EmailVerify />,
+          },
+
+          {
                path: '/sign-up',
                element: <Signup />,
           },
      ]);
 
      return (
-          <QueryClientProvider client={queryClient}>
-               <DropDownProvider>
-                    <Suspense fallback={'Loading ....'}>
-                         <RouterProvider router={router} />
-                    </Suspense>
-               </DropDownProvider>
-               <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
+          <>
+               <QueryClientProvider client={queryClient}>
+                    <DropDownProvider>
+                         <Suspense fallback={'Loading ....'}>
+                              <RouterProvider router={router} />
+                         </Suspense>
+                    </DropDownProvider>
+                    <ReactQueryDevtools initialIsOpen={false} />
+               </QueryClientProvider>
+               <Toaster
+                    position='top-right'
+                    reverseOrder={false}
+                    gutter={8}
+                    toastOptions={{
+                         // Default options for specific types
+                         success: {
+                              duration: 3000,
+                              theme: {
+                                   primary: 'green',
+                                   secondary: 'black',
+                              },
+                         },
+
+                         error: {
+                              duration: 3000,
+                              theme: {
+                                   primary: 'orange',
+                                   secondary: 'black',
+                              },
+                         },
+                    }}
+               />
+          </>
      );
 };
 
