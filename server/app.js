@@ -16,7 +16,7 @@ app.set('views', `${__dirname}/views`);
 const corsOptions = {
      origin:
           process.env.NODE_ENV === 'production'
-               ? 'https://blossomblend.vercel.app'
+               ? 'https://blossom-blend.vercel.app'
                : 'http://localhost:5173',
      methods: ['GET', 'POST', 'DELETE', 'PATCH'],
      optionSuccessStatus: 200,
