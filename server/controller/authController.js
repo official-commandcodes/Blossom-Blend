@@ -9,7 +9,6 @@ const createToken = (res, user, statusCode) => {
      });
 
      const cookieOptions = {
-          domain: 'blossom-blend.vercel.app',
           maxAge: 30 * 24 * 60 * 60 * 1000,
           httpOnly: true,
           path: '/',
