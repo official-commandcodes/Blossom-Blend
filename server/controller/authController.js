@@ -12,7 +12,6 @@ const createToken = (res, user, statusCode) => {
           maxAge: 30 * 24 * 60 * 60 * 1000,
           httpOnly: true,
           path: '/',
-          SameSite: false,
      };
 
      if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
@@ -90,7 +89,7 @@ const login = async (req, res, next) => {
           // check whether user haven't validate their email
           if (!user.emailValid) {
                return next(
-                    new AppError('Your email as not be validated!', 404)
+                    new AppError('Your email as not be validated!', 400)
                );
           }
 
@@ -101,12 +100,12 @@ const login = async (req, res, next) => {
 
           // compare password
           if (!correct) {
-               return next(new AppError('User password is incorrect!', 404));
+               return next(new AppError('User password is incorrect!', 400));
           }
 
           await new Email(user).sendLogInAccess();
 
-          await createToken(res, user, 200);
+          createToken(res, user, 200);
      } catch (err) {
           next(err);
      }
