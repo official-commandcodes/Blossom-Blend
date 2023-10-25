@@ -9,7 +9,7 @@ const {
 router.get('/search', getSearch);
 router
      .get('/', getAllProducts)
-     .get('/:slug', getProduct)
+     .get('/product', getProduct) // get a product by query
      .post('/', createProduct);
 
 module.exports = router;

@@ -8,6 +8,7 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import DropDownProvider from './ui/DropDownContext';
+import { CartTotalProvider } from './context/CartTotal';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const Login = lazy(() => import('./pages/Login'));
@@ -123,11 +124,14 @@ const App = () => {
      return (
           <>
                <QueryClientProvider client={queryClient}>
-                    <DropDownProvider>
-                         <Suspense fallback={'Loading ....'}>
-                              <RouterProvider router={router} />
-                         </Suspense>
-                    </DropDownProvider>
+                    <CartTotalProvider>
+                         <DropDownProvider>
+                              <Suspense fallback={'Loading ....'}>
+                                   <RouterProvider router={router} />
+                              </Suspense>
+                         </DropDownProvider>
+                    </CartTotalProvider>
+
                     <ReactQueryDevtools initialIsOpen={false} />
                </QueryClientProvider>
                <Toaster

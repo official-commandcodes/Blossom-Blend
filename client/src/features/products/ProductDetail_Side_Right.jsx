@@ -10,6 +10,7 @@ import { useUpdateCartItems } from './useUpdateCartItems';
 
 import Star from '../../ui/Star';
 import Spinner from '../../ui/Spinner';
+import ActionButton from '../../ui/ActionButton';
 
 const ProductDetail_Side_Right = ({
      id,
@@ -41,7 +42,9 @@ const ProductDetail_Side_Right = ({
                });
           }
 
-          toast.error('please login before attemping any action');
+          toast.error('please login before attemping any action', {
+               className: 'text-[12px]',
+          });
      };
 
      // DECREASE PRODUCT ITEMS
@@ -133,12 +136,9 @@ const ProductDetail_Side_Right = ({
                               </p>
 
                               <div className='flex items-center space-x-4 w-40'>
-                                   <button
-                                        onClick={handleDecrease}
-                                        className='w-14 h-10 bg-orange-600 text-[19px] text-orange-100 flex justify-center items-center font-bold rounded-md'
-                                   >
+                                   <ActionButton onClick={handleDecrease}>
                                         <AiOutlineMinus />
-                                   </button>
+                                   </ActionButton>
 
                                    <span>
                                         {addStatus === 'pending' ||
@@ -150,19 +150,13 @@ const ProductDetail_Side_Right = ({
                                         )}
                                    </span>
 
-                                   <button
-                                        onClick={handleIncrease}
-                                        className='w-14 h-10 bg-orange-600 text-[19px] text-orange-100 flex justify-center items-center font-bold rounded-md'
-                                   >
+                                   <ActionButton onClick={handleIncrease}>
                                         <AiOutlinePlus />
-                                   </button>
+                                   </ActionButton>
                               </div>
                          </div>
                     ) : (
-                         <button
-                              onClick={handleAddToCart}
-                              className='mt-4 bg-orange-600 text-[14px] w-[150px] h-10 px-2 text-orange-100 flex justify-center items-center font-light space-x-1 rounded-md'
-                         >
+                         <ActionButton onClick={handleAddToCart}>
                               {addStatus === 'pending' ? (
                                    <Spinner w='20' h='15' />
                               ) : (
@@ -171,7 +165,7 @@ const ProductDetail_Side_Right = ({
                                         <span>Add to Cart</span>
                                    </>
                               )}
-                         </button>
+                         </ActionButton>
                     )}
                </div>
           </div>

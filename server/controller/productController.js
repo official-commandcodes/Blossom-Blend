@@ -59,7 +59,13 @@ const getAllProducts = async (req, res, next) => {
 
 const getProduct = async (req, res, next) => {
      try {
-          const product = await Product.findOne({ slug: req.params.slug });
+          let product;
+
+          if (req.query.slug)
+               product = await Product.findOne({ slug: req.query.slug });
+
+          if (req.query.id)
+               product = await Product.findOne({ _id: req.query.id });
 
           res.status(200).json({
                status: 'success',

@@ -9,6 +9,7 @@ export const useUpdateCartItems = () => {
           mutationFn: updateCartItemsAPI,
 
           onSuccess: () => {
+               window.location.reload();
                queryClient.invalidateQueries({ queryKey: ['user'] });
           },
 

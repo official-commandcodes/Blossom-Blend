@@ -1,92 +1,42 @@
-import { Link } from 'react-router-dom';
-import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
-import { MdCancel } from 'react-icons/md';
-import Button from '../../ui/Button';
+import { useContext } from 'react';
+import ActionButton from '../../ui/ActionButton';
+import { formatMoney } from '../../utils/helper';
+import CartList from './CartList';
+import { CartTotalContext } from '../../context/CartTotal';
 
-const CartLists = () => {
+const CartLists = ({ carts }) => {
+     const { sum } = useContext(CartTotalContext);
+
      return (
-          <section className='px-2'>
-               <div className='grid grid-cols-6 gap-2 text-[17px] font-medium py-5'>
-                    <div className='col-span-2'>Item</div>
-                    <div className=''>Price</div>
-                    <div className='justify-self-center '>Quantity</div>
-                    <div className='justify-self-center'>Total</div>
-                    <div className='justify-self-center'>Discard</div>
-               </div>
-
-               <ul className='flex flex-col'>
-                    <li className='grid grid-cols-6 gap-2 items-center py-1 border-t-[1px] border-b-[1px]'>
-                         <Link
-                              to='/products/1'
-                              className='flex items-center col-span-2'
-                         >
-                              <img
-                                   src='/markup-2.png'
-                                   alt='Markup'
-                                   className='w-32 h-32 object-cover'
-                              />
-                              <h3 className='font-medium text-xl'>
-                                   La Mer Crème de la Mer.
-                              </h3>
-                         </Link>
-                         <div className='text-[17px] font-light'>$499.79</div>
-                         <div className='flex items-center gap-5'>
-                              <Button>
-                                   <AiOutlineMinus />
-                              </Button>
-
-                              <span>1</span>
-
-                              <Button>
-                                   <AiOutlinePlus />
-                              </Button>
-                         </div>
-                         <div className='justify-self-center text-[17px] font-light'>
-                              $499.79
-                         </div>
-                         <div className='justify-self-center text-[25px] cursor-pointer text-orange-800'>
-                              <MdCancel />
-                         </div>
-                    </li>
-
-                    <li
-                         to='/products/1'
-                         className='grid grid-cols-6 gap-2 items-center py-1 border-t-[1px] border-b-[1px]'
-                    >
-                         <div className='flex items-center col-span-2'>
-                              <img
-                                   src='/markup-2.png'
-                                   alt='Markup'
-                                   className='w-32 h-32 object-cover'
-                              />
-                              <h3 className='font-medium text-xl'>
-                                   La Mer Crème de la Mer.
-                              </h3>
-                         </div>
-
-                         <div className='text-[17px] font-light'>$499.79</div>
-
-                         <div className='flex items-center gap-5'>
-                              <Button>
-                                   <AiOutlineMinus />
-                              </Button>
-
-                              <span>1</span>
-
-                              <Button>
-                                   <AiOutlinePlus />
-                              </Button>
-                         </div>
-
-                         <div className='justify-self-center text-[17px] font-light'>
-                              $499.79
-                         </div>
-
-                         <div className='justify-self-center text-[25px] cursor-pointer text-orange-800'>
-                              <MdCancel />
-                         </div>
-                    </li>
+          <section className='grid grid-cols-4 px-2 mx-4 space-x-3'>
+               <ul className='col-span-3 bg-gray-50 py-4 divide-y-[1px] px-6'>
+                    {carts.map((cart) => (
+                         <CartList cart={cart} key={cart._id} />
+                    ))}
                </ul>
+
+               <div className='col-span-1 bg-gray-50 p-2 h-[200px] rounded-md flex flex-col divide-y-[1px]'>
+                    <h1 className='font-medium text-[15px] uppercase py-1'>
+                         cart summary
+                    </h1>
+
+                    <div className='flex justify-between py-3'>
+                         <article className='flex flex-col space-y-2'>
+                              <span className='font-[13px]'>Subtotal</span>
+                              <p className='font-light text-[12px]'>
+                                   Delivery fee not included yet.
+                              </p>
+                         </article>
+
+                         <h3>₦ {formatMoney(sum)}</h3>
+                    </div>
+
+                    <div className='pt-6'>
+                         <ActionButton>
+                              checkout (₦ {formatMoney(sum)})
+                         </ActionButton>
+                    </div>
+               </div>
           </section>
      );
 };

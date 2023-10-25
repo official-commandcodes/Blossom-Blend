@@ -7,7 +7,7 @@ export const useProduct = () => {
 
      const { isLoading, data: product } = useQuery({
           queryKey: ['product', slug],
-          queryFn: () => getProduct(slug),
+          queryFn: () => getProduct({ slug }),
      });
 
      return { isLoading, product };

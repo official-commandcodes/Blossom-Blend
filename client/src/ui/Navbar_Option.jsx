@@ -13,7 +13,7 @@ const Navbar_Option = () => {
      return (
           <div className='flex space-x-4 font-light text-[14px] text-gray-600'>
                <Link
-                    to='/cart'
+                    to='/carts'
                     className='relative flex space-x-1 items-center font-medium  hover:text-orange-950 transition-all duration-300'
                >
                     <div className='relative text-[17px]'>

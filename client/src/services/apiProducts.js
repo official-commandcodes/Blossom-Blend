@@ -12,8 +12,17 @@ export const getAllProduct = async (category = 'all', sortBy = 'all') => {
      return data.data;
 };
 
-export const getProduct = async (slug) => {
-     const res = await fetch(`${API_URL}/api/v1/products/${slug}`);
+export const getProduct = async (queryKey) => {
+     let res;
+     if (queryKey.slug)
+          res = await fetch(
+               `${API_URL}/api/v1/products/product?slug=${queryKey.slug}`
+          );
+
+     if (queryKey.id)
+          res = await fetch(
+               `${API_URL}/api/v1/products/product?id=${queryKey.id}`
+          );
 
      const data = await res.json();
 
