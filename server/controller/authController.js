@@ -12,7 +12,7 @@ const createToken = (res, user, statusCode) => {
           maxAge: 30 * 24 * 60 * 60 * 1000,
           httpOnly: true,
           path: '/',
-          SameSite: 'none',
+          sameSite: 'None',
      };
 
      if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
