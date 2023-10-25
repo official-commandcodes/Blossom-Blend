@@ -12,6 +12,7 @@ const createToken = (res, user, statusCode) => {
           maxAge: 30 * 24 * 60 * 60 * 1000,
           httpOnly: true,
           path: '/',
+          SameSite: 'none',
      };
 
      if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
@@ -157,7 +158,7 @@ const validateEmail = async (req, res, next) => {
                return next('Invalid Email Token');
           }
 
-          // if it is equal: update email to valid email
+          // if it is equal: update email to valid email and remove emailValidation field
           user.emailValid = true;
           user.emailValidation = undefined;
 
@@ -174,16 +175,20 @@ const validateEmail = async (req, res, next) => {
 
 // PROTECTED ROUTES MIDDLEWARE
 const protect = async (req, res, next) => {
+     // GET TOKEN
      const token = req.cookies.blossomblendtoken;
 
      if (!token) return next(new AppError("You've not logged in.", 400));
 
+     // VERIIFY TOKEN
      const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
      if (!decoded) return next(new AppError('Invalid token', 400));
 
+     // GET USER IF TOKEN IS VALID
      const user = await User.findOne({ _id: decoded.id });
 
+     // CHECK IF USER EXIST
      if (!user) return next(new AppError('User does not exist', 404));
 
      req.user = user;
