@@ -18,7 +18,7 @@ const Navbar_Option = () => {
                >
                     <div className='relative text-[17px]'>
                          <span className='w-4 h-4 flex justify-center items-center absolute -top-1 -left-2 bg-orange-300 text-[8px] rounded-full'>
-                              {status === 'success' && user.carts.length}
+                              {status === 'success' ? user.carts.length : 0}
                          </span>
                          <ImCart />
                     </div>

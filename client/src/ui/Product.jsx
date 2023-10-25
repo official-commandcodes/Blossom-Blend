@@ -9,15 +9,16 @@ import Star from './Star';
 import Spinner from './Spinner';
 import { useAddToWishlist } from '../features/products/useAddToWishlist';
 import { useRemoveFromWishlist } from '../features/products/useRemoveFromWishlist';
+import { toast } from 'react-hot-toast';
 
 const Product = ({ w, product }) => {
      const { status: addStatus, addToCart } = useAddToCart();
      const { status: removeStatus, removeFromCart } = useRemoveFromCart();
      const { addToWishlist } = useAddToWishlist();
      const { removeFromWishlist } = useRemoveFromWishlist();
-     const { user } = useUser();
+     const { status, user } = useUser();
 
-     const title = `${product?.title.slice(0, 23)}...`;
+     const title = `${product?.title.slice(0, 19)}...`;
 
      const carts = user?.carts?.find((cart) => cart.id === product._id);
      const wishlists = user?.wishlists?.find(
@@ -26,21 +27,35 @@ const Product = ({ w, product }) => {
 
      // EVENTS
      const handleAddToCart = () => {
-          addToCart({
-               id: product._id,
-               quantity: 1,
-          });
+          if (status === 'success') {
+               return addToCart({
+                    id: product._id,
+                    quantity: 1,
+               });
+          }
+
+          toast.error('please login before attemping any action');
      };
 
      const handleRemoveCart = () => {
-          removeFromCart(product._id);
+          if (status === 'success') {
+               return removeFromCart(product._id);
+          }
+
+          toast.error('please login before attemping any action');
      };
 
      const handleAddeAndRemoveFromWishlists = () => {
-          if (!wishlists) {
-               addToWishlist(product._id);
-          } else {
-               removeFromWishlist(product._id);
+          if (status !== 'success') {
+               return toast.error('please login before attemping any action');
+          }
+
+          if (status === 'success') {
+               if (!wishlists) {
+                    addToWishlist(product._id);
+               } else {
+                    removeFromWishlist(product._id);
+               }
           }
      };
 

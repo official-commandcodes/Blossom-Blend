@@ -13,8 +13,8 @@ const Products = () => {
      let filtered;
      // PAGINATION
      // calc starting and ending product
-     const start = page * PAGINATE - PAGINATE; // 0 = 1 * 12 -12, 12 = 2 * 12 - 12
-     const end = PAGINATE * page + 1; // 12 = 1 * 12, 24 = 2 * 12
+     const start = (page - 1) * PAGINATE;
+     const end = PAGINATE * page;
 
      filtered = products.slice(start, end);
 

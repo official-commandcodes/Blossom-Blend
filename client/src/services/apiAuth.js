@@ -62,7 +62,7 @@ export const getLoggedInUser = async () => {
 
      const data = await res.json();
 
-     if (data.err) throw new Error(data.err.message);
+     if (data.err) throw new Error(data.err);
 
      return data.user;
 };

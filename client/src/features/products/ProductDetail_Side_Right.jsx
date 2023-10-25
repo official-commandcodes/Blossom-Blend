@@ -1,8 +1,15 @@
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { BiCartAdd } from 'react-icons/bi';
 import { isFriday, isTuesday } from 'date-fns';
+import { toast } from 'react-hot-toast';
+
+import { useUser } from '../authentication/useUser';
+import { useAddToCart } from './useAddToCart';
+import { useRemoveFromCart } from './useRemoveFromCart';
+import { useUpdateCartItems } from './useUpdateCartItems';
+
 import Star from '../../ui/Star';
-import Button from '../../ui/Button';
+import Spinner from '../../ui/Spinner';
 
 const ProductDetail_Side_Right = ({
      id,
@@ -15,13 +22,46 @@ const ProductDetail_Side_Right = ({
      priceAfterDiscount,
      stockQuantity,
 }) => {
+     const { status: userStatus, user } = useUser();
+     const { status: addStatus, addToCart } = useAddToCart();
+     const { status: removeStatus, removeFromCart } = useRemoveFromCart();
+     const { status: updatingStatus, updateCartItems } = useUpdateCartItems();
+
      const fridayCheck = isFriday(new Date());
      const tuesdayCheck = isTuesday(new Date());
 
-     const addCart = true;
+     const includeInCart = user?.carts?.find((cart) => cart.id === id);
 
+     // ADD TO CART IF NOT YET ADDED
      const handleAddToCart = () => {
-          console.log(id);
+          if (userStatus === 'success') {
+               return addToCart({
+                    id,
+                    quantity: 1,
+               });
+          }
+
+          toast.error('please login before attemping any action');
+     };
+
+     // DECREASE PRODUCT ITEMS
+     const handleDecrease = () => {
+          if (includeInCart.quantity === 1) {
+               return removeFromCart(id);
+          }
+
+          updateCartItems({
+               id,
+               quantity: includeInCart.quantity - 1,
+          });
+     };
+
+     // INCREASE PRODUCT ITEMS
+     const handleIncrease = () => {
+          updateCartItems({
+               id,
+               quantity: includeInCart.quantity + 1,
+          });
      };
 
      return (
@@ -44,8 +84,8 @@ const ProductDetail_Side_Right = ({
                </div>
 
                {/* AMOUNT */}
-               <div className='flex flex-col gap-1'>
-                    <div className='flex items-center space-x-3 py-2 text-gray-400'>
+               <div className='flex flex-col space-y-1'>
+                    <div className='flex items-center py-2 text-gray-400'>
                          <span
                               className={`font-medium text-[24px] text-gray-800 ${
                                    tuesdayCheck || fridayCheck ? '' : 'hidden'
@@ -85,28 +125,55 @@ const ProductDetail_Side_Right = ({
                </div>
 
                {/* ITEM NUMBER */}
-               {!addCart ? (
-                    <div className='flex flex-col gap-3 py-2'>
-                         <p>(1 item added)</p>
+               <div>
+                    {includeInCart ? (
+                         <div className='flex flex-col space-y-4 py-4 w-7/12'>
+                              <p className='font-light text-[14px]'>
+                                   ({includeInCart.quantity} item added)
+                              </p>
 
-                         <div className='flex items-center gap-5'>
-                              <Button>
-                                   <AiOutlineMinus />
-                              </Button>
+                              <div className='flex items-center space-x-4 bg-red-100 w-40'>
+                                   <button
+                                        onClick={handleDecrease}
+                                        className='w-14 h-10 bg-orange-600 text-[19px] text-orange-100 flex justify-center items-center font-bold rounded-md'
+                                   >
+                                        <AiOutlineMinus />
+                                   </button>
 
-                              <span>1</span>
+                                   <span>
+                                        {addStatus === 'pending' ||
+                                        removeStatus === 'pending' ||
+                                        updatingStatus === 'pending' ? (
+                                             <Spinner w='20' h='20' />
+                                        ) : (
+                                             includeInCart.quantity
+                                        )}
+                                   </span>
 
-                              <Button>
-                                   <AiOutlinePlus />
-                              </Button>
+                                   <button
+                                        onClick={handleIncrease}
+                                        className='w-14 h-10 bg-orange-600 text-[19px] text-orange-100 flex justify-center items-center font-bold rounded-md'
+                                   >
+                                        <AiOutlinePlus />
+                                   </button>
+                              </div>
                          </div>
-                    </div>
-               ) : (
-                    <Button onClick={handleAddToCart}>
-                         <BiCartAdd className='text-[18px]' />
-                         Add to Cart
-                    </Button>
-               )}
+                    ) : (
+                         <button
+                              onClick={handleAddToCart}
+                              className='mt-4 bg-orange-600 text-[14px] w-[150px] h-10 px-2 text-orange-100 flex justify-center items-center font-light space-x-1 rounded-md'
+                         >
+                              {addStatus === 'pending' ? (
+                                   <Spinner w='20' h='15' />
+                              ) : (
+                                   <>
+                                        <BiCartAdd className='text-[18px]' />
+                                        <span>Add to Cart</span>
+                                   </>
+                              )}
+                         </button>
+                    )}
+               </div>
           </div>
      );
 };

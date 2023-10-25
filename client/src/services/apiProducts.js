@@ -101,3 +101,20 @@ export const removeFromWishlist = async (productId) => {
 
      return data;
 };
+
+export const updateCartItems = async (updateItem) => {
+     const res = await fetch(`${API_URL}/api/v1/users/carts/updateCartItems`, {
+          method: 'PATCH',
+          credentials: 'include',
+          headers: {
+               'Content-type': 'application/json; charset=UTF-8',
+          },
+          body: JSON.stringify(updateItem),
+     });
+
+     const data = await res.json();
+
+     if (data.message) throw new Error(data.message);
+
+     return data;
+};

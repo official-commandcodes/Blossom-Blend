@@ -11,6 +11,7 @@ const {
      removeFromCart,
      addToWishlist,
      removeFromWishlist,
+     updateCart,
 } = require('../controller/userController');
 
 // AUTH
@@ -22,6 +23,7 @@ router.patch('/validate/:userId/:emailValidateToken', validateEmail);
 router
      .get('/getUser', getLoggedInUser)
      .patch('/carts/addToCarts', protect, addToCart)
+     .patch('/carts/updateCartItems', protect, updateCart)
      .patch('/wishlists/addToWishlists', protect, addToWishlist)
      .delete('/carts/removeFromCarts', protect, removeFromCart)
      .delete('/wishlists/removeFromWishlists', protect, removeFromWishlist);

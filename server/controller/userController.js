@@ -80,9 +80,31 @@ const removeFromWishlist = async (req, res, next) => {
      }
 };
 
+// UPDATE CART ITEMS
+const updateCart = async (req, res, next) => {
+     try {
+          const user = await User.findOneAndUpdate(
+               {
+                    _id: req.user._id,
+                    carts: { $elemMatch: { id: { $eq: req.body.id } } },
+               },
+               { $set: { 'carts.$.quantity': req.body.quantity } },
+               { new: true }
+          );
+
+          res.status(200).json({
+               status: 'success',
+               user,
+          });
+     } catch (err) {
+          next(err);
+     }
+};
+
 module.exports = {
      addToCart,
      removeFromCart,
      addToWishlist,
      removeFromWishlist,
+     updateCart,
 };
