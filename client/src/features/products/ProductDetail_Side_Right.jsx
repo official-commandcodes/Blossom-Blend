@@ -132,7 +132,7 @@ const ProductDetail_Side_Right = ({
                                    ({includeInCart.quantity} item added)
                               </p>
 
-                              <div className='flex items-center space-x-4 bg-red-100 w-40'>
+                              <div className='flex items-center space-x-4 w-40'>
                                    <button
                                         onClick={handleDecrease}
                                         className='w-14 h-10 bg-orange-600 text-[19px] text-orange-100 flex justify-center items-center font-bold rounded-md'

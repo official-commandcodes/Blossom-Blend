@@ -18,15 +18,15 @@ const createToken = (res, user, statusCode) => {
 
      if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
-     res.cookie('blossomblendtoken', token, cookieOptions);
-
      user.password = undefined;
 
-     res.status(statusCode).json({
-          status: 'success',
-          token,
-          user,
-     });
+     res.status(statusCode)
+          .cookie('blossomblendtoken', token, cookieOptions)
+          .json({
+               status: 'success',
+               token,
+               user,
+          });
 };
 
 // SIGN UP
