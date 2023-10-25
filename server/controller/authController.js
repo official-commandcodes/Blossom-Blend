@@ -32,7 +32,7 @@ const createToken = (res, user, statusCode) => {
 // SIGN UP
 const signup = async (req, res, next) => {
      try {
-          // // check if email already exist
+          // check if email already exist
           const user = await User.findOne({ email: req.body.email });
 
           if (user) {
