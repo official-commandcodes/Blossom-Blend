@@ -5,12 +5,15 @@ const { AppError } = require('../utils/appError');
 
 const createToken = (res, user, statusCode) => {
      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-          expiresIn: '30d',
+          expiresIn: '30 days',
      });
 
      const cookieOptions = {
+          domain: 'blossom-blend.vercel.app',
           maxAge: 30 * 24 * 60 * 60 * 1000,
           httpOnly: true,
+          path: '/',
+          SameSite: false,
      };
 
      if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
