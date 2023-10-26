@@ -60,7 +60,7 @@ const App = () => {
                     },
 
                     {
-                         path: '/checkout/:product',
+                         path: '/checkout/payment',
                          element: <Checkout />,
                     },
 

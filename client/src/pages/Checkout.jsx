@@ -1,15 +1,9 @@
-import CartSummary from '../features/cart/CartSummary';
-import Shipping from '../ui/Shipping';
+import CheckOut from '../features/checkout/CheckOut';
 
 const Checkout = () => {
      return (
-          <div className='flex gap-2 px-16 py-10'>
-               <Shipping />
-
-               <div className='bg-gray-300 w-[2px]'></div>
-               <section className='basis-1/4 p-2'>
-                    <CartSummary />
-               </section>
+          <div className='flex flex-col gap-2 px-40 py-10'>
+               <CheckOut />
           </div>
      );
 };

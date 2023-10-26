@@ -9,8 +9,6 @@ export const CartTotalProvider = ({ children }) => {
           .filter((t) => isFinite(t))
           .reduce((acc, cur) => acc + cur, 0);
 
-     console.log(sum);
-
      return (
           <CartTotalContext.Provider value={{ sum, setTotal }}>
                {children}

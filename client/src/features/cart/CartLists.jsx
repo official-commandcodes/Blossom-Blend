@@ -3,6 +3,7 @@ import ActionButton from '../../ui/ActionButton';
 import { formatMoney } from '../../utils/helper';
 import CartList from './CartList';
 import { CartTotalContext } from '../../context/CartTotal';
+import { Link } from 'react-router-dom';
 
 const CartLists = ({ carts }) => {
      const { sum } = useContext(CartTotalContext);
@@ -31,11 +32,11 @@ const CartLists = ({ carts }) => {
                          <h3>₦ {formatMoney(sum)}</h3>
                     </div>
 
-                    <div className='pt-6'>
+                    <Link to='/checkout/payment' className='pt-6'>
                          <ActionButton>
                               checkout (₦ {formatMoney(sum)})
                          </ActionButton>
-                    </div>
+                    </Link>
                </div>
           </section>
      );
