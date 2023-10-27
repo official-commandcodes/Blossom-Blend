@@ -2,16 +2,6 @@ import { useState } from 'react';
 import Input from '../ui/Input';
 
 function Payment() {
-     const [cardNumber, setCardNumber] = useState('');
-     const [expiryDate, setExpiryDate] = useState('');
-     const [cvv, setCvv] = useState('');
-
-     // Function to handle form submission
-     const handleSubmit = (e) => {
-          e.preventDefault();
-          // Here you would typically send payment data to a payment gateway
-     };
-
      return (
           <section className='px-16 py-6 flex items-center gap-4'>
                <div className='flex-1 flex justify-center '>

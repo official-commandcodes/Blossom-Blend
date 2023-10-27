@@ -66,3 +66,18 @@ export const getLoggedInUser = async () => {
 
      return data.user;
 };
+
+export const getTotalAmount = async (items) => {
+     const res = await fetch(`${API_URL}/api/v1/users/totalAmount`, {
+          method: 'POST',
+          headers: {
+               'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify(items),
+     });
+
+     const data = await res.json();
+
+     return data;
+};

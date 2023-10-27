@@ -8,7 +8,6 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import DropDownProvider from './ui/DropDownContext';
-import { CartTotalProvider } from './context/CartTotal';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const Login = lazy(() => import('./pages/Login'));
@@ -18,7 +17,6 @@ const Home = lazy(() => import('./pages/Home'));
 const ProductsDetails = lazy(() => import('./pages/ProductsDetails'));
 const Cart = lazy(() => import('./pages/Cart'));
 const Checkout = lazy(() => import('./pages/Checkout'));
-const Payment = lazy(() => import('./pages/Payment'));
 const Account = lazy(() => import('./pages/Account'));
 const AccountInformation = lazy(() => import('./pages/AccountInformation'));
 const AccountOrders = lazy(() => import('./pages/AccountOrders'));
@@ -62,11 +60,6 @@ const App = () => {
                     {
                          path: '/checkout/payment',
                          element: <Checkout />,
-                    },
-
-                    {
-                         path: '/payment',
-                         element: <Payment />,
                     },
 
                     {
@@ -124,13 +117,11 @@ const App = () => {
      return (
           <>
                <QueryClientProvider client={queryClient}>
-                    <CartTotalProvider>
-                         <DropDownProvider>
-                              <Suspense fallback={'Loading ....'}>
-                                   <RouterProvider router={router} />
-                              </Suspense>
-                         </DropDownProvider>
-                    </CartTotalProvider>
+                    <DropDownProvider>
+                         <Suspense fallback={'Loading ....'}>
+                              <RouterProvider router={router} />
+                         </Suspense>
+                    </DropDownProvider>
 
                     <ReactQueryDevtools initialIsOpen={false} />
                </QueryClientProvider>

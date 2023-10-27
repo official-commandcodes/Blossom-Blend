@@ -10,6 +10,7 @@ export const useRemoveFromCart = () => {
 
           onSuccess: () => {
                queryClient.invalidateQueries({ queryKey: ['user'] });
+               queryClient.invalidateQueries({ queryKey: ['total'] });
                toast.success('Product removed successfully!', {
                     className: 'text-[12px]',
                });

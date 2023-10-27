@@ -1,16 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { addToCart as addToCartAPI } from '../../services/apiProducts';
 
-export const useAddToCart = () => {
+import { checkout as checkoutAPI } from '../../services/apiCheckout';
+
+export const useCheckout = () => {
      const queryClient = useQueryClient();
 
-     const { status, mutate: addToCart } = useMutation({
-          mutationFn: addToCartAPI,
+     const { status, mutate: checkout } = useMutation({
+          mutationFn: checkoutAPI,
 
-          onSuccess: () => {
+          onSuccess: (data) => {
                queryClient.invalidateQueries({ queryKey: ['user'] });
-               queryClient.invalidateQueries({ queryKey: ['total'] });
+               window.location.href = data.url;
           },
 
           onError: (err) => {
@@ -20,5 +21,5 @@ export const useAddToCart = () => {
           },
      });
 
-     return { status, addToCart };
+     return { status, checkout };
 };

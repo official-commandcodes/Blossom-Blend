@@ -1,4 +1,3 @@
-import { useContext, useEffect } from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { MdDelete } from 'react-icons/md';
 import Skeleton from 'react-loading-skeleton';
@@ -8,22 +7,14 @@ import { useProduct } from './useProduct';
 import { API_URL, formatMoney } from '../../utils/helper';
 import { useRemoveFromCart } from '../products/useRemoveFromCart';
 import { useUpdateCartItems } from '../products/useUpdateCartItems';
-import { CartTotalContext } from '../../context/CartTotal';
 
 import ActionButton from '../../ui/ActionButton';
 import Spinner from '../../ui/Spinner';
 
 const CartList = ({ cart }) => {
-     const { setTotal } = useContext(CartTotalContext);
      const { status, product } = useProduct(cart.id);
      const { status: removeStatus, removeFromCart } = useRemoveFromCart();
      const { status: updatingStatus, updateCartItems } = useUpdateCartItems();
-
-     useEffect(() => {
-          if (product && cart) {
-               setTotal((t) => [...t, product?.price * cart?.quantity]);
-          }
-     }, [product, setTotal, cart]);
 
      if (status === 'pending') {
           return (

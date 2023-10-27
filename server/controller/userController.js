@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Product = require('../models/product');
 const { AppError } = require('../utils/appError');
 
 // Add To Cart
@@ -100,10 +101,33 @@ const updateCart = async (req, res, next) => {
      }
 };
 
+// Total Amount
+const totalAmount = async (req, res, next) => {
+     try {
+          const amounts = await Promise.all(
+               req.body.map(async (item) => {
+                    const product = await Product.findById(item.id);
+
+                    return {
+                         amount: product.price * item.quantity,
+                    };
+               })
+          );
+
+          res.status(200).json({
+               status: 'success',
+               amounts,
+          });
+     } catch (err) {
+          next(err);
+     }
+};
+
 module.exports = {
      addToCart,
      removeFromCart,
      addToWishlist,
      removeFromWishlist,
      updateCart,
+     totalAmount,
 };

@@ -1,11 +1,13 @@
 import CheckoutCustomer from './CheckoutCustomer';
+import CheckoutDetails from './CheckoutDetails';
+import CheckoutForm from './CheckoutForm';
 
 const CheckOut = () => {
      return (
-          <div className=''>
+          <div className='space-y-6'>
                <CheckoutCustomer />
-               <div></div>
-               <div></div>
+               <CheckoutDetails />
+               <CheckoutForm />
           </div>
      );
 };

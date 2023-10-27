@@ -12,6 +12,7 @@ const {
      addToWishlist,
      removeFromWishlist,
      updateCart,
+     totalAmount,
 } = require('../controller/userController');
 
 // AUTH
@@ -22,6 +23,7 @@ router.patch('/validate/:userId/:emailValidateToken', validateEmail);
 
 router
      .get('/getUser', getLoggedInUser)
+     .post('/totalAmount', protect, totalAmount)
      .patch('/carts/addToCarts', protect, addToCart)
      .patch('/carts/updateCartItems', protect, updateCart)
      .patch('/wishlists/addToWishlists', protect, addToWishlist)

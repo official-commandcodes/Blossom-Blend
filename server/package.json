@@ -20,6 +20,7 @@
           "mongoose": "^7.6.2",
           "nodemailer": "^6.9.6",
           "slug": "^8.2.3",
+          "stripe": "^14.1.0",
           "validator": "^13.11.0"
      }
 }
