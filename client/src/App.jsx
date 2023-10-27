@@ -22,6 +22,7 @@ const AccountInformation = lazy(() => import('./pages/AccountInformation'));
 const AccountOrders = lazy(() => import('./pages/AccountOrders'));
 const AccountWishLists = lazy(() => import('./pages/AccountWishLists'));
 const Contact = lazy(() => import('./pages/Contact'));
+const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 
 const queryClient = new QueryClient({
      defaultOptions: {
@@ -60,6 +61,11 @@ const App = () => {
                     {
                          path: '/checkout/payment',
                          element: <Checkout />,
+                    },
+
+                    {
+                         path: '*',
+                         element: <PageNotFound />,
                     },
 
                     {
