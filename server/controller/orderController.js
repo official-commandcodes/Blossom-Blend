@@ -100,11 +100,9 @@ const webhookCheckout = (req, res) => {
 
      if (event.type === 'checkout.session.completed') {
           createOrderCheckout(event.data.object);
-
-          res.status(200).json({
-               status: 'success',
-          });
      }
+
+     res.json({ received: true });
 };
 
 module.exports = { getCheckoutSession, webhookCheckout };
