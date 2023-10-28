@@ -55,25 +55,19 @@ const getCheckoutSession = async (req, res, next) => {
 };
 
 const createOrderCheckout = async (session) => {
-     await Order.create({
-          product: '652e4615e3b5b768ef0b36aa',
-          user: '6538d3c2e5756610a2c74784',
-          price: 10000,
-     });
-
      // save order(s) in the database
-     // const userEmail = session.customer_email;
-     // const user = await User.findOne({ email: userEmail });
+     const userEmail = session.customer_email;
+     const user = await User.findOne({ email: userEmail });
 
-     // await Promise.all(
-     //      session.display_items.map(async (item, i) => {
-     //           await Order.create({
-     //                product: item.custom.productId,
-     //                user: user._id,
-     //                price: item.unit_amount,
-     //           });
-     //      })
-     // );
+     await Promise.all(
+          session.display_items.map(async (item) => {
+               await Order.create({
+                    product: item.custom.productId,
+                    user: user._id,
+                    price: item.unit_amount,
+               });
+          })
+     );
 
      // // save products id on user writeReview field for review writing
      // await Promise.all(
