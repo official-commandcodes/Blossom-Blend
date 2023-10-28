@@ -31,7 +31,7 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 
 app.post(
-     '/webhook',
+     '/webhooks',
      express.raw({ type: 'application/json' }),
      webhookCheckout
 );
