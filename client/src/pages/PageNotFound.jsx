@@ -4,7 +4,7 @@ const PageNotFound = () => {
      return (
           <div className='px-40 py-16 bg-orange-100 flex flex-col space-y-4 justify-center font-light text-[14px]'>
                <img
-                    src='/404.png'
+                    src='/404-error.png'
                     alt='Page Not Found'
                     className='w-[200px] h-[200px] object-cover'
                />

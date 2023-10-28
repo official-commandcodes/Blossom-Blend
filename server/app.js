@@ -5,8 +5,9 @@ const cookieParser = require('cookie-parser');
 // ROUTES
 const productRoutes = require('./routes/product');
 const userRoutes = require('./routes/user');
-const paymentRoutes = require('./routes/payment');
+const orderRoutes = require('./routes/order');
 const globalErrorHandler = require('./utils/globalErrorHandler');
+const { webhookCheckout } = require('./controller/orderController');
 const app = express();
 
 // MIDDLEWARES
@@ -29,6 +30,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(cookieParser());
 
+app.post(
+     '/webhook',
+     express.raw({ type: 'application/json' }),
+     webhookCheckout
+);
+
 // BODY-PARSER & STATIC FILES
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
@@ -39,7 +46,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/products', productRoutes);
-app.use('/api/v1/payments', paymentRoutes);
+app.use('/api/v1/orders', orderRoutes);
 
 app.all('*', (req, res) => {
      return res.send(`There is no ${req.originalUrl} route on this server`);

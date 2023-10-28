@@ -48,6 +48,8 @@ const userSchema = new mongoose.Schema(
 
           carts: [cartSchema],
 
+          writeReview: [String],
+
           password: {
                type: String,
                minlength: [
