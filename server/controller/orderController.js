@@ -12,7 +12,7 @@ const getCheckoutSession = async (req, res, next) => {
                     return {
                          price_data: {
                               id: product._id,
-                              amount:
+                              unit_amount:
                                    product.price * item.quantity * 0.0013 * 100,
                               currency: 'usd',
                               product_data: {
