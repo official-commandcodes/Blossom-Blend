@@ -59,7 +59,7 @@ const createOrderCheckout = async (session) => {
      const userEmail = session.customer_email;
      const user = await User.findOne({ email: userEmail });
 
-     new Promise.all(
+     await Promise.all(
           session.line_items.map(async (item) => {
                await Product.create({
                     product: item.id,
@@ -70,10 +70,12 @@ const createOrderCheckout = async (session) => {
      );
 
      // save products id on user writeReview field for review writing
-     new Promise.all(
+     await Promise.all(
           session.line_items.map(async (item) => {
-               await User.updateOne({ writeReview: { $push: item.id } });
-               await User.updateOne({ $set: { carts: [] } });
+               await User.updateOne(
+                    { _id: user._id },
+                    { $push: { writeReview: item.id }, $set: { carts: [] } }
+               );
           })
      );
 };
