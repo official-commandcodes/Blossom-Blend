@@ -37,7 +37,7 @@ const getCheckoutSession = async (req, res, next) => {
                          : 'http://localhost:5173',
                cancel_url:
                     process.env.NODE_ENV === 'production'
-                         ? 'https://blossom-blend.vercel.app/products'
+                         ? 'https://blossom-blend.vercel.app/carts'
                          : `http://localhost:5173/products`,
                customer_email: req.user.email,
                client_reference_id: `ref_id_${Date.now()}`,
