@@ -12,7 +12,8 @@ const getCheckoutSession = async (req, res, next) => {
                     return {
                          price_data: {
                               id: product._id,
-                              unit_amount: product.price * item.quantity,
+                              amount:
+                                   product.price * item.quantity * 0.0013 * 100,
                               currency: 'usd',
                               product_data: {
                                    name: `${product.title} Product`,
@@ -32,7 +33,7 @@ const getCheckoutSession = async (req, res, next) => {
                payment_method_types: ['card'],
                success_url:
                     process.env.NODE_ENV === 'production'
-                         ? 'https://blossom-blend.vercel.app/account/:user/orders'
+                         ? 'https://blossom-blend.vercel.app'
                          : 'http://localhost:5173',
                cancel_url:
                     process.env.NODE_ENV === 'production'
@@ -72,6 +73,7 @@ const createOrderCheckout = async (session) => {
      new Promise.all(
           session.line_items.map(async (item) => {
                await User.updateOne({ writeReview: { $push: item.id } });
+               await User.updateOne({ $set: { carts: [] } });
           })
      );
 };
