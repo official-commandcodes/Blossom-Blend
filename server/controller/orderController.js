@@ -86,7 +86,7 @@ const createOrderCheckout = async (session) => {
      // );
 };
 
-const webhookCheckout = (req, res) => {
+const webhookCheckout = async (req, res) => {
      const sig = request.headers['stripe-signature'];
 
      let event;
@@ -103,7 +103,7 @@ const webhookCheckout = (req, res) => {
      }
 
      if (event.type === 'checkout.session.completed')
-          createOrderCheckout(event.data.object);
+          await createOrderCheckout(event.data.object);
 
      res.status(200).json({ received: true });
 };
