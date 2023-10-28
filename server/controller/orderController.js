@@ -56,9 +56,9 @@ const getCheckoutSession = async (req, res, next) => {
 
 const createOrderCheckout = async (session) => {
      await Order.create({
-          product: '65378537853',
-          user: 3795395,
-          price: 6936,
+          product: '652e4615e3b5b768ef0b36aa',
+          user: '6538d3c2e5756610a2c74784',
+          price: 10000,
      });
 
      // save order(s) in the database
