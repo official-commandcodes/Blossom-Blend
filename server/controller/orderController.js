@@ -5,15 +5,16 @@ const User = require('../models/user');
 const getCheckoutSession = async (req, res, next) => {
      try {
           // compiled all the data in an array
-          const items = await Promise.all(
+          const lineItems = await Promise.all(
                req.body.map(async (item) => {
                     const product = await Product.findById(item.id);
 
                     return {
                          price_data: {
-                              unit_amount: product.price * item.quantity,
+                              unit_amount: product.price * item.quantity * 100,
                               currency: 'usd',
                               product_data: {
+                                   productId: product._id,
                                    name: `${product.title} Product`,
                                    images: [
                                         `https://blossomblendapi.onrender.com/products/${product.imageUrl}`,
@@ -39,10 +40,10 @@ const getCheckoutSession = async (req, res, next) => {
                          : `http://localhost:5173/products`,
                customer_email: req.user.email,
                client_reference_id: `ref_id_${Date.now()}`,
+               line_items: lineItems,
                metadata: {
                     ids: req.body,
                },
-               line_items: items,
                mode: 'payment',
           });
 
@@ -61,9 +62,9 @@ const createOrderCheckout = async (session) => {
      const user = await User.findOne({ email: userEmail });
 
      await Promise.all(
-          session.line_items.map(async (item, i) => {
+          session.display_items.map(async (item, i) => {
                await Product.create({
-                    product: session.metadata.ids[i],
+                    product: item.custom.productId,
                     user: user._id,
                     price: item.unit_amount,
                });
