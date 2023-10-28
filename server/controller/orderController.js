@@ -1,5 +1,6 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Product = require('../models/product');
+const Order = require('../models/order');
 const User = require('../models/user');
 
 const getCheckoutSession = async (req, res, next) => {
@@ -60,7 +61,7 @@ const createOrderCheckout = async (session) => {
 
      await Promise.all(
           session.display_items.map(async (item, i) => {
-               await Product.create({
+               await Order.create({
                     product: item.custom.productId,
                     user: user._id,
                     price: item.unit_amount,
