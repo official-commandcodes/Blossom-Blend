@@ -41,9 +41,6 @@ const getCheckoutSession = async (req, res, next) => {
                customer_email: req.user.email,
                client_reference_id: `ref_id_${Date.now()}`,
                line_items: lineItems,
-               metadata: {
-                    ids: req.body,
-               },
                mode: 'payment',
           });
 
