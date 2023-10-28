@@ -11,9 +11,7 @@ const getCheckoutSession = async (req, res, next) => {
 
                     return {
                          price_data: {
-                              id: product._id,
-                              unit_amount:
-                                   product.price * item.quantity * 0.0013 * 100,
+                              unit_amount: product.price * item.quantity,
                               currency: 'usd',
                               product_data: {
                                    name: `${product.title} Product`,
@@ -41,6 +39,9 @@ const getCheckoutSession = async (req, res, next) => {
                          : `http://localhost:5173/products`,
                customer_email: req.user.email,
                client_reference_id: `ref_id_${Date.now()}`,
+               metadata: {
+                    ids: req.body,
+               },
                line_items: items,
                mode: 'payment',
           });
@@ -60,9 +61,9 @@ const createOrderCheckout = async (session) => {
      const user = await User.findOne({ email: userEmail });
 
      await Promise.all(
-          session.line_items.map(async (item) => {
+          session.line_items.map(async (item, i) => {
                await Product.create({
-                    product: item.id,
+                    product: session.metadata.ids[i],
                     user: user._id,
                     price: item.unit_amount,
                });
