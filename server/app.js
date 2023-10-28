@@ -14,6 +14,12 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', `${__dirname}/views`);
 
+app.post(
+     '/webhook',
+     express.raw({ type: 'application/json' }),
+     webhookCheckout
+);
+
 // CROSS-ORIGIN
 const corsOptions = {
      origin:
@@ -29,12 +35,6 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
-
-app.post(
-     '/webhook',
-     express.raw({ type: 'application/json' }),
-     webhookCheckout
-);
 
 // BODY-PARSER & STATIC FILES
 app.use(express.json());
