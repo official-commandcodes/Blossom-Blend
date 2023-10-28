@@ -55,29 +55,35 @@ const getCheckoutSession = async (req, res, next) => {
 };
 
 const createOrderCheckout = async (session) => {
+     await Order.create({
+          product: '65378537853',
+          user: 3795395,
+          price: 6936,
+     });
+
      // save order(s) in the database
-     const userEmail = session.customer_email;
-     const user = await User.findOne({ email: userEmail });
+     // const userEmail = session.customer_email;
+     // const user = await User.findOne({ email: userEmail });
 
-     await Promise.all(
-          session.display_items.map(async (item, i) => {
-               await Order.create({
-                    product: item.custom.productId,
-                    user: user._id,
-                    price: item.unit_amount,
-               });
-          })
-     );
+     // await Promise.all(
+     //      session.display_items.map(async (item, i) => {
+     //           await Order.create({
+     //                product: item.custom.productId,
+     //                user: user._id,
+     //                price: item.unit_amount,
+     //           });
+     //      })
+     // );
 
-     // save products id on user writeReview field for review writing
-     await Promise.all(
-          session.line_items.map(async (item) => {
-               await User.updateOne(
-                    { _id: user._id },
-                    { $push: { writeReview: item.id }, $set: { carts: [] } }
-               );
-          })
-     );
+     // // save products id on user writeReview field for review writing
+     // await Promise.all(
+     //      session.display_items.map(async (item) => {
+     //           await User.updateOne(
+     //                { _id: user._id },
+     //                { $push: { writeReview: item.id }, $set: { carts: [] } }
+     //           );
+     //      })
+     // );
 };
 
 const webhookCheckout = (req, res) => {
@@ -96,11 +102,10 @@ const webhookCheckout = (req, res) => {
           return;
      }
 
-     if (event.type === 'checkout.session.completed') {
+     if (event.type === 'checkout.session.completed')
           createOrderCheckout(event.data.object);
-     }
 
-     res.json({ received: true });
+     res.status(200).json({ received: true });
 };
 
 module.exports = { getCheckoutSession, webhookCheckout };
