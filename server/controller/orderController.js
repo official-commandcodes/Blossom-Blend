@@ -80,39 +80,30 @@ const webhookCheckout = async (req, res) => {
           const user = await User.findOne({ email: data.customer_email });
 
           await Promise.all(
-               items.data.map(async (item) => {
+               items.data.map(async (item, i) => {
                     await Order.create({
-                         product: '652e60085c6f325c01edad1f',
+                         product: data.client_reference_id.split('_')[i],
                          user: user._id,
                          price: item.amount_subtotal,
-                         data: data.client_reference_id,
                     });
                })
           );
 
-          // save order(s) in the database
-          // const userEmail = session.customer_email;
-          // const user = await User.findOne({ email: userEmail });
-
-          // await Promise.all(
-          //      session.data.map(async (item) => {
-          //           await Order.create({
-          //                product: item.productId,
-          //                user: user._id,
-          //                price: session.amount_total,
-          //           });
-          //      })
-          // );
-
-          // // save products id on user writeReview field for review writing
-          // await Promise.all(
-          //      session.display_items.map(async (item) => {
-          //           await User.updateOne(
-          //                { _id: user._id },
-          //                { $push: { writeReview: item.id }, $set: { carts: [] } }
-          //           );
-          //      })
-          // );
+          // save products id on user writeReview field for review writing
+          await Promise.all(
+               items.data.map(async (item, i) => {
+                    await User.updateOne(
+                         { _id: user._id },
+                         {
+                              $push: {
+                                   writeReview:
+                                        data.client_reference_id.split('_')[i],
+                              },
+                              $set: { carts: [] },
+                         }
+                    );
+               })
+          );
      }
 
      res.status(200).json({ received: true });

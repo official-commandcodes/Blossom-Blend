@@ -19,8 +19,6 @@ const orderSchema = mongoose.Schema(
                required: [true, 'An Order must have a price'],
           },
 
-          data: String,
-
           paid: {
                type: Boolean,
                default: true,
