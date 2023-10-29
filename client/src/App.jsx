@@ -69,29 +69,29 @@ const App = () => {
                     },
 
                     {
-                         path: '/account/:user',
+                         path: '/account/:me',
                          element: <Account />,
                          children: [
                               {
                                    index: true,
                                    element: (
                                         <Navigate
-                                             to='/account/user/info'
+                                             to='/account/:me/info'
                                              replace
                                         />
                                    ),
                               },
                               {
-                                   path: '/account/:user/info',
+                                   path: '/account/:me/info',
                                    element: <AccountInformation />,
                               },
                               {
-                                   path: '/account/:user/orders',
+                                   path: '/account/:me/orders',
                                    element: <AccountOrders />,
                               },
 
                               {
-                                   path: '/account/:user/wishlists',
+                                   path: '/account/:me/wishlists',
                                    element: <AccountWishLists />,
                               },
                          ],

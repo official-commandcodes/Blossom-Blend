@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { isEmail } = require('validator');
+const slug = require('slug');
 
 const cartSchema = new mongoose.Schema({
      id: {
@@ -79,6 +80,13 @@ const userSchema = new mongoose.Schema(
      },
      { timestamps: true }
 );
+
+// CREATE SLUG ON PRE SAVE
+userSchema.pre('save', function (next) {
+     this.slug = slug(this.name, { lower: true });
+
+     next();
+});
 
 userSchema.pre('save', async function (next) {
      if (!this.isModified('password')) return next();

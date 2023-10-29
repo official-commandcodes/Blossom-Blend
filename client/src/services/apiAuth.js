@@ -93,3 +93,27 @@ export const updateUser = async (formData) => {
 
      return data;
 };
+
+// export const updateUserPassword = async (info) => {
+//      const res = await fetch(`${API_URL}/api/v1/users/updatePassword`, {
+//           method: 'POST',
+//           credentials: 'include',
+//           body: formData,
+//      });
+
+//      const data = await res.json();
+
+//      return data;
+// };
+
+// export const getMe = async () => {
+//      const res = await fetch(`${API_URL}/api/v1/users/`, {
+//           method: 'POST',
+//           credentials: 'include',
+//           body: formData,
+//      });
+
+//      const data = await res.json();
+
+//      return data;
+// };

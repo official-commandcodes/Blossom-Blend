@@ -12,14 +12,16 @@ const AccountUserProfile = () => {
      const { register, handleSubmit } = useForm();
      const { status: userStatus, user } = useUser();
      const { status: updateStatus, update } = useUpdateProfile();
-     const [files, setFiles] = useState(null || user?.photo);
-
-     console.log(user);
+     const [file, setFile] = useState(null);
 
      const onSubmit = (values) => {
           const formData = new FormData();
 
-          if (files) formData.append('file', files[0]);
+          if (user?.photo && !file) {
+               formData.append('file', user?.photo);
+          } else {
+               formData.append('file', file);
+          }
 
           Object.entries(values).forEach(([key, val]) =>
                formData.append(key, val)
@@ -30,8 +32,6 @@ const AccountUserProfile = () => {
 
      if (userStatus === 'pending') return null;
 
-     console.log(`${API_URL}/users/${user.photo}`);
-
      return (
           <form
                className='flex flex-col space-y-1 pt-4'
@@ -41,18 +41,18 @@ const AccountUserProfile = () => {
                <div className='flex space-x-3 items-center pt-4'>
                     <img
                          src={
-                              userStatus === 'pending' && user.photo
+                              user.photo
                                    ? `${API_URL}/users/${user.photo}`
                                    : '/avatar.svg'
                          }
                          alt='User profile image'
-                         className='w-20 h-20 rounded-full'
+                         className='w-20 h-20 text-[10px] border-[1px] border-gray-100 rounded-full object-cover'
                     />
 
                     <input
                          type='file'
                          className='block text-sm text-orange-900 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 transition-all duration-300 border-[1px] border-gray-100 w-58 px-1 py-2 rounded-md cursor-pointer outline-none'
-                         onChange={(e) => setFiles(e.target.files)}
+                         onChange={(e) => setFile(e.target.files[0])}
                          disabled={userStatus === 'pending'}
                     />
                </div>
