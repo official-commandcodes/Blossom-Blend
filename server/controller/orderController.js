@@ -68,31 +68,29 @@ const webhookCheckout = async (req, res) => {
                process.env.STRIPE_WEBHOOK_SECRET
           );
      } catch (err) {
-          res.status(400).send(`Webhook Error: ${err.message}`);
-          return;
+          return res.status(400).send(`Webhook Error: ${err.message}`);
      }
 
      if (event.type === 'checkout.session.completed') {
-          const session = await stripe.checkout.sessions.retrieve(
-               event.data.object.id,
-               {
-                    expand: ['line_items', 'line_items.metadata'],
-               }
+          const session = await stripe.checkout.sessions.listLineItems(
+               event.data.object.id
           );
+
+          await Order.create(session);
 
           // save order(s) in the database
-          const userEmail = session.customer_email;
-          const user = await User.findOne({ email: userEmail });
+          // const userEmail = session.customer_email;
+          // const user = await User.findOne({ email: userEmail });
 
-          await Promise.all(
-               session.line_items.data.map(async (item) => {
-                    await Order.create({
-                         product: item.productId,
-                         user: user._id,
-                         price: session.amount_total,
-                    });
-               })
-          );
+          // await Promise.all(
+          //      session.data.map(async (item) => {
+          //           await Order.create({
+          //                product: item.productId,
+          //                user: user._id,
+          //                price: session.amount_total,
+          //           });
+          //      })
+          // );
 
           // // save products id on user writeReview field for review writing
           // await Promise.all(
