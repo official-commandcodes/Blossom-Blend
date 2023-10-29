@@ -15,12 +15,14 @@ const getCheckoutSession = async (req, res, next) => {
                               unit_amount: product.price,
                               currency: 'usd',
                               product_data: {
-                                   productId: product._id,
                                    name: `${product.title} Product`,
                                    images: [
                                         `https://blossomblendapi.onrender.com/products/${product.imageUrl}`,
                                    ],
                                    description: product.description,
+                                   metadata: {
+                                        productId: product._id,
+                                   },
                               },
                          },
                          quantity: item.quantity,
@@ -60,7 +62,7 @@ const createOrderCheckout = async (session) => {
      const user = await User.findOne({ email: userEmail });
 
      await Promise.all(
-          session.display_items.map(async (item) => {
+          session.listLineItems.data.map(async (item) => {
                await Order.create({
                     product: item.custom.productId,
                     user: user._id,
