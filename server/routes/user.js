@@ -13,6 +13,8 @@ const {
      removeFromWishlist,
      updateCart,
      totalAmount,
+     updateUserData,
+     updateUserImage,
 } = require('../controller/userController');
 
 // AUTH
@@ -22,7 +24,8 @@ router.post('/signup', signup).post('/login', login);
 router.patch('/validate/:userId/:emailValidateToken', validateEmail);
 
 router
-     .get('/getUser', getLoggedInUser)
+     .get('/getUser', protect, getLoggedInUser)
+     .post('/updateData', protect, updateUserImage, updateUserData)
      .post('/totalAmount', protect, totalAmount)
      .patch('/carts/addToCarts', protect, addToCart)
      .patch('/carts/updateCartItems', protect, updateCart)

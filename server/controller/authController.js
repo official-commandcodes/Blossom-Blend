@@ -137,6 +137,9 @@ const getLoggedInUser = async (req, res, next) => {
                     email: user.email,
                     wishlists: user.wishlists,
                     carts: user.carts,
+                    address: user.address,
+                    phoneNumber: user.phoneNumber,
+                    photo: user.photo,
                },
           });
      } catch (err) {

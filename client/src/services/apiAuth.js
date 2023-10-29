@@ -81,3 +81,15 @@ export const getTotalAmount = async (items) => {
 
      return data;
 };
+
+export const updateUser = async (formData) => {
+     const res = await fetch(`${API_URL}/api/v1/users/updateData`, {
+          method: 'POST',
+          credentials: 'include',
+          body: formData,
+     });
+
+     const data = await res.json();
+
+     return data;
+};

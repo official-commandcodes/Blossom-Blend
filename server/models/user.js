@@ -44,6 +44,8 @@ const userSchema = new mongoose.Schema(
 
           phoneNumber: Number,
 
+          photo: String,
+
           wishlists: [String],
 
           carts: [cartSchema],

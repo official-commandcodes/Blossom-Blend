@@ -52,12 +52,17 @@ const Navbar_Option = () => {
                                    )}
 
                                    <div className='flex flex-col space-y-2'>
-                                        <Link className='hover:font-medium hover:bg-gray-200 px-2 py-2 text-[14px] transition-all duration-300'>
+                                        <Link
+                                             to={`/account/${user?.id}/info`}
+                                             className='hover:font-medium hover:bg-gray-200 px-2 py-2 text-[14px] transition-all duration-300'
+                                        >
                                              My Account
                                         </Link>
+
                                         <Link className='hover:font-medium hover:bg-gray-200 px-2 py-2 text-[14px] transition-all duration-300'>
                                              Orders
                                         </Link>
+
                                         <Link className='hover:font-medium hover:bg-gray-200 px-2 py-2 text-[14px] transition-all duration-300'>
                                              Saved Items
                                         </Link>

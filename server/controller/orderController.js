@@ -91,7 +91,7 @@ const webhookCheckout = async (req, res) => {
 
           // save products id on user writeReview field for review writing
           await Promise.all(
-               items.data.map(async (item, i) => {
+               items.data.map(async (_, i) => {
                     await User.updateOne(
                          { _id: user._id },
                          {

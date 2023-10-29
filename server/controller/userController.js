@@ -1,6 +1,34 @@
+const multer = require('multer');
 const User = require('../models/user');
 const Product = require('../models/product');
 const { AppError } = require('../utils/appError');
+
+const multerStorage = multer.diskStorage({
+     destination: (req, file, cb) => {
+          cb(null, `${__dirname}/../public/users`);
+     },
+     filename: (req, file, cb) => {
+          const ext = file.originalname.split('.').at(-1);
+          cb(null, `user-${Date.now()}.${ext}`);
+     },
+});
+
+('user-5787078986.jpeg');
+
+const multerFilter = (req, file, cb) => {
+     if (file.mimetype.startsWith('image')) {
+          cb(null, true);
+     } else {
+          cb('File requested must be an image', false);
+     }
+};
+
+const upload = multer({
+     storage: multerStorage,
+     fileFilter: multerFilter,
+});
+
+const updateUserImage = upload.single('file');
 
 // Add To Cart
 const addToCart = async (req, res, next) => {
@@ -123,6 +151,26 @@ const totalAmount = async (req, res, next) => {
      }
 };
 
+// updateUserData
+const updateUserData = async (req, res, next) => {
+     try {
+          const data = {
+               ...req.body,
+               photo: req.body.file || req.file.filename,
+          };
+
+          await User.findByIdAndUpdate(req.user._id, data, {
+               runValidators: true,
+          });
+
+          res.status(200).json({
+               status: 'User updated successfully',
+          });
+     } catch (err) {
+          next(err);
+     }
+};
+
 module.exports = {
      addToCart,
      removeFromCart,
@@ -130,4 +178,6 @@ module.exports = {
      removeFromWishlist,
      updateCart,
      totalAmount,
+     updateUserData,
+     updateUserImage,
 };
