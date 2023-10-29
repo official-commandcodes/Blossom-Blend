@@ -79,7 +79,7 @@ const webhookCheckout = async (req, res) => {
           await Order.create({
                product: '652e60085c6f325c01edad1f',
                user: user._id,
-               price: 4000,
+               price: data.amount_total,
           });
 
           // save order(s) in the database
