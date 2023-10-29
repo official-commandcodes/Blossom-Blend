@@ -42,7 +42,9 @@ const getCheckoutSession = async (req, res, next) => {
                          ? 'https://blossom-blend.vercel.app/carts'
                          : `http://localhost:5173/products`,
                customer_email: req.user.email,
-               client_reference_id: `ref_id_${Date.now()}`,
+               client_reference_id: `${req.body
+                    .map((item) => item.id)
+                    .join('_')}`,
                line_items: lineItems,
                mode: 'payment',
           });
@@ -77,12 +79,16 @@ const webhookCheckout = async (req, res) => {
           const items = await stripe.checkout.sessions.listLineItems(data.id);
           const user = await User.findOne({ email: data.customer_email });
 
-          await Order.create({
-               product: '652e60085c6f325c01edad1f',
-               user: user._id,
-               price: data.amount_total,
-               data: items,
-          });
+          await Promise.all(
+               items.data.map(async (item) => {
+                    await Order.create({
+                         product: '652e60085c6f325c01edad1f',
+                         user: user._id,
+                         price: item.amount_subtotal,
+                         data: data.client_reference_id,
+                    });
+               })
+          );
 
           // save order(s) in the database
           // const userEmail = session.customer_email;
@@ -112,4 +118,18 @@ const webhookCheckout = async (req, res) => {
      res.status(200).json({ received: true });
 };
 
-module.exports = { getCheckoutSession, webhookCheckout };
+const getAllOrders = async (req, res, next) => {
+     try {
+          const orders = await Order.find({});
+
+          res.status(200).json({
+               status: 'success',
+               results: orders.length,
+               orders,
+          });
+     } catch (err) {
+          next(err);
+     }
+};
+
+module.exports = { getCheckoutSession, webhookCheckout, getAllOrders };
