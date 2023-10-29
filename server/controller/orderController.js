@@ -56,38 +56,6 @@ const getCheckoutSession = async (req, res, next) => {
      }
 };
 
-const createOrderCheckout = async (session) => {
-     await Order.create({
-          product: '652e5bf15c6f325c01edad16',
-          user: '653d68c12f4c081762171c55',
-          price: 4000,
-     });
-
-     // save order(s) in the database
-     // const userEmail = session.customer_email;
-     // const user = await User.findOne({ email: userEmail });
-
-     // await Promise.all(
-     //      session.listLineItems.data.map(async (item) => {
-     //           await Order.create({
-     //                product: item.custom.productId,
-     //                user: user._id,
-     //                price: item.unit_amount,
-     //           });
-     //      })
-     // );
-
-     // // save products id on user writeReview field for review writing
-     // await Promise.all(
-     //      session.display_items.map(async (item) => {
-     //           await User.updateOne(
-     //                { _id: user._id },
-     //                { $push: { writeReview: item.id }, $set: { carts: [] } }
-     //           );
-     //      })
-     // );
-};
-
 const webhookCheckout = async (req, res) => {
      const sig = req.headers['stripe-signature'];
 
@@ -104,10 +72,39 @@ const webhookCheckout = async (req, res) => {
           return;
      }
 
-     if (event.type === 'checkout.session.completed')
-          await createOrderCheckout(event.data.object);
+     if (event.type === 'checkout.session.completed') {
+          const session = await stripe.checkout.sessions.retrieve(
+               event.data.object.id,
+               {
+                    expand: ['line_items', 'line_items.metadata'],
+               }
+          );
 
-     res.status(200).json({ received: true });
+          // save order(s) in the database
+          const userEmail = session.customer_email;
+          const user = await User.findOne({ email: userEmail });
+
+          await Promise.all(
+               session.line_items.data.map(async (item) => {
+                    await Order.create({
+                         product: item.productId,
+                         user: user._id,
+                         price: session.amount_total,
+                    });
+               })
+          );
+
+          // // save products id on user writeReview field for review writing
+          // await Promise.all(
+          //      session.display_items.map(async (item) => {
+          //           await User.updateOne(
+          //                { _id: user._id },
+          //                { $push: { writeReview: item.id }, $set: { carts: [] } }
+          //           );
+          //      })
+          // );
+          res.status(200).json({ received: true });
+     }
 };
 
 module.exports = { getCheckoutSession, webhookCheckout };
