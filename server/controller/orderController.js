@@ -76,7 +76,14 @@ const webhookCheckout = async (req, res) => {
                event.data.object.id
           );
 
-          await Order.create(session);
+          const userEmail = session.customer_email;
+          const user = await User.findOne({ email: userEmail });
+
+          await Order.create({
+               product: '652e60085c6f325c01edad1f',
+               user: user._id,
+               price: 4000,
+          });
 
           // save order(s) in the database
           // const userEmail = session.customer_email;
