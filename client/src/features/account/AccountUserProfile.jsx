@@ -12,7 +12,7 @@ const AccountUserProfile = () => {
      const { register, handleSubmit } = useForm();
      const { status: userStatus, user } = useUser();
      const { status: updateStatus, update } = useUpdateProfile();
-     const [files, setFiles] = useState(null);
+     const [files, setFiles] = useState(null || user?.photo);
 
      console.log(user);
 
@@ -28,6 +28,10 @@ const AccountUserProfile = () => {
           update(formData);
      };
 
+     if (userStatus === 'pending') return null;
+
+     console.log(`${API_URL}/users/${user.photo}`);
+
      return (
           <form
                className='flex flex-col space-y-1 pt-4'
@@ -37,7 +41,7 @@ const AccountUserProfile = () => {
                <div className='flex space-x-3 items-center pt-4'>
                     <img
                          src={
-                              userStatus === 'pending' && user?.photo
+                              userStatus === 'pending' && user.photo
                                    ? `${API_URL}/users/${user.photo}`
                                    : '/avatar.svg'
                          }
@@ -48,7 +52,6 @@ const AccountUserProfile = () => {
                     <input
                          type='file'
                          className='block text-sm text-orange-900 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 transition-all duration-300 border-[1px] border-gray-100 w-58 px-1 py-2 rounded-md cursor-pointer outline-none'
-                         defaultValue={user.photo}
                          onChange={(e) => setFiles(e.target.files)}
                          disabled={userStatus === 'pending'}
                     />
