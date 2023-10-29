@@ -74,12 +74,14 @@ const webhookCheckout = async (req, res) => {
      if (event.type === 'checkout.session.completed') {
           const data = event.data.object;
 
+          const items = await stripe.checkout.sessions.listLineItems(data.id);
           const user = await User.findOne({ email: data.customer_email });
 
           await Order.create({
                product: '652e60085c6f325c01edad1f',
                user: user._id,
                price: data.amount_total,
+               data: items,
           });
 
           // save order(s) in the database
