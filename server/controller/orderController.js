@@ -111,12 +111,12 @@ const webhookCheckout = async (req, res) => {
 
 const getAllOrders = async (req, res, next) => {
      try {
-          const orders = await Order.find({});
+          const orders = await Order.find({ user: req.user._id });
 
           res.status(200).json({
                status: 'success',
                results: orders.length,
-               orders,
+               data: orders,
           });
      } catch (err) {
           next(err);

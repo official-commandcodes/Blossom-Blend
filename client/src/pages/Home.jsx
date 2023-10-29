@@ -4,8 +4,13 @@ import Popular from '../features/products/Popular';
 import FAQS from '../features/faq/FAQS';
 import FilterSection from '../ui/FilterSection';
 import HeroSection from '../ui/HeroSection';
+import { useEffect } from 'react';
 
 const Home = () => {
+     useEffect(() => {
+          document.title = 'Blossom Blend | Homepage';
+     }, []);
+
      return (
           <div>
                {/* HERO SECTION */}

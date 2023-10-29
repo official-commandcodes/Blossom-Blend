@@ -37,9 +37,10 @@ const userSchema = new mongoose.Schema(
           emailValid: {
                type: Boolean,
                default: false,
+               select: false,
           },
 
-          emailValidation: String,
+          emailValidation: { type: String, select: false },
 
           address: String,
 

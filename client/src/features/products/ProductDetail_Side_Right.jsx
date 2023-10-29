@@ -1,6 +1,6 @@
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { BiCartAdd } from 'react-icons/bi';
-import { isFriday, isTuesday } from 'date-fns';
+import { isFriday, isSunday, isTuesday } from 'date-fns';
 import { toast } from 'react-hot-toast';
 
 import { useUser } from '../authentication/useUser';
@@ -29,7 +29,7 @@ const ProductDetail_Side_Right = ({
      const { status: updatingStatus, updateCartItems } = useUpdateCartItems();
 
      const fridayCheck = isFriday(new Date());
-     const tuesdayCheck = isTuesday(new Date());
+     const tuesdayCheck = isSunday(new Date());
 
      const includeInCart = user?.carts?.find((cart) => cart.id === id);
 
@@ -88,7 +88,7 @@ const ProductDetail_Side_Right = ({
 
                {/* AMOUNT */}
                <div className='flex flex-col space-y-1'>
-                    <div className='flex items-center py-2 text-gray-400'>
+                    <div className='flex items-center py-2 text-gray-400 space-x-3'>
                          <span
                               className={`font-medium text-[24px] text-gray-800 ${
                                    tuesdayCheck || fridayCheck ? '' : 'hidden'

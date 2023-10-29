@@ -22,7 +22,7 @@ export default {
                },
 
                fontFamily: {
-                    fontFamily: ['Noto Sans Georgian'],
+                    fontFamily: ['Roboto'],
                },
 
                gridTemplateColumns: {

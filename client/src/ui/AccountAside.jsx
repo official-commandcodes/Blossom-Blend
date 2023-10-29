@@ -1,13 +1,18 @@
 import { NavLink } from 'react-router-dom';
+import { useUser } from '../features/authentication/useUser';
 
 const style = 'py-4 cursor-pointer px-3 transition-all duration-300';
 
 const AccountAside = () => {
+     const { status, user } = useUser();
+
+     if (status === 'pending') return null;
+
      return (
           <aside className='border-r-[2px] border-gray-300'>
                <ul className='text-[12px] divide-y-2 flex flex-col'>
                     <NavLink
-                         to='/account/user/info'
+                         to={`/account/${user.id}/info`}
                          className={({ isActive }) =>
                               isActive
                                    ? style + ' bg-gray-200'
@@ -18,7 +23,7 @@ const AccountAside = () => {
                     </NavLink>
 
                     <NavLink
-                         to='/account/user/orders'
+                         to={`/account/${user.id}/orders`}
                          className={({ isActive }) =>
                               isActive
                                    ? style + ' bg-gray-200'
@@ -28,19 +33,8 @@ const AccountAside = () => {
                          MY ORDERS
                     </NavLink>
 
-                    {/* <NavLink
-                         to='/account/user/newsletter-subcribtion'
-                         className={({ isActive }) =>
-                              isActive
-                                   ? style + ' bg-gray-200'
-                                   : style + ' hover:bg-gray-300'
-                         }
-                    >
-                         NEWSLETTER SUBSCRIBTION
-                    </NavLink> */}
-
                     <NavLink
-                         to='/account/user/wishlists'
+                         to={`/account/${user.id}/wishlists`}
                          className={({ isActive }) =>
                               isActive
                                    ? style + ' bg-gray-200'
@@ -49,17 +43,6 @@ const AccountAside = () => {
                     >
                          MY WISHLIST
                     </NavLink>
-
-                    {/* <NavLink
-                         to='/account/user/logout'
-                         className={({ isActive }) =>
-                              isActive
-                                   ? style + ' bg-gray-200'
-                                   : style + ' hover:bg-gray-300'
-                         }
-                    >
-                         LOGOUT
-                    </NavLink> */}
                </ul>
           </aside>
      );

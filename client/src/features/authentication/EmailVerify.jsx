@@ -8,6 +8,8 @@ export const EmailVerify = () => {
      const { status, verify } = useEmailVerication();
 
      useEffect(() => {
+          document.title = `Blossom Blend | Email verification`;
+
           verify({ userId, token });
      }, [verify, userId, token]);
 
@@ -34,7 +36,7 @@ export const EmailVerify = () => {
                          Email Verification
                     </h3>
 
-                    <p className='font-light'>
+                    <p className='font-light text-center'>
                          Your email was verified. You can log in now{' '}
                          <Link to='/login' className='underline text-blue-500'>
                               here

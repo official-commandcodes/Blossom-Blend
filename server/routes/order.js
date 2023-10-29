@@ -7,6 +7,6 @@ const {
 
 router.post('/checkout-session', protect, getCheckoutSession);
 
-router.get('/', getAllOrders);
+router.get('/', protect, getAllOrders);
 
 module.exports = router;

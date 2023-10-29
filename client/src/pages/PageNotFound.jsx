@@ -1,6 +1,11 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const PageNotFound = () => {
+     useEffect(() => {
+          document.title = 'Blossom Blend | Page Not Found';
+     }, []);
+
      return (
           <div className='px-40 py-16 bg-orange-100 flex flex-col space-y-4 justify-center font-light text-[14px]'>
                <img

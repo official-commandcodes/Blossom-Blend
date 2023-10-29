@@ -76,6 +76,19 @@ const getProduct = async (req, res, next) => {
      }
 };
 
+const getProductById = async (req, res, next) => {
+     try {
+          const product = await Product.findById(req.params.id);
+
+          res.status(200).json({
+               status: 'success',
+               data: product,
+          });
+     } catch (err) {
+          next(err);
+     }
+};
+
 const createProduct = async (req, res, next) => {
      try {
           const newProduct = await Product.create(req.body);
@@ -119,4 +132,5 @@ module.exports = {
      createProduct,
      getProduct,
      getSearch,
+     getProductById,
 };

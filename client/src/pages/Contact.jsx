@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
 import Input from '../ui/Input';
+import { useEffect } from 'react';
 
 const Contact = () => {
+     useEffect(() => {
+          document.title = `Blossom Blend | Contact Us`;
+     }, []);
+
      return (
           <div className='px-16 py-10 flex flex-col gap-8'>
                <h2 className='font-medium text-[24px]'>Contact Us </h2>

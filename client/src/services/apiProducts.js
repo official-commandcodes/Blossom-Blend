@@ -29,6 +29,19 @@ export const getProduct = async (queryKey) => {
      return data.data;
 };
 
+export const getProductById = async (id) => {
+     const res = await fetch(`${API_URL}/api/v1/products/${id}`, {
+          credentials: 'include',
+          headers: {
+               'Content-Type': 'application/json',
+          },
+     });
+
+     const data = await res.json();
+
+     return data.data;
+};
+
 export const getSearchProducts = async (query) => {
      const res = await fetch(`${API_URL}/api/v1/products/search?q=${query}`);
 
