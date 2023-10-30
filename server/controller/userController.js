@@ -8,9 +8,7 @@ const multerStorage = multer.diskStorage({
           cb(null, `${__dirname}/../public/users`);
      },
      filename: (req, file, cb) => {
-          const fileArray = file.originalname.split('.');
-
-          const ext = fileArray[fileLength.length - 1];
+          const ext = file.originalname.split('.').at(-1);
           cb(null, `user-${Date.now()}.${ext}`);
      },
 });
