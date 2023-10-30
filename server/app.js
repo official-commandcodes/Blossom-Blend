@@ -28,10 +28,11 @@ const corsOptions = {
                : 'http://localhost:5173',
      methods: ['GET', 'POST', 'DELETE', 'PATCH'],
      optionSuccessStatus: 200,
-     headers: ['Content-Type', 'Authorization', 'x-access-token'],
+     // headers: ['Content-Type', 'Authorization', 'x-access-token'],
+     allowedHeaders: ['Content-Type', 'Authorization'],
      credentials: true,
      maxAge: 3600,
-     preflightContinue: false,
+     preflightContinue: true,
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
