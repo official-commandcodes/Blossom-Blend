@@ -153,8 +153,11 @@ const totalAmount = async (req, res, next) => {
 const updateUserData = async (req, res, next) => {
      try {
           const data = {
-               ...req.body,
-               photo: req.body.file || req.file.filename,
+               name: req.body.name,
+               email: req.body.email,
+               address: req.body.address,
+               phoneNumber: req.body.phoneNumber,
+               photo: req.file && req.file.filename,
           };
 
           const user = await User.findByIdAndUpdate(req.user._id, data, {
