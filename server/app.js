@@ -39,13 +39,6 @@ app.use(cookieParser());
 // BODY-PARSER & STATIC FILES
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
-// app.use((req, res, next) => {
-//      res.setHeader(
-//           'Access-Control-Allow-Origin',
-//           'https://blossom-blend.vercel.app'
-//      );
-//      next();
-// });
 
 app.get('/', (req, res) => {
      res.send('Welcome to Bloom Blend API');
