@@ -25,8 +25,8 @@ router.patch('/validate/:userId/:emailValidateToken', validateEmail);
 
 router
      .get('/getUser', protect, getLoggedInUser)
-     .post('/updateData', protect, updateUserImage, updateUserData)
      .post('/totalAmount', protect, totalAmount)
+     .patch('/updateData', protect, updateUserImage, updateUserData)
      .patch('/carts/addToCarts', protect, addToCart)
      .patch('/carts/updateCartItems', protect, updateCart)
      .patch('/wishlists/addToWishlists', protect, addToWishlist)
