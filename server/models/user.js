@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema(
                select: false,
           },
 
-          emailValidation: { type: String, select: false },
+          emailValidation: String,
 
           address: String,
 

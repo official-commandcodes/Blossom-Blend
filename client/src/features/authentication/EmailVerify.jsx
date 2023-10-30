@@ -1,17 +1,18 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEmailVerication } from './useEmailVerication';
 import Spinner from '../../ui/Spinner';
 import { useEffect } from 'react';
 
 export const EmailVerify = () => {
-     const { userId, token } = useParams();
      const { status, verify } = useEmailVerication();
 
      useEffect(() => {
           document.title = `Blossom Blend | Email verification`;
 
-          verify({ userId, token });
-     }, [verify, userId, token]);
+          verify();
+     }, [verify]);
+
+     console.log(status);
 
      return (
           <div className='flex justify-center items-center'>

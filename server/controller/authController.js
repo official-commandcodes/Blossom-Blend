@@ -151,7 +151,7 @@ const getLoggedInUser = async (req, res, next) => {
 // VALIDATE EMAIL
 const validateEmail = async (req, res, next) => {
      try {
-          // Find user with the param id
+          // Find user with the param id and manually select emailValidation
           const user = await User.findOne({ _id: req.params.userId });
 
           const compare = await user.compareToken(
