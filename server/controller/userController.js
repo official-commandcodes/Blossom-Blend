@@ -157,9 +157,7 @@ const updateUserData = async (req, res, next) => {
                photo: req.body.file || req.file.filename,
           };
 
-          await User.findByIdAndUpdate(req.user._id, data, {
-               runValidators: true,
-          });
+          await User.findByIdAndUpdate(req.user._id, data);
 
           res.status(200).json({
                status: 'User updated successfully',
