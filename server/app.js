@@ -21,24 +21,21 @@ app.post(
 );
 
 // CROSS-ORIGIN
-// const corsOptions = {
-//      origin:
-//           process.env.NODE_ENV === 'production'
-//                ? 'https://blossom-blend.vercel.app'
-//                : 'http://localhost:5173',
-//      // credential: true,
-//      methods: ['GET', 'POST', 'DELETE', 'PATCH'],
-//      optionSuccessStatus: 200,
-//      allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
-//      credentials: true,
-//      maxAge: 3600,
-// };
-app.use(
-     cors({
-          origin: '*',
-          credentials: true,
-     })
-);
+const corsOptions = {
+     // origin:
+     //      process.env.NODE_ENV === 'production'
+     //           ? 'https://blossom-blend.vercel.app'
+     //           : 'http://localhost:5173',
+
+     origin: 'https://blossom-blend.vercel.app',
+     methods: ['GET', 'POST', 'DELETE', 'PATCH'],
+     optionSuccessStatus: 200,
+     headers: ['Content-Type', 'Authorization', 'x-access-token'],
+     credentials: true,
+     maxAge: 3600,
+     preflightContinue: false,
+};
+app.use(cors(corsOptions));
 app.use(cookieParser());
 
 // BODY-PARSER & STATIC FILES
