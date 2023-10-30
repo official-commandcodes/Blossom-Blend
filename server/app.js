@@ -45,7 +45,7 @@ const corsOptions = {
                : 'http://localhost:5173',
      methods: ['GET', 'POST', 'DELETE', 'PATCH'],
      optionSuccessStatus: 200,
-     // headers: ['Content-Type', 'Authorization', 'x-access-token'],
+     headers: ['Content-Type', 'Authorization', 'x-access-token'],
      credentials: true,
      maxAge: 3600,
      preflightContinue: false,
