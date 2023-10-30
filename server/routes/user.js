@@ -23,14 +23,16 @@ router.post('/signup', signup).post('/login', login);
 // PROTECT UER ID TO BE USED
 router.patch('/validate/:userId/:emailValidateToken', validateEmail);
 
+router.use(protect);
+
 router
-     .get('/getUser', protect, getLoggedInUser)
-     .post('/totalAmount', protect, totalAmount)
-     .patch('/updateData', protect, updateUserImage, updateUserData)
-     .patch('/carts/addToCarts', protect, addToCart)
-     .patch('/carts/updateCartItems', protect, updateCart)
-     .patch('/wishlists/addToWishlists', protect, addToWishlist)
-     .delete('/carts/removeFromCarts', protect, removeFromCart)
-     .delete('/wishlists/removeFromWishlists', protect, removeFromWishlist);
+     .get('/getUser', getLoggedInUser)
+     .post('/totalAmount', totalAmount)
+     .patch('/updateData', updateUserImage, updateUserData)
+     .patch('/carts/addToCarts', addToCart)
+     .patch('/carts/updateCartItems', updateCart)
+     .patch('/wishlists/addToWishlists', addToWishlist)
+     .delete('/carts/removeFromCarts', removeFromCart)
+     .delete('/wishlists/removeFromWishlists', removeFromWishlist);
 
 module.exports = router;
