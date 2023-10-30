@@ -20,6 +20,8 @@ const userSchema = new mongoose.Schema(
                required: [true, 'A user must have name'],
           },
 
+          slug: String,
+
           email: {
                type: String,
                // unique: true,

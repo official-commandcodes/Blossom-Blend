@@ -140,6 +140,7 @@ const getLoggedInUser = async (req, res, next) => {
                     address: user.address,
                     phoneNumber: user.phoneNumber,
                     photo: user.photo,
+                    slug: user.slug,
                },
           });
      } catch (err) {
