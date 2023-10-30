@@ -86,9 +86,6 @@ export const updateUser = async (formData) => {
      try {
           const res = await fetch(`${API_URL}/api/v1/users/updateData`, {
                method: 'PATCH',
-               headers: {
-                    'Content-Type': 'application/json',
-               },
                mode: 'cors',
                credentials: 'include',
                body: formData,
