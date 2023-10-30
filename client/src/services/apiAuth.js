@@ -85,6 +85,7 @@ export const getTotalAmount = async (items) => {
 export const updateUser = async (formData) => {
      const res = await fetch(`${API_URL}/api/v1/users/updateData`, {
           method: 'POST',
+          mode: 'cors',
           credentials: 'include',
           body: formData,
      });

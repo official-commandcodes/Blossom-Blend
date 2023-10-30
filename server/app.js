@@ -20,6 +20,23 @@ app.post(
      webhookCheckout
 );
 
+app.use((req, res, next) => {
+     res.header(
+          'Access-Control-Allow-Origin',
+          process.env.NODE_ENV === 'production'
+               ? 'https://blossom-blend.vercel.app'
+               : 'http://localhost:5173'
+     );
+     res.header(
+          'Access-Control-Allow-Headers',
+          process.env.NODE_ENV === 'production'
+               ? 'https://blossom-blend.vercel.app'
+               : 'http://localhost:5173'
+     );
+
+     next();
+});
+
 // CROSS-ORIGIN
 const corsOptions = {
      origin:

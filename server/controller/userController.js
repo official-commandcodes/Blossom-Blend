@@ -164,14 +164,9 @@ const updateUserData = async (req, res, next) => {
                runValidators: true,
           });
 
-          res.setHeader(
-               'Access-Control-Allow-Origin',
-               'https://blossom-blend.vercel.app'
-          )
-               .status(200)
-               .json({
-                    status: 'User updated successfully',
-               });
+          res.status(200).json({
+               status: 'User updated successfully',
+          });
      } catch (err) {
           next(err);
      }
