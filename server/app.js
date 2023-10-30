@@ -22,12 +22,10 @@ app.post(
 
 // CROSS-ORIGIN
 const corsOptions = {
-     // origin:
-     //      process.env.NODE_ENV === 'production'
-     //           ? 'https://blossom-blend.vercel.app'
-     //           : 'http://localhost:5173',
-
-     origin: 'https://blossom-blend.vercel.app',
+     origin:
+          process.env.NODE_ENV === 'production'
+               ? 'https://blossom-blend.vercel.app'
+               : 'http://localhost:5173',
      methods: ['GET', 'POST', 'DELETE', 'PATCH'],
      optionSuccessStatus: 200,
      headers: ['Content-Type', 'Authorization', 'x-access-token'],
