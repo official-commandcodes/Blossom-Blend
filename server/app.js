@@ -32,7 +32,7 @@ const corsOptions = {
      allowedHeaders: ['Content-Type', 'Authorization'],
      credentials: true,
      maxAge: 3600,
-     preflightContinue: true,
+     preflightContinue: false,
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
