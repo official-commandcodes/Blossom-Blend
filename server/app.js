@@ -29,7 +29,7 @@ const corsOptions = {
      // credential: true,
      methods: ['GET', 'POST', 'DELETE', 'PATCH'],
      optionSuccessStatus: 200,
-     headers: ['Content-Type', 'Authorization', 'x-access-token'],
+     allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
      credentials: true,
      maxAge: 3600,
 };

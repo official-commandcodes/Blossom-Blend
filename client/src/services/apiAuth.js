@@ -83,16 +83,20 @@ export const getTotalAmount = async (items) => {
 };
 
 export const updateUser = async (formData) => {
-     const res = await fetch(`${API_URL}/api/v1/users/updateData`, {
-          method: 'PATCH',
-          // mode: 'cors',
-          credentials: 'include',
-          body: formData,
-     });
+     try {
+          const res = await fetch(`${API_URL}/api/v1/users/updateData`, {
+               method: 'PATCH',
+               mode: 'cors',
+               credentials: 'include',
+               body: formData,
+          });
 
-     const data = await res.json();
+          const data = await res.json();
 
-     return data;
+          return data;
+     } catch (err) {
+          console.log(err);
+     }
 };
 
 // export const updateUserPassword = async (info) => {

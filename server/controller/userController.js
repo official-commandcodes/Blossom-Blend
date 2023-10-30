@@ -157,10 +157,14 @@ const updateUserData = async (req, res, next) => {
                photo: req.body.file || req.file.filename,
           };
 
-          await User.findByIdAndUpdate(req.user._id, data);
+          const user = await User.findByIdAndUpdate(req.user._id, data, {
+               new: true,
+               runValidation: true,
+          }).select('-__v');
 
           res.status(200).json({
-               status: 'User updated successfully',
+               status: 'success',
+               user,
           });
      } catch (err) {
           next(err);
