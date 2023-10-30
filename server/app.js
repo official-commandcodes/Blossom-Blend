@@ -34,6 +34,7 @@ const corsOptions = {
      maxAge: 3600,
 };
 app.use(cors(corsOptions));
+app.options('*', cors());
 app.use(cookieParser());
 
 // BODY-PARSER & STATIC FILES
