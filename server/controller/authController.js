@@ -79,7 +79,7 @@ const login = async (req, res, next) => {
           }
 
           const user = await User.findOne({ email: req.body.email }).select(
-               '+password'
+               '+password +emailValid'
           );
 
           // check if there is no user
