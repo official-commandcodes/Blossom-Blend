@@ -9,12 +9,11 @@ const multerStorage = multer.diskStorage({
      },
      filename: (req, file, cb) => {
           const fileArray = file.originalname.split('.');
+
           const ext = fileArray[fileLength.length - 1];
           cb(null, `user-${Date.now()}.${ext}`);
      },
 });
-
-('user-5787078986.jpeg');
 
 const multerFilter = (req, file, cb) => {
      if (file.mimetype.startsWith('image')) {

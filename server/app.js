@@ -26,12 +26,12 @@ const corsOptions = {
           process.env.NODE_ENV === 'production'
                ? 'https://blossom-blend.vercel.app'
                : 'http://localhost:5173',
+     // credential: true,
      methods: ['GET', 'POST', 'DELETE', 'PATCH'],
      optionSuccessStatus: 200,
      headers: ['Content-Type', 'Authorization', 'x-access-token'],
      credentials: true,
      maxAge: 3600,
-     preflightContinue: false,
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
