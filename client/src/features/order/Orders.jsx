@@ -18,7 +18,6 @@ const Orders = () => {
           );
      }
 
-     console.log(orders);
      return (
           <div className='px-3 py-4 flex flex-col space-y-4'>
                <h1 className='text-[20px] font-bold'>All orders</h1>

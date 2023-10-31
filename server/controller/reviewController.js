@@ -19,13 +19,19 @@ const getAllReview = async (req, res, next) => {
 const createReview = async (req, res, next) => {
      try {
           const newReview = await Review.create(req.body);
-          await User.findByIdAndUpdate(req.user._id, {
-               $pull: { writeReview: req.body.product },
-          });
+
+          const user = await User.findByIdAndUpdate(
+               req.user._id,
+
+               { $pull: { writeReview: { $in: [req.body.product] } } },
+
+               { new: true, multi: true }
+          );
 
           res.status(201).json({
                status: 'success',
                data: newReview,
+               user,
           });
      } catch (err) {
           next(err);
