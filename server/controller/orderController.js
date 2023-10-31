@@ -1,4 +1,5 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { isFriday, isTuesday } = require('date-fns');
 const Product = require('../models/product');
 const Order = require('../models/order');
 const User = require('../models/user');
@@ -12,7 +13,10 @@ const getCheckoutSession = async (req, res, next) => {
 
                     return {
                          price_data: {
-                              unit_amount: product.price,
+                              unit_amount:
+                                   isFriday(new Date()) || isTuesday(new Date())
+                                        ? product.discountPrice
+                                        : product.price,
                               currency: 'usd',
                               product_data: {
                                    name: `${product.title} Product`,
@@ -85,6 +89,8 @@ const webhookCheckout = async (req, res) => {
                          product: data.client_reference_id.split('_')[i],
                          user: user._id,
                          price: item.amount_subtotal,
+
+                         data: items,
                     });
                })
           );
