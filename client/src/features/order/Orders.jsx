@@ -1,14 +1,16 @@
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import { useOrders } from '../wishlist/useOrders';
+import { useUser } from '../authentication/useUser';
+import { useOrders } from './useOrders';
 import Empty from '../../ui/Empty';
 import OrderList from './OrderList';
 
 const Orders = () => {
-     const { status, orders } = useOrders();
+     const { status: orderStatus, orders } = useOrders();
+     const { status: userStatus, user } = useUser();
 
-     if (status === 'pending') {
+     if (orderStatus === 'pending' || userStatus === 'pending') {
           return (
                <div className='px-3 py-4 flex flex-col space-y-2 self-end'>
                     <Skeleton count={4} height='60px' />
@@ -42,6 +44,8 @@ const Orders = () => {
                                              paid={order.paid}
                                              qty={order.quantity}
                                              date={order.createdAt}
+                                             writeReview={user.writeReview}
+                                             productId={order.product.id}
                                         />
                                    ))}
                               </ul>

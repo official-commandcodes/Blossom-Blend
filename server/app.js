@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const productRoutes = require('./routes/product');
 const userRoutes = require('./routes/user');
 const orderRoutes = require('./routes/order');
+const reviewRoutes = require('./routes/review');
 const globalErrorHandler = require('./utils/globalErrorHandler');
 const { webhookCheckout } = require('./controller/orderController');
 const app = express();
@@ -28,13 +29,15 @@ const corsOptions = {
                : 'http://localhost:5173',
      methods: ['GET', 'POST', 'DELETE', 'PATCH'],
      optionSuccessStatus: 200,
-     // headers: ['Content-Type', 'Authorization', 'x-access-token'],
+     // // headers: ['Content-Type', 'Authorization', 'x-access-token'],
      allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
      credentials: true,
      maxAge: 3600,
      preflightContinue: false,
 };
+
 app.use(cors(corsOptions));
+
 app.use(cookieParser());
 
 // BODY-PARSER & STATIC FILES
@@ -48,6 +51,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/orders', orderRoutes);
+app.use('/api/v1/reviews', reviewRoutes);
 
 app.all('*', (req, res) => {
      return res.send(`There is no ${req.originalUrl} route on this server`);

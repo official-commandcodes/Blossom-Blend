@@ -6,6 +6,7 @@ const {
      getSearch,
      getProductById,
 } = require('../controller/productController');
+// const { protect } = require('../middleware/auth');
 
 router.get('/search', getSearch);
 router

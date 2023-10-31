@@ -4,7 +4,6 @@ const {
      login,
      validateEmail,
      getLoggedInUser,
-     protect,
 } = require('../controller/authController');
 const {
      addToCart,
@@ -16,6 +15,7 @@ const {
      updateUserData,
      updateUserImage,
 } = require('../controller/userController');
+const { protect } = require('../controller/authController');
 
 // AUTH
 router.post('/signup', signup).post('/login', login);

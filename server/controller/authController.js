@@ -141,6 +141,7 @@ const getLoggedInUser = async (req, res, next) => {
                     phoneNumber: user.phoneNumber,
                     photo: user.photo,
                     slug: user.slug,
+                    writeReview: user.writeReview,
                },
           });
      } catch (err) {

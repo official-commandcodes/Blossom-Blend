@@ -1,4 +1,3 @@
-const path = require('path');
 const multer = require('multer');
 const User = require('../models/user');
 const Product = require('../models/product');
@@ -6,7 +5,7 @@ const { AppError } = require('../utils/appError');
 
 const multerStorage = multer.diskStorage({
      destination: (req, file, cb) => {
-          cb(null, path.dirname('public/users/users'));
+          cb(null, `${__dirname}/../public/users`);
      },
      filename: (req, file, cb) => {
           const ext = file.originalname.split('.')[1];

@@ -2,7 +2,7 @@ import { API_URL } from '../utils/helper';
 
 // const controller = new AbortController();
 
-export const getAllProduct = async (category = 'all', sortBy = 'all') => {
+export const getAllProduct = async (category, sortBy) => {
      const res = await fetch(
           `${API_URL}/api/v1/products?category=${category}&sort=${sortBy}`
      );

@@ -12,7 +12,7 @@ const AccountAside = () => {
           <aside className='border-r-[2px] border-gray-300'>
                <ul className='text-[12px] divide-y-2 flex flex-col'>
                     <NavLink
-                         to={`/account/${user.id}/info`}
+                         to={`/account/${user.slug}/info`}
                          className={({ isActive }) =>
                               isActive
                                    ? style + ' bg-gray-200'
@@ -23,7 +23,7 @@ const AccountAside = () => {
                     </NavLink>
 
                     <NavLink
-                         to={`/account/${user.id}/orders`}
+                         to={`/account/${user.slug}/orders`}
                          className={({ isActive }) =>
                               isActive
                                    ? style + ' bg-gray-200'
@@ -34,7 +34,7 @@ const AccountAside = () => {
                     </NavLink>
 
                     <NavLink
-                         to={`/account/${user.id}/wishlists`}
+                         to={`/account/${user.slug}/wishlists`}
                          className={({ isActive }) =>
                               isActive
                                    ? style + ' bg-gray-200'

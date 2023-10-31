@@ -14,7 +14,7 @@ const Account = () => {
      }, []);
 
      return (
-          <div className='px-16 py-4 flex flex-col gap-4'>
+          <div className='px-16 py-4 flex flex-col space-y-4'>
                <h1 className='text-[20px] font-medium'>
                     Hello,{' '}
                     {status === 'pending' ? (
