@@ -24,8 +24,6 @@ const orderSchema = mongoose.Schema(
                default: 1,
           },
 
-          data: [],
-
           paid: {
                type: Boolean,
                default: true,

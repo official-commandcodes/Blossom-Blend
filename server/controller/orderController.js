@@ -89,8 +89,7 @@ const webhookCheckout = async (req, res) => {
                          product: data.client_reference_id.split('_')[i],
                          user: user._id,
                          price: item.amount_subtotal,
-
-                         data: items,
+                         quantity: item.quantity,
                     });
                })
           );
