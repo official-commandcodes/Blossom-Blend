@@ -12,6 +12,7 @@ import DropDownProvider from './ui/DropDownContext';
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const Login = lazy(() => import('./pages/Login'));
 const EmailVerify = lazy(() => import('./pages/EmailVerify'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPasswordPage'));
 const Signup = lazy(() => import('./pages/Signup'));
 const Home = lazy(() => import('./pages/Home'));
 const ProductsDetails = lazy(() => import('./pages/ProductsDetails'));
@@ -112,6 +113,11 @@ const App = () => {
           {
                path: '/auth/email-verification/:userId/:token',
                element: <EmailVerify />,
+          },
+
+          {
+               path: '/auth/reset-password/:username/:token',
+               element: <ForgotPassword />,
           },
 
           {

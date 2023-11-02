@@ -1,66 +1,40 @@
+import { useUpdatePassword } from './useUpdatePassword';
+
+import { useUser } from '../authentication/useUser';
+import Spinner from '../../ui/Spinner';
+
 const AccountUserPassword = () => {
+     const { status: userStatus, user } = useUser();
+     const { status, updatePassword } = useUpdatePassword();
+
+     const handleClick = (e) => {
+          e.preventDefault();
+          updatePassword({ email: user.email });
+     };
+
+     if (userStatus === 'pending') return null;
+
      return (
-          <form className='flex flex-col gap-4 pt-4'>
-               <h1 className='text-[15px] font-medium'>
-                    Password Authentication
-               </h1>
+          <form className='flex flex-col space-y-4 pt-4'>
+               <h1 className='text-[15px] font-medium'>Update your Password</h1>
 
-               <div className='grid grid-cols-4 items-center'>
-                    <label
-                         htmlFor='currentPassword'
-                         className='text-[15px] font-medium'
-                    >
-                         Current Password{' '}
-                         <span className='text-orange-500'>*</span>
-                    </label>
+               <div className='flex space-x-3 items-center text-gray-200'>
                     <input
-                         type='currentPassword'
+                         type='text'
                          id='currentPassword'
-                         defaultValue={'Musa Abdulkabir Adekunle'}
-                         // onChange={(e) => setName(e.target.value)}
-                         name='currentPassword'
-                         className='col-span-2 outline-none px-3 py-2 rounded-md text-[14px] font-light italic'
+                         disabled
+                         value={user.email}
+                         className='outline-none px-3 py-2 rounded-md text-[14px] font-light italic w-[16rem] bg-orange-500'
                     />
-               </div>
-
-               <div className='grid grid-cols-4 items-center'>
-                    <label
-                         htmlFor='password'
-                         className='text-[15px] font-medium'
+                    <button
+                         onClick={handleClick}
+                         className='bg-orange-700 w-24 h-10 rounded-md flex justify-center items-center'
                     >
-                         New Password <span className='text-orange-500'>*</span>
-                    </label>
-                    <input
-                         type='password'
-                         id='password'
-                         defaultValue={'Musa Abdulkabir Adekunle'}
-                         name='password'
-                         // onChange={(e) => setName(e.target.value)}
-                         className='col-span-2 outline-none px-3 py-2 rounded-md text-[14px] font-light italic'
-                    />
-               </div>
-
-               <div className='grid grid-cols-4 items-center'>
-                    <label
-                         htmlFor='passwordConfirm'
-                         className='text-[15px] font-medium'
-                    >
-                         Confirm New Password{' '}
-                         <span className='text-orange-500'>*</span>
-                    </label>
-                    <input
-                         type='password'
-                         id='passwordConfirm'
-                         defaultValue={'Musa Abdulkabir Adekunle'}
-                         // onChange={(e) => setName(e.target.value)}
-                         name='passwordConfirm'
-                         className='col-span-2 outline-none px-3 py-2 rounded-md text-[14px] font-light italic'
-                    />
-               </div>
-
-               <div>
-                    <button className='bg-red-300 w-20 h-8 rounded-md'>
-                         update
+                         {status === 'pending' ? (
+                              <Spinner w='20px' h='17px' />
+                         ) : (
+                              'update'
+                         )}
                     </button>
                </div>
           </form>

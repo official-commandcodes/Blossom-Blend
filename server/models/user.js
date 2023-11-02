@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema(
           name: {
                type: String,
                trim: true,
+               unique: true,
                required: [true, 'A user must have name'],
           },
 
@@ -24,7 +25,7 @@ const userSchema = new mongoose.Schema(
 
           email: {
                type: String,
-               // unique: true,
+               unique: true,
                trim: true,
                required: [true, 'Please provide your email'],
                validate: {
@@ -55,6 +56,8 @@ const userSchema = new mongoose.Schema(
           carts: [cartSchema],
 
           writeReview: [String],
+
+          passwordResetToken: String,
 
           password: {
                type: String,
@@ -106,7 +109,7 @@ userSchema.methods.createEmailToken = async function () {
 
      const hash = crypto.createHash('sha256').update(emailToken).digest('hex');
 
-     this.emailValidation = await bcrypt.hash(hash, 12);
+     this.emailValidation = await bcrypt.hash(hash, +process.env.HASH_ROUNDS);
 
      return hash;
 };
@@ -117,6 +120,29 @@ userSchema.methods.compareToken = async (plainToken, hashToken) => {
 
 userSchema.methods.correctPassword = async (plainPassword, hashedPassword) => {
      return await bcrypt.compare(plainPassword, hashedPassword);
+};
+
+userSchema.methods.passwordResetVariable = async function () {
+     const resetToken = crypto.randomBytes(32).toString('hex');
+
+     const digestedToken = crypto
+          .createHash('sha256')
+          .update(resetToken)
+          .digest('hex');
+
+     this.passwordResetToken = await bcrypt.hash(
+          digestedToken,
+          +process.env.HASH_ROUNDS
+     );
+
+     return digestedToken;
+};
+
+userSchema.methods.checkPasswordResetToken = async function (
+     plainToken,
+     hashedToken
+) {
+     return await bcrypt.compare(plainToken, hashedToken);
 };
 
 const User = mongoose.model('User', userSchema);

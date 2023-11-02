@@ -1,3 +1,4 @@
+const os = require('os');
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 
@@ -19,10 +20,12 @@ module.exports = class Email {
      }
 
      async send(template, subject) {
+          const aboutOS = `${os.platform}, ${os.release()}`;
           // 1) Render HTML based on a ejs template
           const html = await ejs.renderFile(
                `${__dirname}/../views/${template}.ejs`,
                {
+                    platform: aboutOS,
                     name: this.name.split(' ')[0],
                     url: this.url,
                     subject,
@@ -52,5 +55,9 @@ module.exports = class Email {
 
      async sendLogInAccess() {
           await this.send('login', 'Blossom Blend Login Notification');
+     }
+
+     async sendPasswordResetToken() {
+          await this.send('resetPassword', 'Blossom Blend Security');
      }
 };

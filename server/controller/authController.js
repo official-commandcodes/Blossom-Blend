@@ -155,6 +155,8 @@ const validateEmail = async (req, res, next) => {
           // Find user with the param id and manually select emailValidation
           const user = await User.findOne({ _id: req.params.userId });
 
+          if (!user.emailValidation) return next('Invalid sent token!');
+
           const compare = await user.compareToken(
                req.params.emailValidateToken,
                user.emailValidation
@@ -203,4 +205,113 @@ const protect = async (req, res, next) => {
      next();
 };
 
-module.exports = { signup, login, validateEmail, getLoggedInUser, protect };
+const forgotPassword = async (req, res, next) => {
+     try {
+          // find user with the provided email
+          const user = await User.findOne({ email: req.body.email });
+
+          if (!user) {
+               return next('User does not exist anymore');
+          }
+
+          const token = await user.passwordResetVariable();
+
+          await user.save();
+
+          // constructed reset url
+          const resetUrl = `${
+               process.env.NODE_ENV === 'production'
+                    ? `https://blossom-blend.vercel.app/auth/reset-password/${user.slug}/${token}`
+                    : `http://localhost:5173/auth/reset-password/${user.slug}/${token}`
+          }`;
+
+          // send email
+          new Email(user, resetUrl).sendPasswordResetToken();
+
+          res.status(200).json({
+               status: 'success',
+               message: 'Email sent successfully!',
+          });
+     } catch (err) {
+          next(err);
+     }
+};
+
+const verifyParams = async (req, res, next) => {
+     try {
+          const user = await User.findOne({ slug: req.body.username });
+
+          if (!user) {
+               return next('User does not exist');
+          }
+
+          if (!user.passwordResetToken) {
+               return res.status(400).json({
+                    status: 'fail',
+                    message: 'Invalid tokens',
+               });
+          }
+
+          if (
+               !(await user.checkPasswordResetToken(
+                    req.body.token,
+                    user.passwordResetToken
+               ))
+          ) {
+               return res.status(400).json({
+                    status: 'fail',
+                    message: 'Invalid token',
+               });
+          }
+
+          user.passwordResetToken = undefined;
+
+          await user.save();
+
+          res.status(200).json({
+               status: 'success',
+               message: 'Token validated successfully',
+          });
+     } catch (err) {
+          next(err);
+     }
+};
+
+const updatePassword = async (req, res, next) => {
+     try {
+          if (!req.body.password && !req.body.passwordConfirm) {
+               return next(
+                    new AppError(
+                         'Please provide both password and passwordConfirm',
+                         400
+                    )
+               );
+          }
+
+          const user = await User.findOne({ _id: req.user._id });
+
+          user.password = req.body.password;
+          user.passwordConfirm = req.body.passwordConfirm;
+          user.passwordResetToken = undefined;
+
+          await user.save();
+
+          res.status(200).json({
+               status: 'success',
+               message: 'password Updated',
+          });
+     } catch (err) {
+          next(err);
+     }
+};
+
+module.exports = {
+     signup,
+     login,
+     validateEmail,
+     getLoggedInUser,
+     protect,
+     forgotPassword,
+     verifyParams,
+     updatePassword,
+};

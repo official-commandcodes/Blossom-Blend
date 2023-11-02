@@ -99,26 +99,89 @@ export const updateUser = async (formData) => {
      }
 };
 
-// export const updateUserPassword = async (info) => {
-//      const res = await fetch(`${API_URL}/api/v1/users/updatePassword`, {
-//           method: 'POST',
-//           credentials: 'include',
-//           body: formData,
-//      });
+export const updatePassword = async (email) => {
+     try {
+          const res = await fetch(`${API_URL}/api/v1/users/forgotpassword`, {
+               method: 'POST',
+               headers: {
+                    'Content-Type': 'application/json',
+               },
+               credentials: 'include',
+               body: JSON.stringify(email),
+          });
 
-//      const data = await res.json();
+          const data = await res.json();
 
-//      return data;
-// };
+          return data;
+     } catch (err) {
+          throw new Error(err);
+     }
+};
 
-// export const getMe = async () => {
-//      const res = await fetch(`${API_URL}/api/v1/users/`, {
-//           method: 'POST',
-//           credentials: 'include',
-//           body: formData,
-//      });
+export const updateForgotPassword = async (email) => {
+     try {
+          const res = await fetch(`${API_URL}/api/v1/users/forgotpassword`, {
+               method: 'PATCH',
+               headers: {
+                    'Content-Type': 'application/json',
+               },
+               credentials: 'include',
+               body: JSON.stringify(email),
+          });
 
-//      const data = await res.json();
+          const data = await res.json();
 
-//      return data;
-// };
+          return data;
+     } catch (err) {
+          throw new Error(err);
+     }
+};
+
+export const checkParameters = async (verifyData) => {
+     try {
+          const res = await fetch(
+               `${API_URL}/api/v1/users/forgot-password/verifyParams`,
+               {
+                    method: 'POST',
+                    headers: {
+                         'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(verifyData),
+               }
+          );
+
+          const data = await res.json();
+
+          if (data.err) {
+               throw new Error(data.err);
+          }
+
+          return data;
+     } catch (err) {
+          throw new Error(err);
+     }
+};
+
+export const updatePasswordRoute = async (form) => {
+     try {
+          const res = await fetch(
+               `${API_URL}/api/v1/users/forgot-password/reset`,
+               {
+                    method: 'PATCH',
+                    headers: {
+                         'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(form),
+               }
+          );
+
+          const data = await res.json();
+          console.log(data);
+
+          return data;
+     } catch (err) {
+          throw new Error(err);
+     }
+};
