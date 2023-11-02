@@ -21,7 +21,14 @@ const Reviews = ({ id }) => {
                          <h2 className='px-4'>No review yet!</h2>
                     ) : (
                          reviews.map((review, i) => (
-                              <Review key={i + 1} review={review} />
+                              <Review
+                                   key={i + 1}
+                                   review={review}
+                                   username={review.user.name}
+                                   photo={review.user.photo}
+                                   rate={review.rating}
+                                   date={review.createdAt}
+                              />
                          ))
                     )}
                </ul>

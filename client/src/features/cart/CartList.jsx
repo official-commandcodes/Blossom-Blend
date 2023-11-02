@@ -5,8 +5,8 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 import { useProduct } from './useProduct';
 import { API_URL, formatMoney } from '../../utils/helper';
-import { useRemoveFromCart } from '../products/useRemoveFromCart';
-import { useUpdateCartItems } from '../products/useUpdateCartItems';
+import { useRemoveFromCart } from './useRemoveFromCart';
+import { useUpdateCartItems } from './useUpdateCartItems';
 
 import ActionButton from '../../ui/ActionButton';
 import Spinner from '../../ui/Spinner';
@@ -54,13 +54,13 @@ const CartList = ({ cart }) => {
                          className='w-20 h-full object-cover'
                     />
 
-                    <div>
+                    <div className='flex flex-col space-y-4'>
                          <h2 className='font-medium text-[17px]'>
                               {product?.title}
                          </h2>
                          <article className='text-[14px]'>
                               Seller:{' '}
-                              <span className='font-thin'>blossomblend</span>
+                              <span className='font-thin'>Blossom Blend</span>
                          </article>
                          <span className='font-thin text-[14px]'>In stock</span>
                     </div>

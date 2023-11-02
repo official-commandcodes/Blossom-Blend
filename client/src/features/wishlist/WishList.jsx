@@ -1,17 +1,37 @@
 import { isFriday, isSunday } from 'date-fns';
-import ActionButton from '../../ui/ActionButton';
 import { API_URL } from '../../utils/helper';
 import { useWishlists } from './useWishlist';
+import { useAddToCart } from '../cart/useAddToCart';
+import { useRemoveFromWishlist } from './useRemoveFromWishlist';
+
+import ActionButton from '../../ui/ActionButton';
+import Spinner from '../../ui/Spinner';
 
 const WishList = ({ id }) => {
      const { status, wishlist } = useWishlists(id);
+     const { status: addStatus, addToCart } = useAddToCart();
+     const { status: removeStatus, removeFromWishlist } =
+          useRemoveFromWishlist();
 
      if (status === 'pending') return null;
 
-     console.log(wishlist);
-
      const fridayCheck = isFriday(new Date());
      const tuesdayCheck = isSunday(new Date());
+
+     const handleAddWishlist = function () {
+          if (wishlist) {
+               addToCart({
+                    id: wishlist.id,
+                    quantity: 1,
+               });
+          }
+     };
+
+     const handleRemoveWishlist = function () {
+          if (wishlist) {
+               removeFromWishlist(wishlist.id);
+          }
+     };
 
      return (
           <li className='border-[1px] border-gray-400 rounded-md flex p-4 justify-between '>
@@ -71,8 +91,20 @@ const WishList = ({ id }) => {
                </div>
 
                <div className='flex flex-col justify-between'>
-                    <ActionButton>Buy Now</ActionButton>
-                    <ActionButton>remove</ActionButton>
+                    <ActionButton onClick={handleAddWishlist}>
+                         {addStatus === 'pending' ? (
+                              <Spinner w='16px' h='16px' />
+                         ) : (
+                              'Buy Now'
+                         )}
+                    </ActionButton>
+                    <ActionButton onClick={handleRemoveWishlist}>
+                         {removeStatus === 'pending' ? (
+                              <Spinner w='16px' h='16px' />
+                         ) : (
+                              'remove'
+                         )}
+                    </ActionButton>
                </div>
           </li>
      );

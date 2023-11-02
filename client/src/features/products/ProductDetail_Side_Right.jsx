@@ -1,12 +1,12 @@
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { BiCartAdd } from 'react-icons/bi';
-import { isFriday, isSunday, isTuesday } from 'date-fns';
+import { isFriday, isTuesday } from 'date-fns';
 import { toast } from 'react-hot-toast';
 
 import { useUser } from '../authentication/useUser';
-import { useAddToCart } from './useAddToCart';
-import { useRemoveFromCart } from './useRemoveFromCart';
-import { useUpdateCartItems } from './useUpdateCartItems';
+import { useAddToCart } from '../cart/useAddToCart';
+import { useRemoveFromCart } from '../cart/useRemoveFromCart';
+import { useUpdateCartItems } from '../cart/useUpdateCartItems';
 
 import Star from '../../ui/Star';
 import Spinner from '../../ui/Spinner';
@@ -29,7 +29,7 @@ const ProductDetail_Side_Right = ({
      const { status: updatingStatus, updateCartItems } = useUpdateCartItems();
 
      const fridayCheck = isFriday(new Date());
-     const tuesdayCheck = isSunday(new Date());
+     const tuesdayCheck = isTuesday(new Date());
 
      const includeInCart = user?.carts?.find((cart) => cart.id === id);
 

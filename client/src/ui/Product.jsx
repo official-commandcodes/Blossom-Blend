@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { API_URL } from '../utils/helper';
-import { useAddToCart } from '../features/products/useAddToCart';
+import { useAddToCart } from '../features/cart/useAddToCart';
 import { useUser } from '../features/authentication/useUser';
-import { useRemoveFromCart } from '../features/products/useRemoveFromCart';
+import { useRemoveFromCart } from '../features/cart/useRemoveFromCart';
 
 import Star from './Star';
 import Spinner from './Spinner';
-import { useAddToWishlist } from '../features/products/useAddToWishlist';
-import { useRemoveFromWishlist } from '../features/products/useRemoveFromWishlist';
+import { useAddToWishlist } from '../features/wishlist/useAddToWishlist';
+import { useRemoveFromWishlist } from '../features/wishlist/useRemoveFromWishlist';
 import { toast } from 'react-hot-toast';
 
 const Product = ({ w, product }) => {
