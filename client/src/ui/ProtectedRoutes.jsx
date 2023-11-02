@@ -8,10 +8,10 @@ const ProtectedRoutes = ({ children }) => {
      const navigate = useNavigate();
 
      useEffect(() => {
-          if (!user) {
+          if (status !== 'pending' && !user) {
                navigate('/login', { replace: true });
           }
-     }, [user, navigate]);
+     }, [status, user, navigate]);
 
      if (status === 'pending') {
           return (
@@ -21,7 +21,7 @@ const ProtectedRoutes = ({ children }) => {
           );
      }
 
-     if (user) return <div>{children}</div>;
+     if (user) return children;
 };
 
 export default ProtectedRoutes;

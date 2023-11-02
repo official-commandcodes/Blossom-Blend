@@ -23,7 +23,15 @@ const handleJWTExpiredError = (err, res) => {
      });
 };
 
+const handleJWTMalformed = (err, res) => {
+     return res.status(400).json({
+          status: 'fail',
+          message: 'invalid token',
+     });
+};
+
 const globalErrorHandler = (err, req, res, next) => {
+     console.log(err.message);
      if (process.env.NODE_ENV === 'development') {
           res.json({
                message: err.message,
@@ -42,6 +50,10 @@ const globalErrorHandler = (err, req, res, next) => {
           // Invalid Token
           if (err.name == 'TokenExpiredError')
                return handleJWTExpiredError(err, res);
+
+          // JsonWebTokenError
+          if (err.message === 'JsonWebTokenError')
+               return handleJWTMalformed(err, res);
 
           res.status(err.statusCode || 500).json({ err });
      }

@@ -10,13 +10,13 @@ const Products = () => {
 
      if (isLoading) return <SkeletonLoading length={12} />;
 
-     let filtered;
+     // let filtered;
      // PAGINATION
      // calc starting and ending product
      const start = (page - 1) * PAGINATE;
      const end = PAGINATE * page;
 
-     filtered = products.slice(start, end);
+     const filtered = products.slice(start, end);
 
      return (
           <div className='grid grid-cols-6 grid-rows-2 gap-x-6 gap-y-10 py-2'>

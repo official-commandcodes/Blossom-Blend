@@ -14,6 +14,7 @@ export const getAllProduct = async (category, sortBy) => {
 
 export const getProduct = async (queryKey) => {
      let res;
+
      if (queryKey.slug)
           res = await fetch(
                `${API_URL}/api/v1/products/product?slug=${queryKey.slug}`

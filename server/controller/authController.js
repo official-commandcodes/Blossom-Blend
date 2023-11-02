@@ -198,19 +198,26 @@ const protect = async (req, res, next) => {
      if (!token) return next(new AppError("You've not logged in.", 400));
 
      // VERIIFY TOKEN
-     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+     jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+          if (err) {
+               return res.status(400).json({
+                    status: 'fail',
+                    message: err.message,
+               });
+          }
 
-     if (!decoded) return next(new AppError('Invalid token', 400));
+          if (!decoded) return next(new AppError('Invalid token', 400));
 
-     // GET USER IF TOKEN IS VALID
-     const user = await User.findOne({ _id: decoded.id });
+          // GET USER IF TOKEN IS VALID
+          const user = await User.findOne({ _id: decoded.id });
 
-     // CHECK IF USER EXIST
-     if (!user) return next(new AppError('User does not exist', 404));
+          // CHECK IF USER EXIST
+          if (!user) return next(new AppError('User does not exist', 404));
 
-     req.user = user;
+          req.user = user;
 
-     next();
+          next();
+     });
 };
 
 const forgotPassword = async (req, res, next) => {
