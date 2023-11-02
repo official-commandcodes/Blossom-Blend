@@ -39,8 +39,8 @@ const getCheckoutSession = async (req, res, next) => {
                payment_method_types: ['card'],
                success_url:
                     process.env.NODE_ENV === 'production'
-                         ? 'https://blossom-blend.vercel.app/products'
-                         : 'http://localhost:5173',
+                         ? 'https://blossom-blend.vercel.app/account/:me/orders'
+                         : 'http://localhost:5173/account/:me/orders',
                cancel_url:
                     process.env.NODE_ENV === 'production'
                          ? 'https://blossom-blend.vercel.app/carts'

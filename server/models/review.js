@@ -4,7 +4,6 @@ const reviewSchema = mongoose.Schema(
      {
           review: {
                type: String,
-               minlength: 10,
                trim: true,
                required: [true, 'A review must have text'],
           },
@@ -24,14 +23,18 @@ const reviewSchema = mongoose.Schema(
 
           user: {
                type: mongoose.Schema.ObjectId,
-               ref: 'Product',
+               ref: 'User',
                required: [true, 'A review must have user'],
           },
      },
-     {
-          timestamps: true,
-     }
+     { timestamps: true }
 );
+
+reviewSchema.pre(/^find/, function (next) {
+     this.find({}).populate('user');
+
+     next();
+});
 
 const Review = mongoose.model('Review', reviewSchema);
 

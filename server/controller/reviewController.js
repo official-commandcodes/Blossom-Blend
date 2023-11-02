@@ -1,15 +1,15 @@
 const Review = require('../models/review');
 const User = require('../models/user');
 
-const getAllReview = async (req, res, next) => {
+const getReview = async (req, res, next) => {
      try {
-          const reviews = await Review.find({})
-               .populate('product')
-               .populate('user');
+          const review = await Review.find({
+               product: req.params.id,
+          });
 
           res.status(200).json({
                status: 'success',
-               reviews,
+               data: review,
           });
      } catch (err) {
           next(err);
@@ -18,8 +18,6 @@ const getAllReview = async (req, res, next) => {
 
 const createReview = async (req, res, next) => {
      try {
-          const newReview = await Review.create(req.body);
-
           const user = await User.findByIdAndUpdate(
                req.user._id,
 
@@ -27,6 +25,8 @@ const createReview = async (req, res, next) => {
 
                { new: true, multi: true }
           );
+
+          const newReview = await Review.create(req.body);
 
           res.status(201).json({
                status: 'success',
@@ -38,4 +38,4 @@ const createReview = async (req, res, next) => {
      }
 };
 
-module.exports = { getAllReview, createReview };
+module.exports = { getReview, createReview };

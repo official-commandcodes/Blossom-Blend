@@ -32,9 +32,12 @@ const OrderList = ({ order, paid, qty, date, writeReview, productId }) => {
                     <span className='w-20 h-6 rounded-full bg-orange-300 flex justify-center items-center text-[12px]'>
                          completed
                     </span>
-                    <ReviewTable id={productId}>
+                    <ReviewTable>
                          {writeReview.includes(productId) && (
-                              <ReviewTable.Button text='write review' />
+                              <ReviewTable.Button
+                                   text='write review'
+                                   id={productId}
+                              />
                          )}
 
                          <ReviewTable.Body>

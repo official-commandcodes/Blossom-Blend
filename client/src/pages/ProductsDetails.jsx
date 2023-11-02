@@ -41,7 +41,7 @@ const ProductsDetails = () => {
                     )}
                </div>
 
-               <Reviews />
+               {!isLoading && <Reviews id={product.id} />}
           </div>
      );
 };

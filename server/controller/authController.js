@@ -116,10 +116,17 @@ const login = async (req, res, next) => {
 
 // LOGOUT
 const logout = async (req, res, next) => {
-     res.status(200).cookie('blossomblendtoken', 'You logged out').json({
-          status: 'success',
-          mesage: 'You have been successfully logout',
-     });
+     res.status(200)
+          .cookie('blossomblendtoken', 'You logged out', {
+               path: '/',
+               httpOnly: true,
+               secure: process.env.NODE_ENV === 'production' ? true : false,
+               sameSite: process.env.NODE_ENV === 'production' ? 'None' : '',
+          })
+          .json({
+               status: 'success',
+               mesage: 'You have been successfully logout',
+          });
 };
 
 // LOGGED IN USER

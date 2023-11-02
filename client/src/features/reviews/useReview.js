@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { getAllReview } from '../../services/apiReviews';
+import { getReview } from '../../services/apiReviews';
 import { REFETCH_TIMER } from '../../utils/helper';
 
-export const useCreateReview = () => {
+export const useReview = (id) => {
      const { status, data: reviews } = useQuery({
-          queryKey: 'reviews',
-          queryFn: getAllReview,
+          queryKey: ['review'],
+          queryFn: () => getReview(id),
 
           refetchInterval: REFETCH_TIMER,
      });

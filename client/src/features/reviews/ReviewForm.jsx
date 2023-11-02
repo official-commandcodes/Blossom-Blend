@@ -7,8 +7,10 @@ import { useUser } from '../authentication/useUser';
 import ActionButton from '../../ui/ActionButton';
 import RatingReview from '../../ui/RatingReview';
 import Spinner from '../../ui/Spinner';
+import { useSearchParams } from 'react-router-dom';
 
-const ReviewForm = ({ onCloseTab, id }) => {
+const ReviewForm = ({ onCloseTab }) => {
+     const [searchParams] = useSearchParams();
      const { status: creating, createReview } = useCreateReview();
      const { user } = useUser();
      const [ratings, setRatings] = useState(null);
@@ -18,13 +20,14 @@ const ReviewForm = ({ onCloseTab, id }) => {
           handleSubmit,
      } = useForm();
 
+     // HANDLER
      const onSubmit = (data) => {
           if (!data.review || !ratings) return;
 
           createReview(
                {
                     review: data.review,
-                    product: id,
+                    product: searchParams.get('reviewTab'),
                     rating: ratings,
                     user: user.id,
                },
@@ -38,7 +41,7 @@ const ReviewForm = ({ onCloseTab, id }) => {
 
      return (
           <form
-               className='w-[40rem] h-full bg-white px-9 py-8 flex flex-col space-y-4 rounded-md'
+               className='w-[40rem] h-full bg-orange-200 px-9 py-8 flex flex-col space-y-4 rounded-md'
                onSubmit={handleSubmit(onSubmit)}
           >
                <div className='flex justify-between items-center'>
@@ -46,7 +49,7 @@ const ReviewForm = ({ onCloseTab, id }) => {
 
                     <span
                          onClick={onCloseTab}
-                         className={`font-medium text-[24px] cursor-pointer hover:bg-gray-200 transition-all duration-300 text-orange-600`}
+                         className={`font-medium text-[24px] cursor-pointer hover:bg-orange-950 transition-all duration-300 text-orange-600`}
                     >
                          <LiaTimesSolid />
                     </span>
@@ -65,7 +68,7 @@ const ReviewForm = ({ onCloseTab, id }) => {
                          id='review'
                          cols='30'
                          rows='10'
-                         className='max-h-[100px] rounded-sm bg-gray-200 border-gray-300 focus:border-[2px]  focus:border-orange-700 focus:ring-0 transition-colors duration-300 text-[13px]'
+                         className='max-h-[100px] rounded-sm bg-orange-50 text-gray-500 border-gray-100 focus:border-[2px]  focus:border-orange-700 focus:ring-0 transition-colors duration-300 text-[13px]'
                          {...register('review', {
                               required: 'Review is required',
                               minLength: [
