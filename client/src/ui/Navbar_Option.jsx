@@ -85,13 +85,15 @@ const Navbar_Option = () => {
                     </DropDownProvider.DropDown>
                </div>
 
-               <ActionButton onClick={handleLogout}>
-                    {logoutStatus === 'pending' ? (
-                         <Spinner w='14px' h='17px' />
-                    ) : (
-                         <BiLogOutCircle />
-                    )}
-               </ActionButton>
+               {user && (
+                    <ActionButton onClick={handleLogout}>
+                         {logoutStatus === 'pending' ? (
+                              <Spinner w='14px' h='17px' />
+                         ) : (
+                              <BiLogOutCircle />
+                         )}
+                    </ActionButton>
+               )}
           </div>
      );
 };

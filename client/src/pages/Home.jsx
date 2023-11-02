@@ -20,7 +20,10 @@ const Home = () => {
                <FilterSection />
 
                {/* PRODUCTS */}
-               <section className='px-16 py-8 flex flex-col gap-2'>
+               <section
+                    id='shop-now'
+                    className='px-16 py-8 flex flex-col gap-2'
+               >
                     <h1 className='font-medium text-2xl text-orange-950'>
                          Elegant Beauty Picks
                     </h1>

@@ -5,6 +5,8 @@ export const useOrders = () => {
      const { status, data: orders } = useQuery({
           queryKey: ['orders'],
           queryFn: getAllOrders,
+
+          refetchInterval: 6000,
      });
 
      return { status, orders };

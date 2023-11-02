@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
+     const handleSmoothScroll = function () {
+          document.querySelector('#shop-now').scrollIntoView({
+               behavior: 'smooth',
+          });
+     };
+
      return (
           <section className='flex bg-gray-200 px-12 h-[630px]'>
                <div className='flex-1 pt-44 px-20'>
@@ -16,7 +22,10 @@ const HeroSection = () => {
                          the latest innovations, you&apos;ll find it all here.
                     </p>
 
-                    <Link className='px-4 py-2 text-gray-100 rounded-md shadow-lg shadow-orange-800/50 uppercase text-[13px] bg-orange-400'>
+                    <Link
+                         onClick={handleSmoothScroll}
+                         className='px-4 py-2 text-gray-100 rounded-md shadow-lg shadow-orange-800/50 uppercase text-[13px] bg-orange-400'
+                    >
                          shop now
                     </Link>
                </div>

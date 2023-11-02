@@ -10,6 +10,7 @@ import { Toaster } from 'react-hot-toast';
 import DropDownProvider from './ui/DropDownContext';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
+const ProtectedRoutes = lazy(() => import('./ui/ProtectedRoutes'));
 const Login = lazy(() => import('./pages/Login'));
 const EmailVerify = lazy(() => import('./pages/EmailVerify'));
 const ForgotPassword = lazy(() => import('./pages/ForgotPasswordPage'));
@@ -56,12 +57,20 @@ const App = () => {
 
                     {
                          path: '/carts',
-                         element: <Cart />,
+                         element: (
+                              <ProtectedRoutes>
+                                   <Cart />
+                              </ProtectedRoutes>
+                         ),
                     },
 
                     {
                          path: '/checkout/payment',
-                         element: <Checkout />,
+                         element: (
+                              <ProtectedRoutes>
+                                   <Checkout />,
+                              </ProtectedRoutes>
+                         ),
                     },
 
                     {
@@ -71,7 +80,11 @@ const App = () => {
 
                     {
                          path: '/account/:me',
-                         element: <Account />,
+                         element: (
+                              <ProtectedRoutes>
+                                   <Account />,
+                              </ProtectedRoutes>
+                         ),
                          children: [
                               {
                                    index: true,
