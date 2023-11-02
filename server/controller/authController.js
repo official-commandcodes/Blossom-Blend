@@ -114,6 +114,14 @@ const login = async (req, res, next) => {
      }
 };
 
+// LOGOUT
+const logout = async (req, res, next) => {
+     res.clearCookie('blossomblendtoken').status(200).json({
+          status: 'success',
+          mesage: 'cookie has been cleared!',
+     });
+};
+
 // LOGGED IN USER
 const getLoggedInUser = async (req, res, next) => {
      try {
@@ -314,4 +322,5 @@ module.exports = {
      forgotPassword,
      verifyParams,
      updatePassword,
+     logout,
 };

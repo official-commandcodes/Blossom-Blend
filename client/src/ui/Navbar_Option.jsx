@@ -1,14 +1,21 @@
 import { Link } from 'react-router-dom';
 import { ImCart } from 'react-icons/im';
-import { BiUser } from 'react-icons/bi';
+import { BiUser, BiLogOutCircle } from 'react-icons/bi';
 import { useUser } from '../features/authentication/useUser';
+import { useLogout } from '../features/authentication/useLogout';
+import ActionButton from './ActionButton';
 
 import DropDownProvider from './DropDownContext';
 
 import Spinner from '../ui/Spinner';
 
 const Navbar_Option = () => {
-     const { status, user } = useUser();
+     const { status: userStatus, user } = useUser();
+     const { status: logoutStatus, logout } = useLogout();
+
+     function handleLogout() {
+          logout();
+     }
 
      return (
           <div className='flex space-x-4 font-light text-[14px] text-gray-600'>
@@ -18,7 +25,7 @@ const Navbar_Option = () => {
                >
                     <div className='relative text-[17px]'>
                          <span className='w-4 h-4 flex justify-center items-center absolute -top-1 -left-2 bg-orange-300 text-[8px] rounded-full'>
-                              {status === 'success' ? user.carts.length : 0}
+                              {userStatus === 'success' ? user.carts.length : 0}
                          </span>
                          <ImCart />
                     </div>
@@ -29,20 +36,20 @@ const Navbar_Option = () => {
                     <DropDownProvider.Button account='account'>
                          <BiUser />{' '}
                          <span>
-                              {status === 'success'
+                              {userStatus === 'success'
                                    ? user.name.split(' ')[0]
                                    : 'User'}
                          </span>
                     </DropDownProvider.Button>
 
                     <DropDownProvider.DropDown window='account'>
-                         {status === 'pending' ? (
+                         {userStatus === 'pending' ? (
                               <div className='flex justify-center items-center'>
                                    <Spinner w='60' h='30' />
                               </div>
                          ) : (
                               <>
-                                   {status === 'error' && (
+                                   {userStatus === 'error' && (
                                         <Link
                                              to='/login'
                                              className='text-[14px] py-2 px-4 bg-orange-400 w-full text-center rounded-md font-medium text-gray-100 hover:bg-orange-600 active:bg-orange-600 transition-all duration-300'
@@ -77,6 +84,14 @@ const Navbar_Option = () => {
                          )}
                     </DropDownProvider.DropDown>
                </div>
+
+               <ActionButton onClick={handleLogout}>
+                    {logoutStatus === 'pending' ? (
+                         <Spinner w='14px' h='17px' />
+                    ) : (
+                         <BiLogOutCircle />
+                    )}
+               </ActionButton>
           </div>
      );
 };

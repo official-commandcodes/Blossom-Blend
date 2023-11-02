@@ -34,6 +34,18 @@ export const login = async (loginData) => {
      return data;
 };
 
+export const logout = async () => {
+     const res = await fetch(`${API_URL}/api/v1/users/logout`, {
+          credentials: 'include',
+     });
+
+     const data = await res.json();
+
+     if (data.err) throw new Error(data.err.message);
+
+     return data;
+};
+
 export const verifyEmail = async ({ userId, token }) => {
      const res = await fetch(
           `${API_URL}/api/v1/users/validate/${userId}/${token}`,

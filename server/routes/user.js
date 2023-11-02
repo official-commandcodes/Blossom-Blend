@@ -7,6 +7,7 @@ const {
      forgotPassword,
      verifyParams,
      updatePassword,
+     logout,
 } = require('../controller/authController');
 const {
      addToCart,
@@ -30,6 +31,7 @@ router.use(protect);
 
 router
      .get('/getUser', getLoggedInUser)
+     .get('/logout', logout)
      .post('/forgotPassword', forgotPassword)
      .post('/forgot-password/verifyParams', verifyParams)
      .post('/totalAmount', totalAmount)
