@@ -17,23 +17,6 @@ export const signup = async (newUser) => {
      return data;
 };
 
-// export const signupGoogle = async (credential) => {
-//      const res = await fetch(`${API_URL}/api/v1/users/signup`, {
-//           method: 'POST',
-//           headers: {
-//                'Content-Type': 'application/json',
-//           },
-//           credentials: 'include',
-//           body: JSON.stringify({ googleAccessToken: credential }),
-//      });
-
-//      const data = await res.json();
-
-//      if (data.err) throw new Error(data.err.message);
-
-//      return data;
-// };
-
 export const login = async (loginData) => {
      const res = await fetch(`${API_URL}/api/v1/users/login`, {
           method: 'POST',

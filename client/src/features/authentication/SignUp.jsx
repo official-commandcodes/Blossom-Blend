@@ -5,8 +5,6 @@ import {
 } from 'react-icons/md';
 import { useForm } from 'react-hook-form';
 import { useSignUp } from './useSignUp';
-import { useGoogleSignUp } from './useGoogleSignUp';
-// import { Google } from '@react-oauth/google';
 
 import Spinner from '../../ui/Spinner';
 import AuthHeader from '../../ui/AuthHeader';
@@ -19,7 +17,6 @@ const SignUp = () => {
           getValues,
      } = useForm();
      const { status, signup } = useSignUp();
-     // const { status: signuoGoogle, google } = useGoogleSignUp();
 
      const onSubmit = (data) => {
           signup(data, {
