@@ -113,7 +113,7 @@ const Product = ({ w, product }) => {
                                    {removeStatus === 'pending' ? (
                                         <Spinner h='16' w='40' />
                                    ) : (
-                                        'Remove from cart'
+                                        'unselect'
                                    )}
                               </button>
                          ) : (
@@ -124,7 +124,7 @@ const Product = ({ w, product }) => {
                                    {addStatus === 'pending' ? (
                                         <Spinner h='16' w='40' />
                                    ) : (
-                                        'Add to cart'
+                                        'select'
                                    )}
                               </button>
                          )}

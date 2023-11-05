@@ -31,7 +31,6 @@ const handleJWTMalformed = (err, res) => {
 };
 
 const globalErrorHandler = (err, req, res, next) => {
-     console.log(err.message);
      if (process.env.NODE_ENV === 'development') {
           res.json({
                message: err.message,

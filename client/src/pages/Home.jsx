@@ -32,9 +32,9 @@ const Home = () => {
                {/* PRODUCTS */}
                <section
                     id='shop-now'
-                    className='px-16 py-8 flex flex-col gap-2'
+                    className='px-4 md:px-10 lg:px-16 py-8 flex flex-col space-y-7'
                >
-                    <h1 className='font-medium text-2xl text-orange-950'>
+                    <h1 className='font-medium text-orange-950 text-[18px] lg:text-2xl'>
                          Elegant Beauty Picks
                     </h1>
 

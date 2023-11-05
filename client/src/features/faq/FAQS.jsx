@@ -86,18 +86,18 @@ const FAQS = () => {
      ];
 
      return (
-          <section className='border-t-[1px] px-16 py-10'>
+          <section className='border-t-[1px] px-4 md:px-10 lg:px-16 py-6'>
                <div className='font-thin'>
-                    <h2 className='font-medium text-2xl '>
+                    <h2 className='font-medium text-[19px] lg:text-2xl text-orange-950'>
                          Frequently Asked Questions
                     </h2>
-                    <p className='text-sm mt-2'>
+                    <p className='text-[13px] md:text-sm mt-2'>
                          Find answers to common questions about our products and
                          services below.
                     </p>
                </div>
 
-               <ul className='grid flex-wrap gap-1 py-6'>
+               <ul className='grid gap-2 py-6'>
                     {faq.map((fq, i) => (
                          <FAQ key={i + 1}>
                               <div className='flex justify-between items-center bg-gray-200 px-4 py-2 text-sm font-light tracking-wider'>

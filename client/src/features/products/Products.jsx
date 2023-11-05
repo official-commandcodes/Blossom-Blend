@@ -19,7 +19,7 @@ const Products = () => {
      const filtered = products.slice(start, end);
 
      return (
-          <div className='grid grid-cols-6 grid-rows-2 gap-x-6 gap-y-10 py-2'>
+          <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 grid-rows-2 gap-x-6 gap-y-10 py-2'>
                {filtered.map((product) => (
                     <Product key={product._id} w='' product={product} />
                ))}

@@ -10,7 +10,7 @@ export const FAQ = ({ children }) => {
 
      return (
           <FAQContext.Provider value={{ open, close, setOpen }}>
-               <li className='border-[1px] border-gray-300 w-8/12 bg-gray-100 h-full rounded-sm'>
+               <li className='border-[1px] border-gray-300  w-full md:w-7/12 bg-gray-100 h-full rounded-sm'>
                     {children}
                </li>
           </FAQContext.Provider>
@@ -36,9 +36,7 @@ const Body = ({ children, window }) => {
      if (open !== window) return null;
 
      return (
-          <div
-               className={`font-thin px-4 py-3 text-sm leading-8 transition-all duration-700 ease-out`}
-          >
+          <div className='font-thin px-4 py-3 text-sm leading-8 transition-all duration-700 ease-out'>
                {children}
           </div>
      );

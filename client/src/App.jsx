@@ -12,6 +12,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import DropDownProvider from './ui/DropDownContext';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
+const SuspencePage = lazy(() => import('./ui/Suspense'));
 const ProtectedRoutes = lazy(() => import('./ui/ProtectedRoutes'));
 const Login = lazy(() => import('./pages/Login'));
 const EmailVerify = lazy(() => import('./pages/EmailVerify'));
@@ -148,7 +149,7 @@ const App = () => {
                >
                     <QueryClientProvider client={queryClient}>
                          <DropDownProvider>
-                              <Suspense fallback={'Loading ....'}>
+                              <Suspense fallback={<SuspencePage />}>
                                    <RouterProvider router={router} />
                               </Suspense>
                          </DropDownProvider>

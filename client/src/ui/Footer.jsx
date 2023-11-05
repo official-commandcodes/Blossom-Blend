@@ -9,8 +9,8 @@ import FooterLists from './FooterLists';
 
 const Footer = () => {
      return (
-          <footer className='px-16 text-gray-800 divide-y-[1px] border-t-[1px] border-gray-200'>
-               <div className='py-8 flex justify-between text-[13px]'>
+          <footer className='px-4 md:px-10 lg:px-16 text-gray-800 divide-y-[1px] border-t-[1px] border-gray-200'>
+               <div className='py-4 flex flex-wrap justify-between text-[13px]'>
                     <FooterLists
                          header={'Navigation'}
                          navigation={[

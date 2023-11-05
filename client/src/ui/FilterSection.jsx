@@ -2,7 +2,7 @@ import Filter from './Filter';
 
 const FilterSection = () => {
      return (
-          <section className='px-16 py-7 bg-gray-300 grid justify-items-stretch border-b-[1px]'>
+          <section className='hidden px-16 py-7 bg-gray-300 md:grid justify-items-stretch border-b-[1px]'>
                <div className='justify-self-end flex gap-3'>
                     <Filter
                          options={[
