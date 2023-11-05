@@ -7,6 +7,8 @@ import {
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 import DropDownProvider from './ui/DropDownContext';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
@@ -141,15 +143,19 @@ const App = () => {
 
      return (
           <>
-               <QueryClientProvider client={queryClient}>
-                    <DropDownProvider>
-                         <Suspense fallback={'Loading ....'}>
-                              <RouterProvider router={router} />
-                         </Suspense>
-                    </DropDownProvider>
+               <GoogleOAuthProvider
+                    clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
+               >
+                    <QueryClientProvider client={queryClient}>
+                         <DropDownProvider>
+                              <Suspense fallback={'Loading ....'}>
+                                   <RouterProvider router={router} />
+                              </Suspense>
+                         </DropDownProvider>
 
-                    <ReactQueryDevtools initialIsOpen={false} />
-               </QueryClientProvider>
+                         <ReactQueryDevtools initialIsOpen={false} />
+                    </QueryClientProvider>
+               </GoogleOAuthProvider>
                <Toaster
                     position='top-right'
                     reverseOrder={false}

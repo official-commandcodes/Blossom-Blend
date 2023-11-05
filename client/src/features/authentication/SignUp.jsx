@@ -5,6 +5,8 @@ import {
 } from 'react-icons/md';
 import { useForm } from 'react-hook-form';
 import { useSignUp } from './useSignUp';
+import { useGoogleSignUp } from './useGoogleSignUp';
+// import { Google } from '@react-oauth/google';
 
 import Spinner from '../../ui/Spinner';
 import AuthHeader from '../../ui/AuthHeader';
@@ -17,6 +19,7 @@ const SignUp = () => {
           getValues,
      } = useForm();
      const { status, signup } = useSignUp();
+     // const { status: signuoGoogle, google } = useGoogleSignUp();
 
      const onSubmit = (data) => {
           signup(data, {
@@ -31,7 +34,7 @@ const SignUp = () => {
 
      return (
           <form
-               className='flex flex-col space-y-6 w-5/12 py-6 px-3 bg-gray-800'
+               className='flex flex-col space-y-6 w-5/12 py-6 px-3 bg-orange-800'
                onSubmit={handleSubmit(onSubmit)}
           >
                <AuthHeader

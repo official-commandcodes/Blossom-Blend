@@ -1,3 +1,4 @@
+const { OAuth2Client } = require('google-auth-library');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Email = require('../utils/email');
@@ -33,6 +34,14 @@ const createToken = (res, user, statusCode) => {
 // SIGN UP
 const signup = async (req, res, next) => {
      try {
+          if (
+               !req.body.email ||
+               !req.body.name ||
+               !req.body.password ||
+               !req.body.passwordConfirm
+          ) {
+               return next(new AppError('All fields are required', 400));
+          }
           // check if email already exist
           const user = await User.findOne({ email: req.body.email });
 
@@ -43,10 +52,6 @@ const signup = async (req, res, next) => {
           const newUser = await User.create(req.body);
 
           const emailValidateToken = await newUser.createEmailToken();
-
-          // {
-          //      validateBeforeSave: false;
-          // }
 
           await newUser.save();
 
@@ -73,6 +78,39 @@ const signup = async (req, res, next) => {
 // LOGIN
 const login = async (req, res, next) => {
      try {
+          // GOOGLE SIGN IN
+          if (req.body.clientId && req.body.token) {
+               const client = new OAuth2Client(req.body.clientId);
+
+               const ticket = await client.verifyIdToken({
+                    idToken: req.body.token,
+                    audience: req.body.clientId,
+               });
+
+               const payload = ticket.getPayload();
+
+               // 1) check if user already exist in our database
+               const user = await User.findOne({ email: payload.email });
+
+               if (!user) {
+                    const user = await User.create({
+                         name: payload.name,
+                         email: payload.email,
+                         emailValid: true,
+                         photo: payload.picture,
+                         password: payload.sub,
+                         passwordConfirm: payload.sub,
+                    });
+
+                    await new Email(user).sendLogInAccess();
+
+                    return createToken(res, user, 200);
+               }
+
+               return createToken(res, user, 200);
+          }
+
+          // MANUALLY SIGN IN
           // check if there is no email or password
           if (!req.body.email || !req.body.password) {
                return next(new AppError('Provide email and Password', 400));

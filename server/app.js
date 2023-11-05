@@ -3,8 +3,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 // ROUTES
-const productRoutes = require('./routes/product');
 const userRoutes = require('./routes/user');
+const productRoutes = require('./routes/product');
 const orderRoutes = require('./routes/order');
 const reviewRoutes = require('./routes/review');
 const globalErrorHandler = require('./utils/globalErrorHandler');
@@ -36,8 +36,10 @@ const corsOptions = {
      // preflightContinue: false,
 };
 
+// CORS
 app.use(cors(corsOptions));
 
+// COOKIE PARSER
 app.use(cookieParser());
 
 // BODY-PARSER & STATIC FILES

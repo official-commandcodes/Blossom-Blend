@@ -18,7 +18,6 @@ export const getReview = async (id) => {
 };
 
 export const createReview = async (newReview) => {
-     console.log(newReview);
      try {
           const res = await fetch(`${API_URL}/api/v1/reviews`, {
                method: 'POST',

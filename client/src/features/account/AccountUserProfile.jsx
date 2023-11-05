@@ -41,7 +41,9 @@ const AccountUserProfile = () => {
                <div className='flex space-x-3 items-center pt-4'>
                     <img
                          src={
-                              user.photo
+                              user.photo.startsWith('https')
+                                   ? user.photo
+                                   : user.photo.startsWith('user-')
                                    ? `${API_URL}/users/${user.photo}`
                                    : '/avatar.svg'
                          }

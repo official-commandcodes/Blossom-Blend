@@ -13,10 +13,10 @@ const server = app.listen(PORT, () => {
      console.log(`Server is listening on ${PORT}`);
 });
 
-process.on('unhandledRejection', () => {
-     server.exit();
-});
+// process.on('unhandledRejection', () => {
+//      server.exit();
+// });
 
-process.on('unhandledException', () => {
-     server.exit();
-});
+// process.on('unhandledException', () => {
+//      server.exit();
+// });
