@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 
 const Navbar = () => {
      return (
-          <nav className='flex justify-between items-center px-10 h-[100px] sticky top-0 bg-gray-200 z-10 border-b-[1px] border-gray-300'>
+          <nav className='lg:px-10 px-4 flex justify-between items-center h-[80px] md:h-[100px] sticky top-0 bg-gray-200 z-10 border-b-[1px] border-gray-300'>
                <Logo />
 
                <SearchBar />

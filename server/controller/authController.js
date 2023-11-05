@@ -208,7 +208,8 @@ const validateEmail = async (req, res, next) => {
           // Find user with the param id and manually select emailValidation
           const user = await User.findOne({ _id: req.params.userId });
 
-          if (!user.emailValidation) return next('Invalid sent token!');
+          if (!user.emailValidation)
+               return next(new AppError('Invaid token', 400));
 
           const compare = await user.compareToken(
                req.params.emailValidateToken,
@@ -217,7 +218,7 @@ const validateEmail = async (req, res, next) => {
 
           // Compare (emailValidateToken) with the database hashed token
           if (!compare) {
-               return next('Invalid Email Token');
+               return next(new AppError('Invalid token', 404));
           }
 
           // if it is equal: update email to valid email and remove emailValidation field
@@ -245,10 +246,7 @@ const protect = async (req, res, next) => {
      // VERIIFY TOKEN
      jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
           if (err) {
-               return res.status(400).json({
-                    status: 'fail',
-                    message: err.message,
-               });
+               return next(new AppError(err.message, 400));
           }
 
           if (!decoded) return next(new AppError('Invalid token', 400));
@@ -271,7 +269,7 @@ const forgotPassword = async (req, res, next) => {
           const user = await User.findOne({ email: req.body.email });
 
           if (!user) {
-               return next('User does not exist anymore');
+               return next(new AppError('User does not exist anymore', 400));
           }
 
           const token = await user.passwordResetVariable();
@@ -302,14 +300,11 @@ const verifyParams = async (req, res, next) => {
           const user = await User.findOne({ slug: req.body.username });
 
           if (!user) {
-               return next('User does not exist');
+               return next(new AppError('User does not exist', 400));
           }
 
           if (!user.passwordResetToken) {
-               return res.status(400).json({
-                    status: 'fail',
-                    message: 'Invalid tokens',
-               });
+               return next(new AppError('Invalid tokens', 400));
           }
 
           if (
@@ -318,10 +313,7 @@ const verifyParams = async (req, res, next) => {
                     user.passwordResetToken
                ))
           ) {
-               return res.status(400).json({
-                    status: 'fail',
-                    message: 'Invalid token',
-               });
+               return next(new AppError('Invalid token', 400));
           }
 
           user.passwordResetToken = undefined;

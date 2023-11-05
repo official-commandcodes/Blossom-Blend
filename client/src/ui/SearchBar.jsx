@@ -2,7 +2,7 @@ import ProductSearch from '../features/products/ProductSearch';
 
 const SearchBar = () => {
      return (
-          <div className='relative'>
+          <div className='relative hidden lg:flex'>
                <ProductSearch />
           </div>
      );

@@ -6,9 +6,9 @@ const Logo = () => {
                <img
                     src='/blossomblend.png'
                     alt='BlossomBlend Photo'
-                    className='w-12 h-20 object-cover'
+                    className='w-10 h-16 object-cover md:h-20 md:w-12'
                />
-               <span className='bg-clip-text text-transparent bg-gradient-to-r from-orange-300 to-orange-600'>
+               <span className='text-[12px] md:text-[16px] bg-clip-text text-transparent bg-gradient-to-r from-orange-300 to-orange-600'>
                     Blossom Blend
                </span>
           </Link>
